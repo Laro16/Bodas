@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Invitación de Boda · Jimena & David</title>
   <meta name="description" content="Invitación digital para boda optimizada para celular, con slider, música, contador, WhatsApp y efectos de clic/ripple" />
+  <meta name="theme-color" content="#b08d57" />
   <style>
     :root{
       --brand:#b08d57; --ink:#2b2a28; --muted:#6e6a60; --bg:#f8f4ee; --card:#ffffff;
@@ -19,7 +20,7 @@
     body{
       margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,'Helvetica Neue',Arial;
       line-height:1.6; color:var(--ink);
-      /* Textura de papel con vetas suaves (sin imágenes externas) */
+      /* Textura tipo papel con vetas suaves (sin imágenes externas) */
       background:
         radial-gradient(1px 1px at 12% 18%, rgba(176,141,87,.22) 0 1px, transparent 1.2px),
         radial-gradient(1px 1px at 78% 42%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
@@ -56,21 +57,19 @@
 
     .cta-row{display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap}
     .btn{
-      appearance:none; border:none; background:var(--brand); color:#211a12; font-weight:800;
+      appearance:none; border:1px solid var(--glass-border-light); background:var(--brand); color:#211a12; font-weight:800;
       padding:.85rem 1.05rem; border-radius:14px; cursor:pointer; box-shadow:var(--shadow-soft);
-      transform:translateY(0); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      transform:translateY(0); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease, border-color .18s ease;
       position:relative; overflow:hidden; touch-action:manipulation;
     }
     .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
     .btn:active{transform:translateY(0)}
-    /* Botones glass del HERO: aún más transparentes */
-    header .btn,
-    header .btn.secondary{
-      background:rgba(255,255,255,.08);
-      color:#fff; border:1px solid rgba(255,255,255,.18);
-      backdrop-filter: blur(6px);
+    .btn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(176,141,87,.35), var(--shadow)}
+    /* Botones glass del HERO: más transparentes */
+    header .btn, header .btn.secondary{
+      background:rgba(255,255,255,.08); color:#fff; border-color:rgba(255,255,255,.18); backdrop-filter: blur(6px);
     }
-    .btn.ghost{ background:#fff0; color:var(--ink); border:1px solid var(--glass-border-light) }
+    .btn.ghost{ background:#fff0; color:var(--ink); }
 
     /* ===== Contador (más transparente + efecto toque) ===== */
     .countdown{display:flex; justify-content:center; gap:10px; margin:14px auto 4px; z-index:2}
@@ -83,16 +82,17 @@
     .time-box:hover{transform:translateY(-1px); box-shadow:inset 0 10px 30px rgba(0,0,0,.2)}
     .time-box .num{font-size:26px; font-weight:900; letter-spacing:.02em; display:block; text-shadow:0 1px 6px rgba(0,0,0,.35)}
     .time-box .label{font-size:11px; opacity:.92; margin-top:2px}
-    /* Ping interno */
+    /* Ping dorado */
     .time-box .ping{
-      position:absolute; width:12px; height:12px; border-radius:999px; background:rgba(255,255,255,.55);
+      position:absolute; width:12px; height:12px; border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,.95) 0 35%, rgba(176,141,87,.65) 35% 65%, rgba(176,141,87,0) 70%);
       left:var(--x,50%); top:var(--y,50%); transform:translate(-50%,-50%);
-      animation:ping 700ms ease-out forwards; pointer-events:none;
-      box-shadow:0 0 0 0 rgba(255,255,255,.55);
+      animation:pingBrand 800ms ease-out forwards; pointer-events:none;
+      box-shadow:0 0 0 0 rgba(176,141,87,.55);
     }
-    @keyframes ping{
-      from{opacity:.7; transform:translate(-50%,-50%) scale(.8)}
-      to{opacity:0; transform:translate(-50%,-50%) scale(10)}
+    @keyframes pingBrand{
+      from{opacity:.9; transform:translate(-50%,-50%) scale(.6); box-shadow:0 0 0 0 rgba(176,141,87,.55)}
+      to{opacity:0; transform:translate(-50%,-50%) scale(9); box-shadow:0 0 0 26px rgba(176,141,87,0)}
     }
 
     @media(min-width:760px){
@@ -109,24 +109,21 @@
     .slides{display:flex; transition:transform .6s cubic-bezier(.22,.75,.18,1); touch-action:pan-y; will-change:transform}
     .slide{min-width:100%; height:62svh; position:relative; background:#eee}
     .slide img{width:100%; height:100%; object-fit:cover; transition:transform .8s ease, opacity .6s ease}
-    .slide.is-active img{transform:scale(1.02)}           /* zoom suave en la activa */
-    /* Mensaje MUY transparente con fade/slide */
+    .slide.is-active img{transform:scale(1.02)}
     .overlay{
       position:absolute; left:12px; right:12px; bottom:12px;
-      background:rgba(255,255,255,.28);  /* << MÁS TRANSPARENTE */
+      background:rgba(255,255,255,.26); /* MUY transparente */
       border:1px solid rgba(0,0,0,.04); color:var(--ink);
       padding:12px 14px; border-radius:12px; backdrop-filter:blur(10px) saturate(110%);
       max-width:720px; margin-inline:auto; box-shadow:0 4px 14px rgba(0,0,0,.08);
       opacity:0; transform:translateY(6px);
       transition:opacity .6s ease, transform .6s ease;
     }
-    .slide.is-active .overlay{opacity:1; transform:translateY(0)}  /* fade/slide del texto */
-
-    /* Flechas un pelín más translúcidas */
+    .slide.is-active .overlay{opacity:1; transform:translateY(0)}
+    /* Flechas/indicadores */
     .nav-btn{position:absolute; top:50%; translate:0 -50%; z-index:10; width:40px; height:40px; border-radius:999px;
       border:1px solid rgba(0,0,0,.06); background:rgba(255,255,255,.55); display:grid; place-items:center; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.08)}
     .nav-btn.prev{left:10px} .nav-btn.next{right:10px}
-    /* Indicadores */
     .dots{position:absolute; inset:auto 0 10px; display:flex; gap:8px; justify-content:center; z-index:5}
     .dots button{width:8px; height:8px; border-radius:999px; border:0; background:rgba(0,0,0,.22)}
     .dots button[aria-current="true"]{background:rgba(176,141,87,.45)}
@@ -170,6 +167,12 @@
     .signature{padding:36px 0; text-align:center; color:var(--muted)}
     .signature em{display:block; font-family: "Times New Roman", Georgia, serif; font-size:clamp(22px,4.5vw,32px); color:var(--brand)}
 
+    /* ===== Toasts ===== */
+    .toast{position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(30px); opacity:0;
+      background:rgba(33,26,18,.9); color:#fff; padding:.7rem 1rem; border-radius:12px; box-shadow:var(--shadow); z-index:100;
+      transition:opacity .25s ease, transform .25s ease}
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
     /* ===== Ripple global ===== */
     .ripple{position:fixed; pointer-events:none; inset:auto auto 0 0; width:14px; height:14px; border-radius:999px; background:radial-gradient(circle, rgba(176,141,87,.55) 0%, rgba(176,141,87,.25) 45%, rgba(176,141,87,0) 60%); opacity:.9; transform:translate(-50%,-50%) scale(1); animation:rippleOut .6s ease-out forwards}
     @keyframes rippleOut{to{opacity:0; transform:translate(-50%,-50%) scale(12)}}
@@ -185,10 +188,7 @@
     #lugares .place-media img{width:100%; height:100%; object-fit:cover; display:block}
     @media(min-width:720px){#lugares .place-media{height:260px}}
     .center-actions{display:flex; justify-content:center; padding-top:6px}
-    .btn.map{
-      background:rgba(255,255,255,.8); color:#211a12; border:1px solid rgba(176,141,87,.35);
-      backdrop-filter: blur(6px); font-weight:800
-    }
+    .btn.map{background:rgba(255,255,255,.8); color:#211a12; border:1px solid rgba(176,141,87,.35); backdrop-filter: blur(6px); font-weight:800}
 
     /* ===== Itinerario ===== */
     .timeline{position:relative; max-width:900px; margin:0 auto}
@@ -207,8 +207,7 @@
       box-shadow:0 2px 8px rgba(0,0,0,.15);
       z-index:1;
     }
-    .tl-card.card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96));
-      border:1px solid var(--glass-border-light); border-left:4px solid var(--brand)}
+    .tl-card.card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); border:1px solid var(--glass-border-light); border-left:4px solid var(--brand)}
     .tl-card .body{padding:12px}
     .tl-card .place{color:var(--muted); font-size:.95rem}
 
@@ -217,16 +216,12 @@
     .rsvp-card{
       max-width:720px; margin:0 auto; padding:16px 14px 18px;
       background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
-      border: 1px solid rgba(176,141,87,.30);
-      border-left:4px solid var(--brand);
+      border: 1px solid rgba(176,141,87,.30); border-left:4px solid var(--brand);
       border-radius:18px; box-shadow:var(--shadow-soft)
     }
     .rsvp-accent{display:flex; align-items:center; gap:.6rem; margin:0 0 8px 2px; color:#7b6a4c}
     .rsvp-accent .dot{width:8px; height:8px; border-radius:999px; background:var(--brand)}
-    .btn.whatsapp{
-      background:var(--brand); color:#211a12; border:1px solid rgba(0,0,0,.06);
-      box-shadow:var(--shadow-soft); font-weight:800
-    }
+    .btn.whatsapp{background:var(--brand); color:#211a12; border:1px solid rgba(0,0,0,.06); box-shadow:var(--shadow-soft); font-weight:800}
     .btn.whatsapp svg{width:18px; height:18px}
 
     /* ===== Modal Padrinos ===== */
@@ -248,19 +243,24 @@
     .dialog .content{padding:8px 18px 20px}
     .dialog .content p{
       font-family: "Times New Roman", Georgia, serif;
-      font-size:clamp(16px,3.8vw,20px); line-height:1.75; color:#3a3327;
-      margin:0;
+      font-size:clamp(16px,3.8vw,20px); line-height:1.75; color:#3a3327; margin:0;
     }
-    .dialog .close{
-      position:absolute; top:10px; right:10px; width:38px; height:38px; border-radius:12px;
-      border:1px solid rgba(0,0,0,.08); background:#fff; box-shadow:var(--shadow-soft); cursor:pointer
+    .dialog .close{position:absolute; top:10px; right:10px; width:38px; height:38px; border-radius:12px; border:1px solid rgba(0,0,0,.08); background:#fff; box-shadow:var(--shadow-soft); cursor:pointer}
+
+    /* ===== Scroll reveal ===== */
+    .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1; transform:none}
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none!important; transition:none!important; scroll-behavior:auto!important}
     }
   </style>
 </head>
 <body>
   <!-- ===== HERO ===== -->
   <header class="hero" id="hero">
-    <div class="wrap">
+    <div class="wrap reveal">
       <span class="badge">Boda</span>
       <h1 id="couple">Jimena & David</h1>
       <p class="sub" id="eventDate">18 de septiembre de 2025 · 1:30 pm</p>
@@ -278,6 +278,8 @@
       <div class="cta-row">
         <button class="btn secondary" id="btnHistoria">Nuestra Historia</button>
         <button class="btn secondary" id="btnEscuchar">Reproducir nuestra canción</button>
+        <button class="btn secondary" id="btnCalendar" title="Agregar al calendario">Añadir al calendario</button>
+        <button class="btn secondary" id="btnShare" title="Compartir invitación">Compartir</button>
       </div>
     </div>
   </header>
@@ -300,7 +302,7 @@
   </div>
 
   <!-- ===== Nuestra Historia ===== -->
-  <section id="historia" class="wrap">
+  <section id="historia" class="wrap reveal">
     <h2 class="title">Nuestra Historia</h2>
     <p class="subtitle">Desliza para ver los momentos que los llevaron al “sí”. Cada foto tiene su nota y fecha.</p>
 
@@ -331,10 +333,10 @@
   </section>
 
   <!-- ===== Padrinos ===== -->
-  <section id="padrinos" class="wrap">
+  <section id="padrinos" class="wrap reveal">
     <h2 class="title">Padrinos</h2>
     <div class="grid three">
-      <article class="card">
+      <article class="card reveal">
         <img src="assets/imagenes/padrino-velacion.jpg" alt="Padrino de velación" loading="lazy" decoding="async"/>
         <div class="body">
           <span class="tag">Velación</span>
@@ -346,7 +348,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card reveal">
         <img src="assets/imagenes/madrina-anillos.jpg" alt="Madrina de anillo" loading="lazy" decoding="async"/>
         <div class="body">
           <span class="tag">Anillo</span>
@@ -358,7 +360,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card reveal">
         <img src="assets/imagenes/padrino-arras.jpg" alt="Padrino de arras" loading="lazy" decoding="async"/>
         <div class="body">
           <span class="tag">Arras</span>
@@ -373,11 +375,11 @@
   </section>
 
   <!-- ===== Lugares ===== -->
-  <section id="lugares" class="wrap">
+  <section id="lugares" class="wrap reveal">
     <h2 class="title">Lugares</h2>
     <p class="subtitle">Ceremonia y recepción. Toca “Ver ubicación” para abrir el mapa.</p>
     <div class="grid two">
-      <article class="card">
+      <article class="card reveal">
         <div class="place-media">
           <img src="assets/imagenes/ceremonia.jpg" alt="Lugar de la ceremonia" loading="lazy" decoding="async"/>
         </div>
@@ -389,7 +391,7 @@
           </div>
         </div>
       </article>
-      <article class="card">
+      <article class="card reveal">
         <div class="place-media">
           <img src="assets/imagenes/recepcion.jpg" alt="Lugar de la recepción" loading="lazy" decoding="async"/>
         </div>
@@ -405,7 +407,7 @@
   </section>
 
   <!-- ===== Itinerario ===== -->
-  <section id="itinerario" class="wrap">
+  <section id="itinerario" class="wrap reveal">
     <h2 class="title">Itinerario</h2>
     <ul class="timeline">
       <li class="tl-item">
@@ -432,7 +434,7 @@
   </section>
 
   <!-- ===== RSVP ===== -->
-  <section id="rsvp" class="wrap">
+  <section id="rsvp" class="wrap reveal">
     <h2 class="title">Confirmar asistencia</h2>
     <p class="subtitle">Por favor confirma tu asistencia un mes antes del evento. ¡Gracias!</p>
 
@@ -469,7 +471,7 @@
     </form>
   </section>
 
-  <footer class="signature">
+  <footer class="signature reveal">
     <div>Con cariño,</div>
     <em>Escobar</em>
   </footer>
@@ -488,6 +490,9 @@
     </div>
   </div>
 
+  <!-- ===== Toast element ===== -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <!-- ===== Audio ===== -->
   <audio id="bgMusic" src="assets/musica/fondo.mp3" preload="auto" loop></audio>
   <audio id="voiceInvite" src="assets/musica/invitacion.mp3" preload="auto"></audio>
@@ -496,6 +501,8 @@
     // ===== Helpers
     const $  = (s, el=document) => el.querySelector(s);
     const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+    const toast = $('#toast');
+    function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 1600); }
 
     // Scroll a historia
     $('#btnHistoria')?.addEventListener('click', ()=> $('#historia').scrollIntoView({behavior:'smooth'}));
@@ -507,31 +514,39 @@
     const dotsC  = slider?.querySelector('[data-dots]');
     const prev   = slider?.querySelector('[data-prev]');
     const next   = slider?.querySelector('[data-next]');
-    let i = 0, x0 = null;
+    let i = 0, x0 = null, autoTimer = null;
 
+    function markActive(){
+      slides.forEach(s=> s.classList.remove('is-active'));
+      slides[i].classList.add('is-active');
+      if(dotsC) [...dotsC.children].forEach((d,idx)=> d.setAttribute('aria-current', idx===i));
+    }
     function go(n){
       if(!track) return;
       i = (n + slides.length) % slides.length;
-      // marcar activa para animaciones (zoom + overlay fade)
-      slides.forEach(s=> s.classList.remove('is-active'));
-      slides[i].classList.add('is-active');
-
       track.style.transform = `translateX(${-i*100}%)`;
-      if(dotsC) [...dotsC.children].forEach((d,idx)=> d.setAttribute('aria-current', idx===i));
+      markActive();
+    }
+    function auto(){
+      clearInterval(autoTimer);
+      autoTimer = setInterval(()=> go(i+1), 6000);
     }
     slides.forEach((_s, idx)=>{
       const b = document.createElement('button');
       b.type = 'button';
       b.setAttribute('aria-label', `Ir a la foto ${idx+1}`);
-      b.addEventListener('click', ()=> go(idx));
+      b.addEventListener('click', ()=>{ go(idx); auto(); });
       dotsC.appendChild(b);
     });
-    go(0);
-    prev?.addEventListener('click', ()=> go(i-1));
-    next?.addEventListener('click', ()=> go(i+1));
-    track?.addEventListener('pointerdown', e=>{ x0 = e.clientX; track.setPointerCapture(e.pointerId); });
-    track?.addEventListener('pointerup',   e=>{ if(x0===null) return; const dx = e.clientX - x0; x0=null; if(Math.abs(dx) > 40) go(i + (dx<0?1:-1)); });
-    window.addEventListener('keydown', e=>{ if(e.key==='ArrowRight') go(i+1); if(e.key==='ArrowLeft')  go(i-1); });
+    markActive(); auto();
+    prev?.addEventListener('click', ()=>{ go(i-1); auto(); });
+    next?.addEventListener('click', ()=>{ go(i+1); auto(); });
+    track?.addEventListener('pointerdown', e=>{ x0 = e.clientX; track.setPointerCapture(e.pointerId); clearInterval(autoTimer); });
+    track?.addEventListener('pointerup',   e=>{
+      if(x0===null) return; const dx = e.clientX - x0; x0=null;
+      if(Math.abs(dx) > 40) go(i + (dx<0?1:-1)); auto();
+    });
+    window.addEventListener('keydown', e=>{ if(e.key==='ArrowRight'){go(i+1);auto();} if(e.key==='ArrowLeft'){go(i-1);auto();} });
 
     // ===== Audio & Tocadiscos
     const bg = $('#bgMusic'), voice = $('#voiceInvite');
@@ -582,7 +597,7 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // Efecto “ping” al tocar cuadros del contador
+    // Efecto “ping” dorado al tocar cuadros del contador
     $$('.time-box').forEach(box=>{
       function pingAt(x,y){
         const r = document.createElement('span');
@@ -597,6 +612,54 @@
       box.addEventListener('touchstart', (e)=> {
         const t = e.touches[0]; if(t) pingAt(t.clientX, t.clientY);
       }, {passive:true});
+    });
+
+    // ===== Añadir al calendario (.ics)
+    $('#btnCalendar')?.addEventListener('click', ()=>{
+      const start = new Date('2025-09-18T13:30:00');
+      const end   = new Date(start.getTime() + 4*60*60*1000); // 4h
+      const fmt = d => {
+        const pad = n => String(n).padStart(2,'0');
+        return (
+          d.getUTCFullYear() +
+          pad(d.getUTCMonth()+1) +
+          pad(d.getUTCDate()) + 'T' +
+          pad(d.getUTCHours()) +
+          pad(d.getUTCMinutes()) +
+          '00Z'
+        );
+      };
+      const ics = [
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Creative Studio//Boda//ES',
+        'BEGIN:VEVENT',
+        'UID:' + Date.now() + '@boda',
+        'DTSTAMP:' + fmt(new Date()),
+        'DTSTART:' + fmt(start),
+        'DTEND:'   + fmt(end),
+        'SUMMARY:' + 'Boda de Jimena & David',
+        'LOCATION:' + 'Iglesia Retalhuleu; Recepción: Salón Las Morenas',
+        'DESCRIPTION:' + 'Acompáñanos en nuestro gran día 💕',
+        'END:VEVENT','END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], {type:'text/calendar'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Boda-Jimena-David.ics';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=> URL.revokeObjectURL(url), 5000);
+      showToast('Evento agregado (archivo .ics)');
+    });
+
+    // ===== Compartir
+    $('#btnShare')?.addEventListener('click', async ()=>{
+      const data = {title:'Boda · Jimena & David', text:'Acompáñanos 💕', url:location.href};
+      if (navigator.share){
+        try{ await navigator.share(data); }catch{}
+      }else{
+        try{ await navigator.clipboard.writeText(location.href); showToast('Enlace copiado'); }
+        catch{ showToast('No se pudo copiar el enlace'); }
+      }
     });
 
     // ===== RSVP → WhatsApp
@@ -629,11 +692,7 @@
     }
     $$('#padrinos [data-open-modal]').forEach(btn=>{
       btn.addEventListener('click', ()=>{
-        openModal({
-          who: btn.dataset.who,
-          role: btn.dataset.role,
-          text: btn.dataset.text
-        });
+        openModal({who: btn.dataset.who, role: btn.dataset.role, text: btn.dataset.text});
       });
     });
     closeModal.addEventListener('click', ()=> modal.classList.remove('open'));
@@ -663,6 +722,14 @@
     document.addEventListener('click', (e)=>{
       if(!e.target.closest('.time-box')) spawnRipple(e.clientX, e.clientY);
     });
+
+    // ===== Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12});
+    $$('.reveal').forEach(el=> io.observe(el));
   </script>
 </body>
 </html>
