@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invitación de Boda · Template</title>
+  <meta name="description" content="Invitación digital para boda con slider, música, audio de los novios y contador" />
+  <style>
+    :root{
+      --brand:#8c6cf2;
+      --text:#f7f7fb;
+      --muted:#cfcfe1;
+      --glass:rgba(255,255,255,.14);
+      --glass-border:rgba(255,255,255,.25);
+      --radius:22px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,'Helvetica Neue',Arial;
+      line-height:1.6; color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -20%, #1b1b28 0%, transparent 60%),
+        radial-gradient(1200px 600px at 110% 10%, #181825 0%, transparent 60%),
+        linear-gradient(180deg, #111119 0%, #0b0b10 100%);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    img{max-width:100%; display:block}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+    a{color:inherit; text-decoration:none}
+
+    /* ====== HERO ====== */
+    header.hero{
+      min-height:92svh; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.7)),
+        url('assets/imagenes/hero-portada.jpg') center/cover no-repeat;  /* 👈 corrección de ruta */
+    }
+    header .badge{
+      display:inline-block; padding:.35rem .7rem; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; background:rgba(255,255,255,.12); border:1px solid var(--glass-border);
+      border-radius:999px; backdrop-filter:blur(6px)
+    }
+    header h1{font-size:clamp(36px,6vw,70px); margin:.4rem 0 .2rem; line-height:1.08}
+    header p.sub{color:var(--muted); margin:.35rem 0 1rem}
+    .cta-row{display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap}
+    .btn{
+      appearance:none; border:none; background:var(--brand); color:#0b0b10; font-weight:800;
+      padding:.9rem 1.1rem; border-radius:14px; cursor:pointer; box-shadow:0 10px 22px rgba(140,108,242,.28);
+    }
+    .btn.secondary{background:transparent; color:var(--text); border:1px solid var(--glass-border)}
+
+    /* ====== Contador (estilo transparente) ====== */
+    .countdown{display:flex; justify-content:center; gap:12px; margin:18px auto 6px; z-index:2}
+    .time-box{
+      min-width:78px; border-radius:14px; padding:10px 12px; text-align:center; color:#fff;
+      background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35);
+      backdrop-filter:blur(6px); box-shadow:inset 0 8px 30px rgba(0,0,0,.25);
+    }
+    .time-box .num{font-size:28px; font-weight:900; letter-spacing:.02em; display:block}
+    .time-box .label{font-size:12px; opacity:.9; margin-top:2px}
+    @media(min-width:760px){
+      .time-box{min-width:94px; border-radius:16px; padding:12px 14px}
+      .time-box .num{font-size:34px}
+    }
+
+    /* ====== Barra de audio flotante ====== */
+    .audio-floating{
+      position:fixed; right:16px; bottom:16px; z-index:50; display:flex; gap:.6rem; align-items:center;
+      background:var(--glass); border:1px solid var(--glass-border); border-radius:999px; padding:.45rem .6rem; backdrop-filter:blur(10px)
+    }
+    .audio-floating button{background:#0000; border:0; color:#fff; padding:.55rem; border-radius:999px; cursor:pointer}
+    .audio-title{display:none; color:var(--muted)}
+    @media(min-width:720px){.audio-title{display:block}}
+
+    /* ====== Secciones / Slider ====== */
+    section{padding:72px 0}
+    .title{font-size:clamp(24px,4.6vw,44px); margin:0 0 22px; text-align:center}
+    .subtitle{color:var(--muted); text-align:center; margin:-10px auto 32px; max-width:720px}
+
+    .slider{position:relative; overflow:hidden; border-radius:var(--radius);
+      box-shadow:0 30px 60px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06)}
+    .slides{display:flex; transition:transform .55s cubic-bezier(.22,.75,.18,1); touch-action:pan-y; will-change:transform}
+    .slide{min-width:100%; height:70svh; position:relative; background:#111}
+    .slide img{width:100%; height:100%; object-fit:cover}
+    .overlay{
+      position:absolute; left:16px; right:16px; bottom:16px;
+      background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.28); color:#fff;
+      padding:14px 16px; border-radius:14px; backdrop-filter:blur(6px); max-width:720px; margin-inline:auto
+    }
+    .nav-btn{position:absolute; top:50%; translate:0 -50%; z-index:10; width:44px; height:44px;
+      border-radius:999px; border:1px solid var(--glass-border); background:var(--glass); display:grid; place-items:center; cursor:pointer}
+    .nav-btn.prev{left:12px} .nav-btn.next{right:12px}
+    .dots{position:absolute; inset:auto 0 10px; display:flex; gap:8px; justify-content:center; z-index:5}
+    .dots button{width:8px; height:8px; border-radius:999px; border:0; background:#ffffff44}
+    .dots button[aria-current="true"]{background:var(--brand)}
+
+    /* ====== Padrinos / Itinerario ====== */
+    .grid{display:grid; gap:18px}
+    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); border:1px solid var(--glass-border); border-radius:16px; overflow:hidden}
+    .card .body{padding:14px}
+    .tag{display:inline-block; font-size:.72rem; padding:.28rem .55rem; border:1px solid var(--glass-border); border-radius:999px; color:var(--muted)}
+    .name{font-weight:800; margin:8px 0 2px}
+    .role{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <!-- ==================== HERO ==================== -->
+  <header class="hero" id="hero">
+    <div class="wrap">
+      <span class="badge">Boda</span>
+      <h1 id="couple">Jimena & David</h1>
+      <p class="sub" id="eventDate">18 de septiembre de 2025 · 1:30 pm</p>
+
+      <!-- 🔢 CONTADOR TRANSPARENTE -->
+      <div id="countdown" class="countdown" aria-live="polite">
+        <div class="time-box"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
+        <div class="time-box"><span class="num" id="cd-hours">00</span><span class="label">Horas</span></div>
+        <div class="time-box"><span class="num" id="cd-mins">00</span><span class="label">Minutos</span></div>
+        <div class="time-box"><span class="num" id="cd-secs">00</span><span class="label">Segundos</span></div>
+      </div>
+
+      <p class="sub" id="place">Iglesia Retalhuleu · Recepción: Salón Las Morenas</p>
+
+      <div class="cta-row">
+        <button class="btn" id="btnHistoria">Nuestra Historia</button>
+        <button class="btn secondary" id="btnEscuchar">▶️ Escuchar invitación</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Audio flotante (música de fondo) ===== -->
+  <div class="audio-floating" aria-live="polite">
+    <span class="audio-title">Música de fondo</span>
+    <button id="btnMusic" title="Reproducir / Pausar">▶️</button>
+    <button id="btnMute" title="Silenciar / Activar">🔊</button>
+  </div>
+
+  <!-- ==================== NUESTRA HISTORIA ==================== -->
+  <section id="historia" class="wrap">
+    <h2 class="title">Nuestra Historia</h2>
+    <p class="subtitle">Desliza para ver los momentos que los llevaron al “sí”. Cada foto tiene su nota y fecha.</p>
+
+    <div class="slider" data-slider>
+      <button class="nav-btn prev" data-prev aria-label="Anterior">⟵</button>
+      <button class="nav-btn next" data-next aria-label="Siguiente">⟶</button>
+
+      <ul class="slides" data-slides>
+        <!-- 👇 correcciones de ruta -->
+        <li class="slide">
+          <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" />
+          <div class="overlay"><b>Fecha: 02-09-2025</b> · Cuando nos conocimos. Una mirada bastó para empezar la aventura.</div>
+        </li>
+        <li class="slide">
+          <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" />
+          <div class="overlay"><b>Fecha: 16-10-2025</b> · Primera cita. Risas, café y mil planes por delante.</div>
+        </li>
+        <li class="slide">
+          <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" />
+          <div class="overlay"><b>Fecha: 08-01-2026</b> · Nuestro primer viaje. Descubrimos que el mejor destino es estar juntos.</div>
+        </li>
+        <li class="slide">
+          <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" />
+          <div class="overlay"><b>Fecha: 12-02-2027</b> · ¡Dijo que sí! El comienzo de una nueva etapa.</div>
+        </li>
+      </ul>
+      <div class="dots" data-dots></div>
+    </div>
+  </section>
+
+  <!-- ==================== PADRINOS ==================== -->
+  <section id="padrinos" class="wrap">
+    <h2 class="title">Padrinos</h2>
+    <div class="grid">
+      <article class="card">
+        <img src="assets/imagenes/padrinos/padrino-velacion.jpg" alt="Padrino de velación" />
+        <div class="body">
+          <span class="tag">Velación</span>
+          <div class="name">Carlos Mendoza</div>
+          <div class="role">Padrino de Velación</div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/imagenes/padrinos/madrina-anillos.jpg" alt="Madrina de anillos" />
+        <div class="body">
+          <span class="tag">Anillos</span>
+          <div class="name">María López</div>
+          <div class="role">Madrina de Anillos</div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="assets/imagenes/padrinos/padrino-arras.jpg" alt="Padrino de arras" />
+        <div class="body">
+          <span class="tag">Arras</span>
+          <div class="name">Jorge Ramírez</div>
+          <div class="role">Padrino de Arras</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==================== ITINERARIO ==================== -->
+  <section id="itinerario" class="wrap">
+    <h2 class="title">Itinerario</h2>
+    <div class="grid" style="grid-template-columns:1fr; max-width:900px; margin:0 auto">
+      <div class="card"><div class="body"><b>6:00 pm — Ceremonia</b><br/>Iglesia Retalhuleu. Llegar 15 minutos antes.</div></div>
+      <div class="card"><div class="body"><b>8:00 pm — Recepción</b><br/>Salón Las Morenas. Cena, brindis y baile.</div></div>
+      <div class="card"><div class="body"><b>10:30 pm — Pastel</b><br/>Corte del pastel y fotos.</div></div>
+      <div class="card"><div class="body"><b>12:00 am — Despedida</b><br/>Gracias por acompañarnos. 💕</div></div>
+    </div>
+  </section>
+
+  <!-- ==================== AUDIO ==================== -->
+  <!-- 👇 correcciones de ruta -->
+  <audio id="bgMusic" src="assets/musica/fondo.mp3" preload="auto" loop></audio>
+  <audio id="voiceInvite" src="assets/musica/invitacion.mp3" preload="auto"></audio>
+
+  <script>
+    /* Utilidades */
+    const $  = (s, el=document) => el.querySelector(s);
+    const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+
+    /* Scroll a Historia */
+    $('#btnHistoria')?.addEventListener('click', ()=> $('#historia').scrollIntoView({behavior:'smooth'}));
+
+    /* Slider */
+    const slider = $('[data-slider]');
+    const track  = slider?.querySelector('[data-slides]');
+    const slides = $$('.slide', slider);
+    const dotsC  = slider?.querySelector('[data-dots]');
+    const prev   = slider?.querySelector('[data-prev]');
+    const next   = slider?.querySelector('[data-next]');
+    let i = 0, x0 = null;
+
+    function go(n){
+      if(!track) return;
+      i = (n + slides.length) % slides.length;
+      track.style.transform = `translateX(${-i*100}%)`;
+      if(dotsC) [...dotsC.children].forEach((d,idx)=> d.setAttribute('aria-current', idx===i));
+    }
+    slides.forEach((_s, idx)=>{
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Ir a la foto ${idx+1}`);
+      b.addEventListener('click', ()=> go(idx));
+      dotsC.appendChild(b);
+    });
+    go(0);
+    prev?.addEventListener('click', ()=> go(i-1));
+    next?.addEventListener('click', ()=> go(i+1));
+    track?.addEventListener('pointerdown', e=>{ x0 = e.clientX; track.setPointerCapture(e.pointerId); });
+    track?.addEventListener('pointerup',   e=>{
+      if(x0===null) return; const dx = e.clientX - x0; x0=null;
+      if(Math.abs(dx) > 40) go(i + (dx<0?1:-1));
+    });
+    window.addEventListener('keydown', e=>{
+      if(e.key==='ArrowRight') go(i+1);
+      if(e.key==='ArrowLeft')  go(i-1);
+    });
+
+    /* Música y audio de invitación */
+    const bg = $('#bgMusic'), voice = $('#voiceInvite');
+    const bPlay = $('#btnMusic'), bMute = $('#btnMute'), bEscuchar = $('#btnEscuchar');
+    let bgStarted = false;
+    function updBtns(){ bPlay.textContent = bg.paused ? '▶️' : '⏸️'; bMute.textContent = bg.muted ? '🔇' : '🔊'; }
+    function tryStartBg(){ if(!bgStarted){ bg.volume = .65; bg.play().then(()=>{bgStarted=true;updBtns();}).catch(()=>{}); } }
+
+    bPlay?.addEventListener('click', ()=>{ if(bg.paused) bg.play(); else bg.pause(); updBtns(); });
+    bMute?.addEventListener('click', ()=>{ bg.muted = !bg.muted; updBtns(); });
+    document.addEventListener('click', tryStartBg, {once:true});
+    bEscuchar?.addEventListener('click', async ()=>{
+      tryStartBg();
+      if(!voice.paused){ voice.pause(); voice.currentTime = 0; }
+      bg.pause(); updBtns();
+      try{ await voice.play(); }catch(e){}
+    });
+    voice?.addEventListener('ended', ()=>{ if(bgStarted){ bg.play(); updBtns(); } });
+
+    /* Contador regresivo */
+    const target = new Date('2025-09-18T13:30:00');
+    const d = $('#cd-days'), h = $('#cd-hours'), m = $('#cd-mins'), s = $('#cd-secs');
+    function tick(){
+      const now = new Date();
+      let diff = target - now;
+      if (diff <= 0) { d.textContent=h.textContent=m.textContent=s.textContent='00'; return; }
+      const dd = Math.floor(diff / 86400000); diff %= 86400000;
+      const hh = Math.floor(diff / 3600000);  diff %= 3600000;
+      const mm = Math.floor(diff / 60000);    diff %= 60000;
+      const ss = Math.floor(diff / 1000);
+      d.textContent = String(dd).padStart(2,'0');
+      h.textContent = String(hh).padStart(2,'0');
+      m.textContent = String(mm).padStart(2,'0');
+      s.textContent = String(ss).padStart(2,'0');
+    }
+    tick(); setInterval(tick, 1000);
+  </script>
+</body>
+</html>
