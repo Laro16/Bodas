@@ -417,7 +417,7 @@
       updBtns();
     });
 
-    // Reemplazo: si se reproduce el audio de invitación, pausamos la música
+    // Si se reproduce el audio de invitación, pausamos la música
     $('#voiceInvite')?.addEventListener('play', ()=>{ if(!bg.paused){ bg.pause(); updBtns(); } });
 
     // Auto-intento al primer click en la página (por políticas del navegador)
@@ -443,7 +443,7 @@
     tick(); setInterval(tick, 1000);
 
     // ===== RSVP → WhatsApp
-    const WHATSAPP_NUMBER = '54389207'; // 🔁 si necesitas código de país, usa por ej. '50254389207'
+    const WHATSAPP_NUMBER = '54389207'; // 🔁 si más adelante agregas código de país, p.ej. '50254389207'
     $('#rsvpForm')?.addEventListener('submit', (e)=>{
       e.preventDefault();
       const name = $('#guestName').value.trim();
@@ -463,7 +463,7 @@
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank');
 
-      // Pequeño feedback visual
+      // Feedback visual
       const btn = $('#btnWhatsapp');
       btn.disabled = true; btn.style.opacity = .7; btn.textContent = 'Abriendo WhatsApp…';
       setTimeout(()=>{ btn.disabled = false; btn.style.opacity = 1; btn.textContent = 'Confirmar por WhatsApp'; }, 2000);
