@@ -7,18 +7,21 @@
   <meta name="description" content="Invitación digital para boda con slider, música, audio, contador y confirmación por WhatsApp" />
   <style>
     :root{
-      --brand:#b08d57;
-      --ink:#2b2a28;
-      --muted:#7b7468;
-      --bg:#f6f1e9;
+      /* Paleta clara elegante */
+      --brand:#b08d57;              /* dorado suave */
+      --ink:#2b2a28;                /* texto principal */
+      --muted:#7b7468;              /* texto secundario */
+      --bg:#f6f1e9;                 /* blanco hueso */
       --card:#ffffff;
       --radius:22px; 
       --maxw:1100px;
+      /* Sombras flotantes */
       --shadow: 0 18px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.08);
       --shadow-soft: 0 10px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
       --glass-border-light:rgba(0,0,0,.08);
       --glass-border-dark:rgba(255,255,255,.35);
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -27,10 +30,12 @@
       line-height:1.65; 
       color:var(--ink);
       background:
+        /* Textura papel/regalo */
         url('assets/imagenes/bg-textura.jpg') center/700px repeat,
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'><g fill='none' stroke='%232b2a28' stroke-opacity='.06' stroke-width='1.5'><path d='M18 26c0-6 10-6 10 2 0-8 10-8 10-2 0 8-10 12-10 12S18 34 18 26z'/><rect x='50' y='50' width='20' height='20' rx='4'/><path d='M60 50v20M50 60h20'/></g></svg>") center/88px repeat,
         var(--bg);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      -webkit-font-smoothing:antialiased; 
+      -moz-osx-font-smoothing:grayscale;
     }
     body::before{
       content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
@@ -38,16 +43,18 @@
                   radial-gradient(1200px 600px at 110% 10%, rgba(0,0,0,.02), transparent 60%);
       mix-blend-mode:multiply; opacity:.9;
     }
+
     img{max-width:100%; display:block}
     .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
     a{color:inherit; text-decoration:none}
 
+    /* ===== HERO con overlay para contraste ===== */
     header.hero{
       min-height:92svh; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden;
       color:#fff;
       background:
         linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65)),
-        url('assets/imagenes/hero-portada.jpg') center/cover no-repeat;
+        url('assets/imagenes/hero-portada.jpg') center/cover no-repeat; /* 🔁 portada */
     }
     header .badge{
       display:inline-block; padding:.35rem .7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
@@ -57,6 +64,7 @@
     header h1{font-size:clamp(36px,6vw,70px); margin:.4rem 0 .2rem; line-height:1.08}
     header p.sub{color:#f0ecff; margin:.35rem 0 1rem}
 
+    /* Botones flotantes */
     .cta-row{display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap}
     .btn{
       appearance:none; border:none; background:var(--brand); color:#211a12; font-weight:800; 
@@ -65,66 +73,124 @@
     }
     .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
     .btn:active{transform:translateY(0)}
-    .btn.secondary{background:#ffffffd8; color:var(--ink); border:1px solid var(--glass-border-light)}
-    .btn.ghost{background:#fff0; color:var(--ink); border:1px solid var(--glass-border-light)}
+    .btn.secondary{
+      background:#ffffffd8; color:var(--ink); border:1px solid var(--glass-border-light)
+    }
+    .btn.ghost{
+      background:#fff0; color:var(--ink); border:1px solid var(--glass-border-light)
+    }
     .chip{display:inline-flex; align-items:center; gap:.5rem; padding:.5rem .9rem; border-radius:999px; background:#ffffffd8; border:1px solid var(--glass-border-light); box-shadow:var(--shadow-soft)}
 
+    /* ===== Contador ===== */
     .countdown{display:flex; justify-content:center; gap:12px; margin:18px auto 6px; z-index:2}
-    .time-box{min-width:78px; border-radius:14px; padding:10px 12px; text-align:center; color:#fff; background:rgba(255,255,255,.14); border:1px solid var(--glass-border-dark); backdrop-filter:blur(6px); box-shadow:inset 0 8px 30px rgba(0,0,0,.25)}
+    .time-box{
+      min-width:78px; border-radius:14px; padding:10px 12px; text-align:center; color:#fff; 
+      background:rgba(255,255,255,.14); border:1px solid var(--glass-border-dark); 
+      backdrop-filter:blur(6px); box-shadow:inset 0 8px 30px rgba(0,0,0,.25)
+    }
     .time-box .num{font-size:28px; font-weight:900; letter-spacing:.02em; display:block}
     .time-box .label{font-size:12px; opacity:.92; margin-top:2px}
     @media(min-width:760px){.time-box{min-width:94px; border-radius:16px; padding:12px 14px}.time-box .num{font-size:34px}}
 
+    /* ===== Secciones ===== */
     section{padding:72px 0}
     .title{font-size:clamp(24px,4.6vw,44px); margin:0 0 12px; text-align:center}
     .subtitle{color:var(--muted); text-align:center; margin:-4px auto 32px; max-width:720px}
 
-    .slider{position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); background:var(--card); border:1px solid var(--glass-border-light)}
+    /* ===== Slider Historia ===== */
+    .slider{
+      position:relative; overflow:hidden; border-radius:var(--radius); 
+      box-shadow:var(--shadow); background:var(--card); border:1px solid var(--glass-border-light)
+    }
     .slides{display:flex; transition:transform .55s cubic-bezier(.22,.75,.18,1); touch-action:pan-y; will-change:transform}
     .slide{min-width:100%; height:70svh; position:relative; background:#eee}
     .slide img{width:100%; height:100%; object-fit:cover}
-    .overlay{position:absolute; left:16px; right:16px; bottom:16px; background:#ffffffd8; border:1px solid var(--glass-border-light); color:var(--ink); padding:14px 16px; border-radius:14px; backdrop-filter:blur(6px); max-width:720px; margin-inline:auto; box-shadow:var(--shadow-soft)}
-    .nav-btn{position:absolute; top:50%; translate:0 -50%; z-index:10; width:44px; height:44px; border-radius:999px; border:1px solid var(--glass-border-light); background:#ffffffd8; display:grid; place-items:center; cursor:pointer; box-shadow:var(--shadow-soft)}
+    .overlay{
+      position:absolute; left:16px; right:16px; bottom:16px; 
+      background:#ffffffd8; border:1px solid var(--glass-border-light); color:var(--ink); 
+      padding:14px 16px; border-radius:14px; backdrop-filter:blur(6px); max-width:720px; margin-inline:auto;
+      box-shadow:var(--shadow-soft)
+    }
+    .nav-btn{
+      position:absolute; top:50%; translate:0 -50%; z-index:10; width:44px; height:44px; border-radius:999px; 
+      border:1px solid var(--glass-border-light); background:#ffffffd8; display:grid; place-items:center; cursor:pointer;
+      box-shadow:var(--shadow-soft)
+    }
     .nav-btn.prev{left:12px} .nav-btn.next{right:12px}
     .dots{position:absolute; inset:auto 0 10px; display:flex; gap:8px; justify-content:center; z-index:5}
     .dots button{width:8px; height:8px; border-radius:999px; border:0; background:#00000022}
     .dots button[aria-current="true"]{background:var(--brand)}
 
+    /* ===== Tarjetas flotantes (Padrinos / Itinerario / Lugares / RSVP) ===== */
     .grid{display:grid; gap:18px}
     @media(min-width:720px){.grid.three{grid-template-columns:repeat(3,1fr)} .grid.two{grid-template-columns:repeat(2,1fr)}}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); border:1px solid var(--glass-border-light); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); 
+      border:1px solid var(--glass-border-light); border-radius:16px; overflow:hidden; 
+      box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease
+    }
     .card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
     .card .body{padding:14px}
-    .tag{display:inline-block; font-size:.72rem; padding:.28rem .55rem; border:1px solid var(--glass-border-light); border-radius:999px; color:var(--muted); background:#fff}
+    .tag{
+      display:inline-block; font-size:.72rem; padding:.28rem .55rem; 
+      border:1px solid var(--glass-border-light); border-radius:999px; color:var(--muted); background:#fff
+    }
     .name{font-weight:800; margin:8px 0 2px; color:var(--ink)}
     .role{color:var(--muted)}
 
-    .player{position:fixed; right:16px; bottom:16px; z-index:50; display:flex; align-items:center; gap:.9rem; padding:.65rem .8rem; background:#ffffffd8; border:1px solid var(--glass-border-light); border-radius:999px; box-shadow:var(--shadow-soft); backdrop-filter:blur(8px)}
-    .disc{width:42px; height:42px; border-radius:50%; background:radial-gradient(circle at 50% 50%, #333 0 9px, #111 10px 50%, #000 51% 100%),repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.06) 0 2px, rgba(0,0,0,.12) 2px 4px); position:relative; flex:0 0 42px; box-shadow:inset 0 2px 6px rgba(255,255,255,.3), inset 0 -2px 8px rgba(0,0,0,.25); animation:spin 4s linear infinite; animation-play-state:paused}
+    /* ===== Tocadiscos ===== */
+    .player{
+      position:fixed; right:16px; bottom:16px; z-index:50; 
+      display:flex; align-items:center; gap:.9rem; padding:.65rem .8rem; 
+      background:#ffffffd8; border:1px solid var(--glass-border-light); border-radius:999px; 
+      box-shadow:var(--shadow-soft); backdrop-filter:blur(8px);
+    }
+    .disc{
+      width:42px; height:42px; border-radius:50%;
+      background:
+        radial-gradient(circle at 50% 50%, #333 0 9px, #111 10px 50%, #000 51% 100%),
+        repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.06) 0 2px, rgba(0,0,0,.12) 2px 4px);
+      position:relative; flex:0 0 42px; 
+      box-shadow:inset 0 2px 6px rgba(255,255,255,.3), inset 0 -2px 8px rgba(0,0,0,.25);
+      animation:spin 4s linear infinite; animation-play-state:paused;
+    }
     .disc::after{content:""; position:absolute; width:8px; height:8px; border-radius:50%; background:#b08d57; top:50%; left:50%; transform:translate(-50%,-50%)}
-    .arm{width:36px; height:6px; background:#cfc7bb; border-radius:6px; transform:rotate(22deg); transform-origin:left center; box-shadow:0 2px 6px rgba(0,0,0,.1)}
+    .arm{
+      width:36px; height:6px; background:#cfc7bb; border-radius:6px; transform:rotate(22deg); transform-origin:left center; 
+      box-shadow:0 2px 6px rgba(0,0,0,.1);
+    }
     .player.playing .disc{animation-play-state:running}
     @keyframes spin{to{transform:rotate(360deg)}}
     .player .label{font-weight:700}
     .player .sub{font-size:.82rem; color:var(--muted); margin-top:-6px}
 
+    /* ===== Formularios ===== */
     .field{display:flex; flex-direction:column; gap:.35rem}
-    .input, .select{width:100%; padding:.9rem 1rem; border-radius:14px; border:1px solid var(--glass-border-light); background:#fff; box-shadow:var(--shadow-soft); outline:none; transition:box-shadow .18s ease, transform .18s ease}
+    .input, .select{
+      width:100%; padding:.9rem 1rem; border-radius:14px; border:1px solid var(--glass-border-light); background:#fff; 
+      box-shadow:var(--shadow-soft); outline:none; transition:box-shadow .18s ease, transform .18s ease;
+    }
     .input:focus, .select:focus{box-shadow:var(--shadow); transform:translateY(-1px)}
     .helper{font-size:.86rem; color:var(--muted)}
     .btn.whatsapp{display:inline-flex; align-items:center; gap:.55rem}
-    .btn.whatsapp::before{content:""; width:18px; height:18px; background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path fill="%23ffffff" d="M128 24a104 104 0 0 0-90.66 154.69L24 232l54.12-12.93A104 104 0 1 0 128 24Zm56.35 147.77C172.63 186.72 146.82 182 146.82 182s-30.1-7.6-50.9-28.43S67.49 102 67.49 102s-4.74-25.82 10.23-37.52S104.8 64 104.8 64s5.57.14 7.64 6.08c2.08 5.94 6.83 19.6 6.83 19.6s1.2 3.64-.62 5.67-6.82 8.23-6.82 8.23-2.9 2.9-.83 6.7 9.64 16.2 18.06 24.62 21.82 17.2 25.62 18.27 6.7-.83 6.7-.83 6.2-5.58 8.23-6.8 5.67-.62 5.67-.62 13.64 4.75 19.57 6.83 6.08 7.64 6.08 7.64 2.5 17.07-12.7 29.21Z"/></svg>') center/contain no-repeat; filter: drop-shadow(0 1px 0 rgba(0,0,0,.2))}
+    .btn.whatsapp::before{
+      content:""; width:18px; height:18px; background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path fill="%23ffffff" d="M128 24a104 104 0 0 0-90.66 154.69L24 232l54.12-12.93A104 104 0 1 0 128 24Zm56.35 147.77C172.63 186.72 146.82 182 146.82 182s-30.1-7.6-50.9-28.43S67.49 102 67.49 102s-4.74-25.82 10.23-37.52S104.8 64 104.8 64s5.57.14 7.64 6.08c2.08 5.94 6.83 19.6 6.83 19.6s1.2 3.64-.62 5.67-6.82 8.23-6.82 8.23-2.9 2.9-.83 6.7 9.64 16.2 18.06 24.62 21.82 17.2 25.62 18.27 6.7-.83 6.7-.83 6.2-5.58 8.23-6.8 5.67-.62 5.67-.62 13.64 4.75 19.57 6.83 6.08 7.64 6.08 7.64 2.5 17.07-12.7 29.21Z"/></svg>') center/contain no-repeat; filter: drop-shadow(0 1px 0 rgba(0,0,0,.2));
+    }
+
+    /* ===== Footer firma ===== */
     .signature{padding:42px 0; text-align:center; color:var(--muted)}
     .signature em{display:block; font-family: "Times New Roman", Georgia, serif; font-size:clamp(24px,4vw,34px); color:var(--brand)}
   </style>
 </head>
 <body>
+  <!-- ===== HERO ===== -->
   <header class="hero" id="hero">
     <div class="wrap">
       <span class="badge">Boda</span>
       <h1 id="couple">Jimena & David</h1>
       <p class="sub" id="eventDate">18 de septiembre de 2025 · 1:30 pm</p>
 
+      <!-- 🔢 CONTADOR -->
       <div id="countdown" class="countdown" aria-live="polite">
         <div class="time-box"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
         <div class="time-box"><span class="num" id="cd-hours">00</span><span class="label">Horas</span></div>
@@ -141,6 +207,7 @@
     </div>
   </header>
 
+  <!-- ===== Tocadiscos flotante ===== -->
   <div class="player" id="player" role="region" aria-label="Reproductor de música">
     <div class="disc" aria-hidden="true"></div>
     <div class="arm" aria-hidden="true"></div>
@@ -152,6 +219,7 @@
     <button class="btn ghost" id="btnMute" title="Silenciar / Activar">🔊</button>
   </div>
 
+  <!-- ===== Nuestra Historia ===== -->
   <section id="historia" class="wrap">
     <h2 class="title">Nuestra Historia</h2>
     <p class="subtitle">Desliza para ver los momentos que los llevaron al “sí”. Cada foto tiene su nota y fecha.</p>
@@ -161,21 +229,21 @@
       <button class="nav-btn next" data-next aria-label="Siguiente">⟶</button>
 
       <ul class="slides" data-slides>
+        <!-- 🔁 Reemplaza imágenes y textos -->
         <li class="slide">
-          <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" onerror="handleImgError(this)" />
+          <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" />
           <div class="overlay"><b>Fecha: 02-09-2025</b> · Cuando nos conocimos. Una mirada bastó para empezar la aventura.</div>
         </li>
         <li class="slide">
-          <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" onerror="handleImgError(this)" />
+          <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" />
           <div class="overlay"><b>Fecha: 16-10-2025</b> · Primera cita. Risas, café y mil planes por delante.</div>
         </li>
         <li class="slide">
-          <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" onerror="handleImgError(this)" />
+          <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" />
           <div class="overlay"><b>Fecha: 08-01-2026</b> · Nuestro primer viaje. Descubrimos que el mejor destino es estar juntos.</div>
         </li>
         <li class="slide">
-          <!-- 👇 Cache-buster para forzar versión nueva -->
-          <img src="assets/imagenes/historia-4.jpg?v=2" alt="La propuesta" onerror="handleImgError(this)" />
+          <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" />
           <div class="overlay"><b>Fecha: 12-02-2027</b> · ¡Dijo que sí! El comienzo de una nueva etapa.</div>
         </li>
       </ul>
@@ -183,47 +251,50 @@
     </div>
   </section>
 
+  <!-- ===== Padrinos ===== -->
   <section id="padrinos" class="wrap">
     <h2 class="title">Padrinos</h2>
     <div class="grid three">
       <article class="card">
-        <img src="assets/imagenes/padrinos/padrino-velacion.jpg" alt="Padrino de velación" onerror="handleImgError(this)" />
+        <img src="assets/imagenes/padrinos/padrino-velacion.jpg" alt="Padrino de velación" />
         <div class="body"><span class="tag">Velación</span><div class="name">Carlos Mendoza</div><div class="role">Padrino de Velación</div></div>
       </article>
       <article class="card">
-        <img src="assets/imagenes/padrinos/madrina-anillos.jpg" alt="Madrina de anillos" onerror="handleImgError(this)" />
+        <img src="assets/imagenes/padrinos/madrina-anillos.jpg" alt="Madrina de anillos" />
         <div class="body"><span class="tag">Anillos</span><div class="name">María López</div><div class="role">Madrina de Anillos</div></div>
       </article>
       <article class="card">
-        <img src="assets/imagenes/padrinos/padrino-arras.jpg" alt="Padrino de arras" onerror="handleImgError(this)" />
+        <img src="assets/imagenes/padrinos/padrino-arras.jpg" alt="Padrino de arras" />
         <div class="body"><span class="tag">Arras</span><div class="name">Jorge Ramírez</div><div class="role">Padrino de Arras</div></div>
       </article>
     </div>
   </section>
 
+  <!-- ===== Lugares ===== -->
   <section id="lugares" class="wrap">
     <h2 class="title">Lugares</h2>
     <p class="subtitle">Ceremonia y recepción. Toca “Ver ubicación” para abrir el mapa.</p>
     <div class="grid two">
       <article class="card">
-        <img src="assets/imagenes/lugares/ceremonia.jpg" alt="Lugar de la ceremonia" onerror="handleImgError(this)" />
+        <img src="assets/imagenes/lugares/ceremonia.jpg" alt="Lugar de la ceremonia" />
         <div class="body">
           <h3 style="margin:.2rem 0 .4rem">Ceremonia — Iglesia Retalhuleu</h3>
           <p class="helper">Llegar 15 minutos antes. Estacionamiento frente a la entrada.</p>
-          <a class="btn" href="https://maps.google.com/?q=Iglesia%20Retalhuleu" target="_blank" rel="noopener">Ver ubicación</a>
+          <a class="btn" href="https://maps.google.com/?q=Iglesia%20Retalhuleu" target="_blank" rel="noopener">Ver ubicación</a> <!-- 🔁 reemplazar por tu enlace exacto -->
         </div>
       </article>
       <article class="card">
-        <img src="assets/imagenes/lugares/recepcion.jpg" alt="Lugar de la recepción" onerror="handleImgError(this)" />
+        <img src="assets/imagenes/lugares/recepcion.jpg" alt="Lugar de la recepción" />
         <div class="body">
           <h3 style="margin:.2rem 0 .4rem">Recepción — Salón Las Morenas</h3>
           <p class="helper">Cena, brindis y baile.</p>
-          <a class="btn" href="https://maps.google.com/?q=Salon%20Las%20Morenas" target="_blank" rel="noopener">Ver ubicación</a>
+          <a class="btn" href="https://maps.google.com/?q=Salon%20Las%20Morenas" target="_blank" rel="noopener">Ver ubicación</a> <!-- 🔁 reemplazar por tu enlace exacto -->
         </div>
       </article>
     </div>
   </section>
 
+  <!-- ===== Itinerario (flotante) ===== -->
   <section id="itinerario" class="wrap">
     <h2 class="title">Itinerario</h2>
     <div class="grid" style="grid-template-columns:1fr; max-width:900px; margin:0 auto">
@@ -234,6 +305,7 @@
     </div>
   </section>
 
+  <!-- ===== Confirmar asistencia (RSVP WhatsApp) ===== -->
   <section id="rsvp" class="wrap">
     <h2 class="title">Confirmar asistencia</h2>
     <p class="subtitle">Por favor confirma tu asistencia un mes antes del evento. ¡Gracias!</p>
@@ -255,4 +327,147 @@
             <option value="4">Asistiré con 4 acompañantes</option>
             <option value="5">Asistiré con 5 acompañantes</option>
             <option value="-1">No podré asistir</option>
-          </select
+          </select>
+        </label>
+
+        <div style="display:flex; gap:.8rem; align-items:center; flex-wrap:wrap">
+          <button type="submit" class="btn whatsapp" id="btnWhatsapp">Confirmar por WhatsApp</button>
+          <span class="helper">También puedes llamar al <a href="tel:54389207">54 38 92 07</a>.</span>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <footer class="signature">
+    <div>Con cariño,</div>
+    <em>Escobar</em>
+  </footer>
+
+  <!-- ===== Audio ===== -->
+  <audio id="bgMusic" src="assets/musica/fondo.mp3" preload="auto" loop></audio>     <!-- 🔁 tu canción de fondo -->
+  <audio id="voiceInvite" src="assets/musica/invitacion.mp3" preload="auto"></audio> <!-- 🔁 audio de invitación -->
+
+  <script>
+    // ===== Utils
+    const $  = (s, el=document) => el.querySelector(s);
+    const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+
+    // Scroll a historia
+    $('#btnHistoria')?.addEventListener('click', ()=> $('#historia').scrollIntoView({behavior:'smooth'}));
+
+    // ===== Slider
+    const slider = $('[data-slider]');
+    const track  = slider?.querySelector('[data-slides]');
+    const slides = $$('.slide', slider);
+    const dotsC  = slider?.querySelector('[data-dots]');
+    const prev   = slider?.querySelector('[data-prev]');
+    const next   = slider?.querySelector('[data-next]');
+    let i = 0, x0 = null;
+
+    function go(n){
+      if(!track) return;
+      i = (n + slides.length) % slides.length;
+      track.style.transform = `translateX(${-i*100}%)`;
+      if(dotsC) [...dotsC.children].forEach((d,idx)=> d.setAttribute('aria-current', idx===i));
+    }
+    slides.forEach((_s, idx)=>{
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Ir a la foto ${idx+1}`);
+      b.addEventListener('click', ()=> go(idx));
+      dotsC.appendChild(b);
+    });
+    go(0);
+    prev?.addEventListener('click', ()=> go(i-1));
+    next?.addEventListener('click', ()=> go(i+1));
+    track?.addEventListener('pointerdown', e=>{ x0 = e.clientX; track.setPointerCapture(e.pointerId); });
+    track?.addEventListener('pointerup',   e=>{
+      if(x0===null) return; const dx = e.clientX - x0; x0=null;
+      if(Math.abs(dx) > 40) go(i + (dx<0?1:-1));
+    });
+    window.addEventListener('keydown', e=>{
+      if(e.key==='ArrowRight') go(i+1);
+      if(e.key==='ArrowLeft')  go(i-1);
+    });
+
+    // ===== Audio & Tocadiscos
+    const bg = $('#bgMusic'), voice = $('#voiceInvite');
+    const bPlay = $('#btnMusic'), bMute = $('#btnMute'), bEscuchar = $('#btnEscuchar');
+    const player = $('#player'), playerState = $('#playerState');
+    let bgStarted = false;
+
+    function updBtns(){ 
+      bPlay.textContent = bg.paused ? '▶️' : '⏸️'; 
+      bMute.textContent = bg.muted ? '🔇' : '🔊'; 
+      player.classList.toggle('playing', !bg.paused); 
+      playerState.textContent = bg.paused ? 'Pausada' : 'Reproduciendo';
+    }
+    function tryStartBg(){ 
+      if(!bgStarted){ 
+        bg.volume = .72; 
+        bg.play().then(()=>{bgStarted=true;updBtns();}).catch(()=>{}); 
+      } 
+    }
+
+    bPlay?.addEventListener('click', ()=>{ if(bg.paused) bg.play(); else bg.pause(); updBtns(); });
+    bMute?.addEventListener('click', ()=>{ bg.muted = !bg.muted; updBtns(); });
+    // Botón del hero: Reproducir nuestra canción (pausa voz si estaba sonando)
+    bEscuchar?.addEventListener('click', async ()=>{
+      if(!bgStarted || bg.paused){ tryStartBg(); } else { bg.pause(); }
+      updBtns();
+    });
+
+    // Si se reproduce el audio de invitación, pausamos la música
+    $('#voiceInvite')?.addEventListener('play', ()=>{ if(!bg.paused){ bg.pause(); updBtns(); } });
+
+    // Auto-intento al primer click en la página (por políticas del navegador)
+    document.addEventListener('click', tryStartBg, {once:true});
+    bg.addEventListener('play', updBtns);
+    bg.addEventListener('pause', updBtns);
+
+    // ===== Contador
+    const target = new Date('2025-09-18T13:30:00'); // 🔁 ajusta fecha/hora exactas
+    const d = $('#cd-days'), h = $('#cd-hours'), m = $('#cd-mins'), s = $('#cd-secs');
+    function tick(){
+      const now = new Date(); let diff = target - now;
+      if (diff <= 0) { d.textContent=h.textContent=m.textContent=s.textContent='00'; return; }
+      const dd = Math.floor(diff / 86400000); diff %= 86400000;
+      const hh = Math.floor(diff / 3600000);  diff %= 3600000;
+      const mm = Math.floor(diff / 60000);    diff %= 60000;
+      const ss = Math.floor(diff / 1000);
+      d.textContent = String(dd).padStart(2,'0');
+      h.textContent = String(hh).padStart(2,'0');
+      m.textContent = String(mm).padStart(2,'0');
+      s.textContent = String(ss).padStart(2,'0');
+    }
+    tick(); setInterval(tick, 1000);
+
+    // ===== RSVP → WhatsApp
+    const WHATSAPP_NUMBER = '54389207'; // 🔁 si más adelante agregas código de país, p.ej. '50254389207'
+    $('#rsvpForm')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = $('#guestName').value.trim();
+      const companions = $('#companions').value;
+      if(!name){ alert('Por favor, escribe tu nombre.'); return; }
+
+      const attending = companions !== '-1';
+      const compText = companions === '-1' ? 'No podré asistir' 
+        : (companions === '0' ? 'Asistiré sin acompañantes' 
+        : `Asistiré con ${companions} acompañante${companions==='1'?'':'s'}`);
+
+      // Mensaje
+      const dateText = $('#eventDate')?.textContent?.trim() ?? '';
+      const placeText = $('#place')?.textContent?.trim() ?? '';
+      const msg = `Hola, soy ${name}. ${compText}. Evento: ${dateText}. ${placeText}.`;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+
+      // Feedback visual
+      const btn = $('#btnWhatsapp');
+      btn.disabled = true; btn.style.opacity = .7; btn.textContent = 'Abriendo WhatsApp…';
+      setTimeout(()=>{ btn.disabled = false; btn.style.opacity = 1; btn.textContent = 'Confirmar por WhatsApp'; }, 2000);
+    });
+  </script>
+</body>
+</html>
