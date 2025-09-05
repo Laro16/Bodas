@@ -18,13 +18,23 @@
     html,body{height:100%}
     body{
       margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,'Helvetica Neue',Arial;
-      line-height:1.6; color:var(--ink); background:var(--bg);
+      line-height:1.6; color:var(--ink);
+      /* ===== Fondo con textura tipo papel + vetas doradas (sin imágenes) ===== */
+      background:
+        /* pequeñas vetas doradas dispersas */
+        radial-gradient(1px 1px at 12% 18%, rgba(176,141,87,.22) 0 1px, transparent 1.2px),
+        radial-gradient(1px 1px at 78% 42%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
+        radial-gradient(1px 1px at 32% 76%, rgba(176,141,87,.16) 0 1px, transparent 1.2px),
+        radial-gradient(1px 1px at 60% 12%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
+        /* jaspeado muy suave */
+        repeating-linear-gradient(145deg, rgba(0,0,0,.018) 0 2px, rgba(255,255,255,.018) 2px 4px),
+        radial-gradient(1200px 800px at -10% -20%, #ffffff 0 30%, rgba(255,255,255,.96) 30% 60%, rgba(255,255,255,.94) 60% 100%),
+        var(--bg);
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
       overflow-x:hidden;
     }
 
     img{max-width:100%; display:block}
-    /* Reset listas (evita saltos en sliders) */
     ul,ol{margin:0; padding:0; list-style:none}
 
     .wrap{max-width:var(--maxw); margin:0 auto; padding:0 16px}
@@ -49,8 +59,7 @@
       appearance:none; border:none; background:var(--brand); color:#211a12; font-weight:800;
       padding:.85rem 1.05rem; border-radius:14px; cursor:pointer; box-shadow:var(--shadow-soft);
       transform:translateY(0); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-      position:relative; overflow:hidden; /* para ripple interno */
-      touch-action:manipulation;
+      position:relative; overflow:hidden; touch-action:manipulation;
     }
     .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
     .btn:active{transform:translateY(0)}
@@ -94,23 +103,36 @@
     .name{font-weight:800; margin:8px 0 2px; color:var(--ink)}
     .role{color:var(--muted)}
 
-    /* ===== Tocadiscos (mini) ===== */
-    .player{position:fixed; right:12px; bottom:12px; z-index:50; display:flex; align-items:center; gap:.6rem; padding:.5rem .65rem;
-      background:#ffffffd8; border:1px solid var(--glass-border-light); border-radius:999px; box-shadow:var(--shadow-soft); backdrop-filter:blur(8px)}
-    .disc{width:30px; height:30px; border-radius:50%; background:
-        radial-gradient(circle at 50% 50%, #333 0 7px, #111 8px 50%, #000 51% 100%),
+    /* ===== Tocadiscos (versión compacta y elegante) ===== */
+    .player{
+      position:fixed; right:12px; bottom:12px; z-index:50;
+      display:flex; align-items:center; gap:.5rem;
+      padding:.35rem .5rem; background:#ffffffd8; border:1px solid var(--glass-border-light);
+      border-radius:999px; box-shadow:var(--shadow-soft); backdrop-filter:blur(8px)
+    }
+    .disc{
+      width:22px; height:22px; border-radius:50%;
+      background:
+        radial-gradient(circle at 50% 50%, #333 0 6px, #111 7px 50%, #000 51% 100%),
         repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.06) 0 2px, rgba(0,0,0,.12) 2px 4px);
-      position:relative; flex:0 0 30px; box-shadow:inset 0 2px 6px rgba(255,255,255,.3), inset 0 -2px 8px rgba(0,0,0,.25);
-      animation:spin 4s linear infinite; animation-play-state:paused}
-    .disc::after{content:""; position:absolute; width:6px; height:6px; border-radius:50%; background:#b08d57; top:50%; left:50%; transform:translate(-50%,-50%)}
-    .arm{ width:28px; height:5px; background:#cfc7bb; border-radius:6px; transform:rotate(20deg); transform-origin:left center; box-shadow:0 2px 6px rgba(0,0,0,.1) }
+      position:relative; flex:0 0 22px; box-shadow:inset 0 2px 6px rgba(255,255,255,.3), inset 0 -2px 8px rgba(0,0,0,.25);
+      animation:spin 5s linear infinite; animation-play-state:paused
+    }
+    .disc::after{content:""; position:absolute; width:5px; height:5px; border-radius:50%; background:#b08d57; top:50%; left:50%; transform:translate(-50%,-50%)}
+    .arm{ display:none } /* ocultamos el brazo para que el componente sea más limpio y corto */
     .player.playing .disc{animation-play-state:running}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .player .label{font-weight:700; font-size:.9rem}
-    .player .sub{font-size:.74rem; color:var(--muted); margin-top:-4px}
-    .player .btn{padding:.5rem .6rem; border-radius:10px}
+    .player .label{font-weight:700; font-size:.85rem}
+    .player .sub{font-size:.72rem; color:var(--muted); margin-top:-2px}
+    .icon-btn{
+      width:34px; height:34px; display:grid; place-items:center; border-radius:12px; border:1px solid var(--glass-border-light);
+      background:#fff; box-shadow:var(--shadow-soft); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease
+    }
+    .icon-btn:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
+    .icon{width:18px; height:18px; display:block}
+    .icon path{fill:#3a342a}
 
-    /* Inputs */
+    /* ===== Inputs ===== */
     .field{display:flex; flex-direction:column; gap:.35rem}
     .input,.select{width:100%; padding:.85rem 1rem; border-radius:12px; border:1px solid var(--glass-border-light); background:#fff; box-shadow:var(--shadow-soft); outline:none; transition:box-shadow .18s ease, transform .18s ease}
     .input:focus,.select:focus{box-shadow:var(--shadow); transform:translateY(-1px)}
@@ -120,39 +142,59 @@
     .signature{padding:36px 0; text-align:center; color:var(--muted)}
     .signature em{display:block; font-family: "Times New Roman", Georgia, serif; font-size:clamp(22px,4.5vw,32px); color:var(--brand)}
 
-    /* ===== Click ripple global ===== */
+    /* ===== Ripple global ===== */
     .ripple{position:fixed; pointer-events:none; inset:auto auto 0 0; width:14px; height:14px; border-radius:999px; background:radial-gradient(circle, rgba(176,141,87,.55) 0%, rgba(176,141,87,.25) 45%, rgba(176,141,87,0) 60%); opacity:.9; transform:translate(-50%,-50%) scale(1); animation:rippleOut .6s ease-out forwards}
     @keyframes rippleOut{to{opacity:0; transform:translate(-50%,-50%) scale(12)}}
 
-    /* Resp. y accesibilidad */
     @media (max-width:420px){
       .cta-row{gap:.55rem}
       .player .label{display:none}
+      .player .sub{display:none}
     }
-    @media (prefers-reduced-motion:reduce){
-      *{scroll-behavior:auto!important; animation:none!important; transition:none!important}
-    }
-      /* ===== Lugares: imágenes con altura unificada ===== */
+
+    /* ===== Lugares: imágenes con altura unificada ===== */
     #lugares .place-media{height:200px; overflow:hidden}
     #lugares .place-media img{width:100%; height:100%; object-fit:cover; display:block}
     @media(min-width:720px){#lugares .place-media{height:220px}}
 
-    /* ===== Itinerario: línea de tiempo decorada ===== */
+    /* ===== Itinerario: línea de tiempo (fix de solapado) ===== */
     .timeline{position:relative; max-width:900px; margin:0 auto}
-    .timeline::before{content:""; position:absolute; left:28px; top:0; bottom:0; width:3px; border-radius:3px;
+    .timeline::before{content:""; position:absolute; left:30px; top:0; bottom:0; width:3px; border-radius:3px;
       background:linear-gradient(180deg, rgba(176,141,87,.6), rgba(176,141,87,.15)); box-shadow:0 0 0 1px rgba(0,0,0,.03) inset}
-    .tl-item{display:grid; grid-template-columns:70px 1fr; gap:12px; align-items:start; position:relative; margin-bottom:14px}
+    .tl-item{display:grid; grid-template-columns:80px 1fr; gap:12px; align-items:start; position:relative; margin-bottom:14px}
     .tl-item:last-child{margin-bottom:0}
-    .tl-time{font-weight:800; font-variant-numeric:tabular-nums; background:#fff; border:1px solid var(--glass-border-light);
-      border-radius:999px; padding:.35rem .55rem; text-align:center; box-shadow:var(--shadow-soft)}
-    .tl-dot{position:absolute; left:22px; top:16px; width:14px; height:14px; border-radius:50%;
+    .tl-time{
+      font-weight:800; font-variant-numeric:tabular-nums; background:#fff; border:1px solid var(--glass-border-light);
+      border-radius:999px; padding:.35rem .55rem; text-align:center; box-shadow:var(--shadow-soft);
+      position:relative; z-index:2; /* por encima del adorno */
+    }
+    .tl-dot{
+      position:absolute; left:26px; top:18px; width:12px; height:12px; border-radius:50%;
       background:radial-gradient(circle at 40% 40%, #fff 0 2px, #d8c7aa 3px 6px, #b08d57 7px);
-      box-shadow:0 2px 8px rgba(0,0,0,.15)}
+      box-shadow:0 2px 8px rgba(0,0,0,.15);
+      z-index:1; /* por debajo del horario */
+    }
     .tl-card.card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96));
       border:1px solid var(--glass-border-light); border-left:4px solid var(--brand)}
     .tl-card .body{padding:12px}
     .tl-card .place{color:var(--muted); font-size:.95rem}
 
+    /* ===== RSVP rediseñado ===== */
+    #rsvp .subtitle{margin-bottom:16px}
+    .rsvp-card{
+      max-width:720px; margin:0 auto; padding:16px 14px 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
+      border: 1px solid rgba(176,141,87,.30);
+      border-left:4px solid var(--brand);
+      border-radius:18px; box-shadow:var(--shadow-soft)
+    }
+    .rsvp-accent{display:flex; align-items:center; gap:.6rem; margin:0 0 8px 2px; color:#7b6a4c}
+    .rsvp-accent .dot{width:8px; height:8px; border-radius:999px; background:var(--brand)}
+    .btn.whatsapp{
+      background:var(--brand); color:#211a12; border:1px solid rgba(0,0,0,.06);
+      box-shadow:var(--shadow-soft); font-weight:800
+    }
+    .btn.whatsapp svg{width:18px; height:18px}
   </style>
 </head>
 <body>
@@ -180,16 +222,22 @@
     </div>
   </header>
 
-  <!-- ===== Tocadiscos mini ===== -->
+  <!-- ===== Tocadiscos mini (compacto) ===== -->
   <div class="player" id="player" role="region" aria-label="Reproductor de música">
     <div class="disc" aria-hidden="true"></div>
-    <div class="arm" aria-hidden="true"></div>
     <div>
       <div class="label">Nuestra canción</div>
       <div class="sub" id="playerState">Pausada</div>
     </div>
-    <button class="btn ghost" id="btnMusic" title="Reproducir / Pausar">▶️</button>
-    <button class="btn ghost" id="btnMute" title="Silenciar / Activar">🔊</button>
+    <button class="icon-btn" id="btnMusic" aria-label="Reproducir / Pausar" title="Reproducir / Pausar">
+      <!-- Play/Pause icon (se intercambia por JS) -->
+      <svg class="icon" id="icoPlay" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon" id="icoPause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+    </button>
+    <button class="icon-btn" id="btnMute" aria-label="Silenciar / Activar" title="Silenciar / Activar">
+      <svg class="icon" id="icoVol" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4zm12.5 2a4.5 4.5 0 0 0-2.3-3.9v7.8a4.5 4.5 0 0 0 2.3-3.9z"/></svg>
+      <svg class="icon" id="icoMute" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M16.5 12a4.5 4.5 0 0 1-2.3 3.9V8.1A4.5 4.5 0 0 1 16.5 12zM4 10v4h4l5 4V6l-5 4H4zm12.6 6.2 1.4 1.4L21.6 18l-1.8-1.8L21.6 14l-1.4-1.4-1.8 1.8-1.8-1.8L15.2 14l1.8 1.8-1.8 1.8z"/></svg>
+    </button>
   </div>
 
   <!-- ===== Nuestra Historia ===== -->
@@ -223,7 +271,7 @@
     </div>
   </section>
 
-  <!-- ===== Padrinos (solo velación, arras y anillo) ===== -->
+  <!-- ===== Padrinos ===== -->
   <section id="padrinos" class="wrap">
     <h2 class="title">Padrinos</h2>
     <div class="grid three">
@@ -302,7 +350,9 @@
     <h2 class="title">Confirmar asistencia</h2>
     <p class="subtitle">Por favor confirma tu asistencia un mes antes del evento. ¡Gracias!</p>
 
-    <form class="card" id="rsvpForm" style="max-width:720px; margin:0 auto; padding:14px 14px 18px">
+    <form class="rsvp-card" id="rsvpForm">
+      <div class="rsvp-accent"><span class="dot" aria-hidden="true"></span><strong>Tu espacio</strong> · Nos encantará contar contigo</div>
+
       <div class="grid" style="grid-template-columns:1fr; gap:12px">
         <label class="field">
           <span>Tu nombre completo</span>
@@ -323,7 +373,10 @@
         </label>
 
         <div style="display:flex; gap:.8rem; align-items:center; flex-wrap:wrap">
-          <button type="submit" class="btn whatsapp" id="btnWhatsapp">Confirmar por WhatsApp</button>
+          <button type="submit" class="btn whatsapp" id="btnWhatsapp" aria-label="Confirmar por WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#211a12" d="M20.5 3.5a10 10 0 0 0-16.2 11.3L3 21l6.4-1.3A10 10 0 0 0 20.5 3.5Zm-1.1 13a8 8 0 0 1-11.8 1.5l-.3-.2-3 .6.6-2.9-.2-.3A8 8 0 1 1 19.4 16.5ZM8.9 7.9c.2-.5.4-.5.7-.5h.6c.2 0 .5 0 .7.5s.9 1.5.9 1.6.1.4 0 .6-.2.4-.4.6-.4.5-.2.9c.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9s.5 0 .7-.2.8-.9 1-1.2.4-.2.6-.1.6.3 1.4.7 1.2.6 1.4.9.1.9-.2 1.5c-.3.6-1.2 1.1-1.6 1.1s-.9.2-3-.8a13.6 13.6 0 0 1-3.8-2.4 12.2 12.2 0 0 1-2.2-2.6c-.8-1.2-1.1-2.1-1.2-2.4-.2-.4 0-.8.1-1s.5-1.2.6-1.4Z"/></svg>
+            Confirmar por WhatsApp
+          </button>
           <span class="helper">También puedes llamar al <a href="tel:54389207">54 38 92 07</a>.</span>
         </div>
       </div>
@@ -376,17 +429,23 @@
     track?.addEventListener('pointerup',   e=>{ if(x0===null) return; const dx = e.clientX - x0; x0=null; if(Math.abs(dx) > 40) go(i + (dx<0?1:-1)); });
     window.addEventListener('keydown', e=>{ if(e.key==='ArrowRight') go(i+1); if(e.key==='ArrowLeft')  go(i-1); });
 
-    // ===== Audio & Tocadiscos (mini)
+    // ===== Audio & Tocadiscos (compacto)
     const bg = $('#bgMusic'), voice = $('#voiceInvite');
-    const bPlay = $('#btnMusic'), bMute = $('#btnMute'), bEscuchar = $('#btnEscuchar');
+    const bPlay = $('#btnMusic'), bMute = $('#btnMute');
+    const icoPlay = $('#icoPlay'), icoPause = $('#icoPause');
+    const icoVol  = $('#icoVol'),  icoMute = $('#icoMute');
     const player = $('#player'), playerState = $('#playerState');
     let bgStarted = false;
 
     function updBtns(){
-      bPlay.textContent = bg.paused ? '▶️' : '⏸️';
-      bMute.textContent = bg.muted ? '🔇' : '🔊';
-      player.classList.toggle('playing', !bg.paused);
-      playerState.textContent = bg.paused ? 'Pausada' : 'Reproduciendo';
+      const isPaused = bg.paused;
+      const isMuted  = bg.muted;
+      player.classList.toggle('playing', !isPaused);
+      playerState.textContent = isPaused ? 'Pausada' : 'Reproduciendo';
+      icoPlay.style.display  = isPaused ? 'block' : 'none';
+      icoPause.style.display = isPaused ? 'none'  : 'block';
+      icoVol.style.display   = isMuted ? 'none' : 'block';
+      icoMute.style.display  = isMuted ? 'block' : 'none';
     }
     function tryStartBg(){
       if(!bgStarted){
@@ -397,7 +456,7 @@
 
     bPlay?.addEventListener('click', ()=>{ if(bg.paused) bg.play(); else bg.pause(); updBtns(); });
     bMute?.addEventListener('click', ()=>{ bg.muted = !bg.muted; updBtns(); });
-    bEscuchar?.addEventListener('click', ()=>{ if(!bgStarted || bg.paused){ tryStartBg(); } else { bg.pause(); } updBtns(); });
+    $('#btnEscuchar')?.addEventListener('click', ()=>{ if(!bgStarted || bg.paused){ tryStartBg(); } else { bg.pause(); } updBtns(); });
 
     $('#voiceInvite')?.addEventListener('play', ()=>{ if(!bg.paused){ bg.pause(); updBtns(); } });
 
@@ -405,7 +464,7 @@
     bg.addEventListener('play', updBtns);
     bg.addEventListener('pause', updBtns);
 
-    // ===== Contador (ajustado a zona horaria local del dispositivo)
+    // ===== Contador (zona horaria del dispositivo)
     const target = new Date('2025-09-18T13:30:00');
     const d = $('#cd-days'), h = $('#cd-hours'), m = $('#cd-mins'), s = $('#cd-secs');
     function tick(){
@@ -459,7 +518,7 @@
       }, {once:true});
     });
 
-    // ===== Efecto global en cualquier clic (ripple elegante)
+    // ===== Efecto global ripple =====
     function spawnRipple(x,y){
       const r = document.createElement('span');
       r.className = 'ripple';
@@ -470,7 +529,6 @@
     }
     document.addEventListener('click', (e)=>{
       spawnRipple(e.clientX, e.clientY);
-      // ripple interno para botones
       const t = e.target.closest('.btn');
       if(t){
         const rect = t.getBoundingClientRect();
@@ -489,4 +547,3 @@
   </script>
 </body>
 </html>
-
