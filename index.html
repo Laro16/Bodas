@@ -46,7 +46,7 @@
     }
     header .badge{
       display:inline-block; padding:.3rem .7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-      background:rgba(255,255,255,.10); border:1px solid var(--glass-border-dark); border-radius:999px; backdrop-filter:blur(6px)
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:999px; backdrop-filter:blur(6px)
     }
     header h1{font-size:clamp(32px,7.5vw,64px); margin:.45rem 0 .2rem; line-height:1.08}
     header p.sub{color:#efeafc; margin:.3rem 0 .8rem}
@@ -60,25 +60,42 @@
     }
     .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
     .btn:active{transform:translateY(0)}
-    .btn.secondary{ background:#ffffffb8; color:var(--ink); border:1px solid var(--glass-border-light) }
-    /* Botones transparentes “glass” para el HERO */
+    /* Botones glass del HERO, más transparentes */
     header .btn,
     header .btn.secondary{
-      background:rgba(255,255,255,.12);
-      color:#fff; border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.10);
+      color:#fff; border:1px solid rgba(255,255,255,.22);
       backdrop-filter: blur(6px);
     }
     .btn.ghost{ background:#fff0; color:var(--ink); border:1px solid var(--glass-border-light) }
 
-    .chip{display:inline-flex; align-items:center; gap:.5rem; padding:.45rem .85rem; border-radius:999px; background:#ffffffd8; border:1px solid var(--glass-border-light); box-shadow:var(--shadow-soft)}
-
-    /* ===== Contador (más transparente) ===== */
+    /* ===== Contador (AÚN MÁS TRANSPARENTE + efecto toque) ===== */
     .countdown{display:flex; justify-content:center; gap:10px; margin:14px auto 4px; z-index:2}
-    .time-box{min-width:70px; border-radius:12px; padding:9px 10px; text-align:center; color:#fff;
-      background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.28); backdrop-filter:blur(6px); box-shadow:inset 0 8px 30px rgba(0,0,0,.22)}
+    .time-box{
+      min-width:70px; border-radius:12px; padding:9px 10px; text-align:center; color:#fff; position:relative; overflow:hidden;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.20); backdrop-filter:blur(6px);
+      box-shadow:inset 0 8px 28px rgba(0,0,0,.20);
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .time-box:hover{transform:translateY(-1px); box-shadow:inset 0 10px 30px rgba(0,0,0,.22)}
     .time-box .num{font-size:26px; font-weight:900; letter-spacing:.02em; display:block}
     .time-box .label{font-size:11px; opacity:.92; margin-top:2px}
-    @media(min-width:760px){.time-box{min-width:90px; border-radius:14px; padding:11px 13px}.time-box .num{font-size:32px}}
+    /* “Ping” interno al tocar */
+    .time-box .ping{
+      position:absolute; width:12px; height:12px; border-radius:999px; background:rgba(255,255,255,.55);
+      left:var(--x,50%); top:var(--y,50%); transform:translate(-50%,-50%);
+      animation:ping 700ms ease-out forwards; pointer-events:none;
+      box-shadow:0 0 0 0 rgba(255,255,255,.55);
+    }
+    @keyframes ping{
+      from{opacity:.7; transform:translate(-50%,-50%) scale(.8)}
+      to{opacity:0; transform:translate(-50%,-50%) scale(10)}
+    }
+
+    @media(min-width:760px){
+      .time-box{min-width:90px; border-radius:14px; padding:11px 13px}
+      .time-box .num{font-size:32px}
+    }
 
     section{padding:60px 0}
     .title{font-size:clamp(22px,5.2vw,42px); margin:0 0 10px; text-align:center}
@@ -89,8 +106,13 @@
     .slides{display:flex; transition:transform .5s cubic-bezier(.22,.75,.18,1); touch-action:pan-y; will-change:transform}
     .slide{min-width:100%; height:62svh; position:relative; background:#eee}
     .slide img{width:100%; height:100%; object-fit:cover}
-    .overlay{position:absolute; left:12px; right:12px; bottom:12px; background:#ffffffd6; border:1px solid var(--glass-border-light); color:var(--ink);
-      padding:12px 14px; border-radius:12px; backdrop-filter:blur(6px); max-width:720px; margin-inline:auto; box-shadow:var(--shadow-soft)}
+    /* Mensaje MUCHO más transparente con blur para legibilidad */
+    .overlay{
+      position:absolute; left:12px; right:12px; bottom:12px;
+      background:rgba(255,255,255,.40); border:1px solid rgba(0,0,0,.06); color:var(--ink);
+      padding:12px 14px; border-radius:12px; backdrop-filter:blur(8px);
+      max-width:720px; margin-inline:auto; box-shadow:var(--shadow-soft)
+    }
     /* Flechas más transparentes */
     .nav-btn{position:absolute; top:50%; translate:0 -50%; z-index:10; width:40px; height:40px; border-radius:999px;
       border:1px solid rgba(0,0,0,.06); background:rgba(255,255,255,.65); display:grid; place-items:center; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.08)}
@@ -149,7 +171,7 @@
       .player .sub{display:none}
     }
 
-    /* ===== Lugares: MÁS ALTAS y botón centrado ===== */
+    /* ===== Lugares (un poco más altas) y botón centrado ===== */
     #lugares .place-media{height:240px; overflow:hidden}
     #lugares .place-media img{width:100%; height:100%; object-fit:cover; display:block}
     @media(min-width:720px){#lugares .place-media{height:260px}}
@@ -159,7 +181,7 @@
       backdrop-filter: blur(6px); font-weight:800
     }
 
-    /* ===== Itinerario (fix solapado) ===== */
+    /* ===== Itinerario ===== */
     .timeline{position:relative; max-width:900px; margin:0 auto}
     .timeline::before{content:""; position:absolute; left:30px; top:0; bottom:0; width:3px; border-radius:3px;
       background:linear-gradient(180deg, rgba(176,141,87,.6), rgba(176,141,87,.15)); box-shadow:0 0 0 1px rgba(0,0,0,.03) inset}
@@ -205,7 +227,6 @@
     .dialog{
       position:relative; z-index:1; max-width:800px; width:min(92vw,820px);
       border-radius:22px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.06);
-      /* textura de papel suave dorado */
       background:
         radial-gradient(1px 1px at 16% 22%, rgba(176,141,87,.22) 0 1px, transparent 1.2px),
         radial-gradient(1px 1px at 72% 44%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
@@ -444,7 +465,7 @@
     <em>Escobar</em>
   </footer>
 
-  <!-- ===== Modal para Padrinos ===== -->
+  <!-- ===== Modal Padrinos ===== -->
   <div class="modal" id="modal">
     <div class="dialog">
       <button class="close" id="closeModal" aria-label="Cerrar">✕</button>
@@ -485,7 +506,6 @@
       track.style.transform = `translateX(${-i*100}%)`;
       if(dotsC) [...dotsC.children].forEach((d,idx)=> d.setAttribute('aria-current', idx===i));
     }
-    // Indicadores simples (no usar clase .btn)
     slides.forEach((_s, idx)=>{
       const b = document.createElement('button');
       b.type = 'button';
@@ -549,6 +569,23 @@
     }
     tick(); setInterval(tick, 1000);
 
+    // Efecto “ping” al tocar cuadros del contador
+    $$('.time-box').forEach(box=>{
+      function pingAt(x,y){
+        const r = document.createElement('span');
+        r.className='ping';
+        const rect = box.getBoundingClientRect();
+        r.style.setProperty('--x', (x-rect.left)+'px');
+        r.style.setProperty('--y', (y-rect.top)+'px');
+        box.appendChild(r);
+        r.addEventListener('animationend', ()=> r.remove(), {once:true});
+      }
+      box.addEventListener('click', (e)=> pingAt(e.clientX, e.clientY));
+      box.addEventListener('touchstart', (e)=> {
+        const t = e.touches[0]; if(t) pingAt(t.clientX, t.clientY);
+      }, {passive:true});
+    });
+
     // ===== RSVP → WhatsApp
     const WHATSAPP_NUMBER = '54389207'; // agrega código de país si hace falta
     $('#rsvpForm')?.addEventListener('submit', (e)=>{
@@ -601,7 +638,7 @@
       }, {once:true});
     });
 
-    // ===== Ripple global
+    // ===== Ripple global general
     function spawnRipple(x,y){
       const r = document.createElement('span');
       r.className = 'ripple';
@@ -611,7 +648,8 @@
       r.addEventListener('animationend', ()=> r.remove(), {once:true});
     }
     document.addEventListener('click', (e)=>{
-      spawnRipple(e.clientX, e.clientY);
+      // Evita doble ripple cuando haces ping en time-box
+      if(!e.target.closest('.time-box')) spawnRipple(e.clientX, e.clientY);
     });
   </script>
 </body>
