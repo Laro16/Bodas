@@ -20,7 +20,7 @@
     body{
       margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,'Helvetica Neue',Arial;
       line-height:1.6; color:var(--ink);
-      /* textura de papel suave, sin imágenes externas */
+      /* textura de papel suave (sin imágenes externas) */
       background:
         radial-gradient(1px 1px at 12% 18%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
         radial-gradient(1px 1px at 78% 42%, rgba(176,141,87,.16) 0 1px, transparent 1.2px),
@@ -53,32 +53,47 @@
 
     .cta-row{display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap}
     .btn{
-      appearance:none; border:1px solid var(--glass-border-light); background:var(--brand); color:#211a12; font-weight:800;
+      appearance:none; border:1px solid var(--glass-border-light);
+      background:var(--brand); color:#211a12; font-weight:800;
       padding:.85rem 1.05rem; border-radius:14px; cursor:pointer; box-shadow:var(--shadow-soft);
-      transform:translateY(0); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease, border-color .18s ease;
+      transform:translateY(0);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
       position:relative; overflow:hidden; touch-action:manipulation;
+      display:inline-flex; align-items:center; gap:.55rem; /* para íconos */
     }
     .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
     .btn:active{transform:translateY(0)}
     .btn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(176,141,87,.35), var(--shadow)}
-    /* Botones del hero y contenedor del contador totalmente transparentes */
-    header .btn, header .btn.secondary{background:transparent; color:#fff; border-color:rgba(255,255,255,.36); box-shadow:0 8px 24px rgba(0,0,0,.12)}
+    .btn svg{width:18px; height:18px; display:block}
+    .btn svg path{fill:currentColor}
+    /* Botones del hero totalmente transparentes */
+    header .btn, header .btn.secondary{
+      background:transparent; color:#fff; border-color:rgba(255,255,255,.36);
+      box-shadow:0 8px 24px rgba(0,0,0,.12)
+    }
+    header .btn:hover{background:rgba(255,255,255,.06)}
 
     /* ===== Contador transparente ===== */
     .countdown{display:flex; justify-content:center; gap:10px; margin:14px auto 4px; z-index:2}
     .time-box{
       min-width:70px; border-radius:12px; padding:9px 10px; text-align:center; color:#fff; position:relative; overflow:hidden;
-      background:transparent; border:1px solid rgba(255,255,255,.36); box-shadow:0 8px 24px rgba(0,0,0,.12);
+      background:transparent; border:1px solid rgba(255,255,255,.36);
+      box-shadow:0 8px 24px rgba(0,0,0,.12);
       transition:transform .15s ease, box-shadow .15s ease;
     }
     .time-box:hover{transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.18)}
     .time-box .num{font-size:26px; font-weight:900; letter-spacing:.02em; display:block; text-shadow:0 1px 6px rgba(0,0,0,.35)}
     .time-box .label{font-size:11px; opacity:.92; margin-top:2px}
-    .time-box .ping{position:absolute; width:12px; height:12px; border-radius:999px; background:radial-gradient(circle, rgba(255,255,255,.95) 0 35%, rgba(176,141,87,.65) 35% 65%, rgba(176,141,87,0) 70%); left:var(--x,50%); top:var(--y,50%); transform:translate(-50%,-50%); animation:pingBrand .8s ease-out forwards; pointer-events:none}
+    .time-box .ping{
+      position:absolute; width:12px; height:12px; border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,.95) 0 35%, rgba(176,141,87,.65) 35% 65%, rgba(176,141,87,0) 70%);
+      left:var(--x,50%); top:var(--y,50%); transform:translate(-50%,-50%);
+      animation:pingBrand 800ms ease-out forwards; pointer-events:none;
+    }
     @keyframes pingBrand{from{opacity:.9; transform:translate(-50%,-50%) scale(.6)}to{opacity:0; transform:translate(-50%,-50%) scale(9)}}
     @media(min-width:760px){.time-box{min-width:90px; border-radius:14px; padding:11px 13px}.time-box .num{font-size:32px}}
 
-    /* ===== Secciones con divisor (todas) ===== */
+    /* ===== Secciones con divisor elegante ===== */
     section.sectioned{padding:84px 0; position:relative}
     section.sectioned::before{
       content:""; position:absolute; top:24px; left:50%; transform:translateX(-50%);
@@ -93,7 +108,7 @@
     .title{font-size:clamp(22px,5.2vw,42px); margin:0 0 10px; text-align:center}
     .subtitle{color:var(--muted); text-align:center; margin:-2px auto 28px; max-width:720px}
 
-    /* ===== Slider Historia con transición ===== */
+    /* ===== Slider Historia (con transición) ===== */
     .slider{position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); background:var(--card); border:1px solid var(--glass-border-light)}
     .slides{display:flex; transition:transform .6s cubic-bezier(.22,.75,.18,1); touch-action:pan-y; will-change:transform}
     .slide{min-width:100%; height:62svh; position:relative; background:#eee}
@@ -102,7 +117,7 @@
     .slide.leaving img{opacity:.85; filter:blur(2px); transform:scale(1.05)}
     .overlay{
       position:absolute; left:12px; right:12px; bottom:12px;
-      background:rgba(255,255,255,.22);
+      background:rgba(255,255,255,.22); /* muy transparente */
       border:1px solid rgba(0,0,0,.04); color:var(--ink);
       padding:12px 14px; border-radius:12px; max-width:720px; margin-inline:auto; box-shadow:0 4px 14px rgba(0,0,0,.08);
       opacity:0; transform:translateY(6px); transition:opacity .6s ease, transform .6s ease;
@@ -173,7 +188,7 @@
     .tl-card .body{padding:12px}
     .tl-card .place{color:var(--muted); font-size:.95rem}
 
-    /* ===== Modal padrinos ===== */
+    /* ===== Modal Padrinos ===== */
     .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; padding:18px; z-index:90}
     .modal.open{display:flex}
     .modal::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.45); backdrop-filter:blur(2px)}
@@ -215,18 +230,37 @@
       <p class="sub" id="place">Iglesia Retalhuleu · Recepción: Salón Las Morenas</p>
 
       <div class="cta-row">
-        <button class="btn secondary" id="btnHistoria">Nuestra Historia</button>
-        <button class="btn secondary" id="btnEscuchar">Reproducir nuestra canción</button>
-        <button class="btn secondary" id="btnCalendar">Añadir al calendario</button>
-        <button class="btn secondary" id="btnShare">Compartir</button>
+        <button class="btn secondary" id="btnHistoria" aria-label="Ir a Nuestra Historia">
+          <!-- book-open -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a3 3 0 0 1 3-3h13v17h-1a5 5 0 0 0-4 2 5 5 0 0 0-4-2H4V5zm2 1v11h6a3 3 0 0 1 3 1V4H7a1 1 0 0 0-1 1z"/></svg>
+          Nuestra Historia
+        </button>
+        <button class="btn secondary" id="btnEscuchar" aria-label="Reproducir nuestra canción">
+          <!-- music-note -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11.55A4 4 0 1 1 10 18V7h9V3h-7z"/></svg>
+          Reproducir nuestra canción
+        </button>
+        <button class="btn secondary" id="btnCalendar" title="Agregar al calendario" aria-label="Añadir al calendario">
+          <!-- calendar-plus -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm13 8H6v10h14V10zm-6 2h2v3h3v2h-3v3h-2v-3h-3v-2h3v-3z"/></svg>
+          Añadir al calendario
+        </button>
+        <button class="btn secondary" id="btnShare" title="Compartir invitación" aria-label="Compartir invitación">
+          <!-- share -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16a3 3 0 0 0-2.24 1.03L8.91 13.7a3.03 3.03 0 0 0 0-3.4l6.85-3.33A3 3 0 1 0 15 5a3 3 0 0 0 .09.72L8.24 9.05a3 3 0 1 0 0 5.9l6.85 3.33A3 3 0 1 0 18 16z"/></svg>
+          Compartir
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- ===== Tocadiscos ===== -->
+  <!-- ===== Tocadiscos mini ===== -->
   <div class="player" id="player" role="region" aria-label="Reproductor de música">
     <div class="disc" aria-hidden="true"></div>
-    <div><div class="label">Nuestra canción</div><div class="sub" id="playerState">Pausada</div></div>
+    <div>
+      <div class="label">Nuestra canción</div>
+      <div class="sub" id="playerState">Pausada</div>
+    </div>
     <button class="icon-btn" id="btnMusic" aria-label="Reproducir / Pausar" title="Reproducir / Pausar">
       <svg class="icon" id="icoPlay" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon" id="icoPause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
@@ -278,7 +312,10 @@
           <span class="tag">Velación</span>
           <div class="name">Carlos Mendoza</div>
           <div class="role">Padrino de Velación</div>
-          <button class="btn" data-open-modal data-who="Carlos Mendoza" data-role="Padrino de Velación" data-text="Carlos ha sido un guía espiritual para nosotros. Su ejemplo de amor y servicio nos inspiró desde el inicio; por eso deseamos que bendiga esta nueva etapa con su presencia.">Ver por qué lo elegimos</button>
+          <button class="btn" data-open-modal data-who="Carlos Mendoza" data-role="Padrino de Velación" data-text="Carlos ha sido un guía espiritual para nosotros. Su ejemplo de amor y servicio nos inspiró desde el inicio; por eso deseamos que bendiga esta nueva etapa con su presencia.">
+            <svg viewBox="0 0 24 24"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4zm0 2.2L7 7.5v8.9l5 2.8 5-2.8V7.5l-5-2.3z"/></svg>
+            Ver por qué lo elegimos
+          </button>
         </div>
       </article>
 
@@ -288,7 +325,10 @@
           <span class="tag">Anillo</span>
           <div class="name">María López</div>
           <div class="role">Madrina de Anillo</div>
-          <button class="btn" data-open-modal data-who="María López" data-role="Madrina de Anillo" data-text="María nos ha acompañado en momentos clave de nuestra historia. Su amor y amistad representan el compromiso que hoy sellamos con los anillos.">Ver por qué la elegimos</button>
+          <button class="btn" data-open-modal data-who="María López" data-role="Madrina de Anillo" data-text="María nos ha acompañado en momentos clave de nuestra historia. Su amor y amistad representan el compromiso que hoy sellamos con los anillos.">
+            <svg viewBox="0 0 24 24"><path d="M12 7a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0-5l2 3h-4l2-3z"/></svg>
+            Ver por qué la elegimos
+          </button>
         </div>
       </article>
 
@@ -298,7 +338,10 @@
           <span class="tag">Arras</span>
           <div class="name">Jorge Ramírez</div>
           <div class="role">Padrino de Arras</div>
-          <button class="btn" data-open-modal data-who="Jorge Ramírez" data-role="Padrino de Arras" data-text="Jorge nos enseñó el valor de la generosidad y el trabajo en equipo. Las arras simbolizan esa confianza compartida que queremos en nuestra familia.">Ver por qué lo elegimos</button>
+          <button class="btn" data-open-modal data-who="Jorge Ramírez" data-role="Padrino de Arras" data-text="Jorge nos enseñó el valor de la generosidad y el trabajo en equipo. Las arras simbolizan esa confianza compartida que queremos en nuestra familia.">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5v5h4v2h-6V7h2z"/></svg>
+            Ver por qué lo elegimos
+          </button>
         </div>
       </article>
     </div>
@@ -409,16 +452,21 @@
     <em>Escobar</em>
   </footer>
 
-  <!-- ===== Modal padrinos ===== -->
+  <!-- ===== Modal Padrinos ===== -->
   <div class="modal" id="modal">
     <div class="dialog">
       <button class="close" id="closeModal" aria-label="Cerrar">✕</button>
-      <div class="head"><div class="who" id="mWho">Nombre</div><div class="role" id="mRole">Rol</div></div>
-      <div class="content"><p id="mText">Texto…</p></div>
+      <div class="head">
+        <div class="who" id="mWho">Nombre</div>
+        <div class="role" id="mRole">Rol</div>
+      </div>
+      <div class="content">
+        <p id="mText">Texto…</p>
+      </div>
     </div>
   </div>
 
-  <!-- ===== Audio (ruta ajustada) ===== -->
+  <!-- ===== Audio (ruta actualizada) ===== -->
   <audio id="bgMusic" src="assets/imagenes/musica/fondo.mp3" preload="auto" loop></audio>
   <audio id="voiceInvite" src="assets/musica/invitacion.mp3" preload="auto"></audio>
 
@@ -426,7 +474,7 @@
     const $  = (s, el=document) => el.querySelector(s);
     const $$ = (s, el=document) => [...el.querySelectorAll(s)];
 
-    // Scroll a historia (botón del hero)
+    // Scroll a historia
     $('#btnHistoria')?.addEventListener('click', ()=> $('#historia').scrollIntoView({behavior:'smooth'}));
 
     // ===== Slider con transición =====
@@ -444,13 +492,24 @@
       slides[i].classList.add('is-active');
       if(dotsC) [...dotsC.children].forEach((d,idx)=> d.setAttribute('aria-current', idx===i));
     }
-    function go(n){ if(!track) return; const prevIdx=i; i=(n+slides.length)%slides.length; track.style.transform=`translateX(${-i*100}%)`; markActive(prevIdx);}
+    function go(n){
+      if(!track) return;
+      const prevIdx=i;
+      i = (n + slides.length) % slides.length;
+      track.style.transform = `translateX(${-i*100}%)`;
+      markActive(prevIdx);
+    }
     function auto(){ clearInterval(autoTimer); autoTimer=setInterval(()=>go(i+1), 6000); }
-    slides.forEach((_s, idx)=>{ const b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label',`Ir a la foto ${idx+1}`); b.addEventListener('click',()=>{go(idx);auto();}); dotsC.appendChild(b);});
+    slides.forEach((_s, idx)=>{
+      const b=document.createElement('button');
+      b.type='button'; b.setAttribute('aria-label',`Ir a la foto ${idx+1}`);
+      b.addEventListener('click',()=>{go(idx);auto();});
+      dotsC.appendChild(b);
+    });
     markActive(); auto();
     prev?.addEventListener('click', ()=>{ go(i-1); auto(); });
     next?.addEventListener('click', ()=>{ go(i+1); auto(); });
-    track?.addEventListener('pointerdown', e=>{ x0=e.clientX; track.setPointerCapture(e.pointerId); clearInterval(autoTimer); });
+    track?.addEventListener('pointerdown', e=>{ x0 = e.clientX; track.setPointerCapture(e.pointerId); clearInterval(autoTimer); });
     track?.addEventListener('pointerup',   e=>{ if(x0===null) return; const dx=e.clientX - x0; x0=null; if(Math.abs(dx) > 40) go(i + (dx<0?1:-1)); auto(); });
     window.addEventListener('keydown', e=>{ if(e.key==='ArrowRight'){go(i+1);auto();} if(e.key==='ArrowLeft'){go(i-1);auto();} });
 
@@ -459,40 +518,63 @@
     const player=$('#player'), playerState=$('#playerState');
     const icoPlay=$('#icoPlay'), icoPause=$('#icoPause'), icoVol=$('#icoVol'), icoMute=$('#icoMute');
     let bgStarted=false;
-    function updBtns(){ const p=bg.paused, m=bg.muted; player.classList.toggle('playing',!p); playerState.textContent=p?'Pausada':'Reproduciendo'; icoPlay.style.display=p?'block':'none'; icoPause.style.display=p?'none':'block'; icoVol.style.display=m?'none':'block'; icoMute.style.display=m?'block':'none'; }
-    function tryStartBg(){ if(!bgStarted){ bg.volume=.6; bg.play().then(()=>{bgStarted=true;updBtns();}).catch(()=>{});} }
+
+    function updBtns(){
+      const p=bg.paused, m=bg.muted;
+      player.classList.toggle('playing',!p);
+      playerState.textContent=p?'Pausada':'Reproduciendo';
+      icoPlay.style.display=p?'block':'none';
+      icoPause.style.display=p?'none':'block';
+      icoVol.style.display=m?'none':'block';
+      icoMute.style.display=m?'block':'none';
+    }
+    function tryStartBg(){
+      if(!bgStarted){ bg.volume=.6; bg.play().then(()=>{bgStarted=true;updBtns();}).catch(()=>{}); }
+    }
     $('#btnMusic')?.addEventListener('click', ()=>{ if(bg.paused) bg.play(); else bg.pause(); updBtns(); });
     $('#btnMute')?.addEventListener('click', ()=>{ bg.muted=!bg.muted; updBtns(); });
-    $('#btnEscuchar')?.addEventListener('click', ()=>{ if(!bgStarted||bg.paused){ tryStartBg(); } else { bg.pause(); } updBtns(); });
-    document.addEventListener('click', tryStartBg, {once:true}); // autoplay móvil
+    $('#btnEscuchar')?.addEventListener('click', ()=>{ if(!bgStarted || bg.paused){ tryStartBg(); } else { bg.pause(); } updBtns(); });
+    document.addEventListener('click', tryStartBg, {once:true});
     bg.addEventListener('play', updBtns); bg.addEventListener('pause', updBtns);
     voice?.addEventListener('play', ()=>{ if(!bg.paused){ bg.pause(); updBtns(); } });
 
-    // ===== Contador =====
+    // ===== Contador + ping al tocar
     const target=new Date('2025-09-18T13:30:00'),
           d=$('#cd-days'), h=$('#cd-hours'), m=$('#cd-mins'), s=$('#cd-secs');
-    function tick(){ const now=new Date(); let diff=target-now; if(diff<=0){ d.textContent=h.textContent=m.textContent=s.textContent='00'; return; }
+    function tick(){
+      const now=new Date(); let diff=target-now;
+      if (diff<=0){ d.textContent=h.textContent=m.textContent=s.textContent='00'; return; }
       const dd=Math.floor(diff/86400000); diff%=86400000;
       const hh=Math.floor(diff/3600000);  diff%=3600000;
       const mm=Math.floor(diff/60000);    diff%=60000;
       const ss=Math.floor(diff/1000);
-      d.textContent=String(dd).padStart(2,'0'); h.textContent=String(hh).padStart(2,'0'); m.textContent=String(mm).padStart(2,'0'); s.textContent=String(ss).padStart(2,'0');
+      d.textContent=String(dd).padStart(2,'0');
+      h.textContent=String(hh).padStart(2,'0');
+      m.textContent=String(mm).padStart(2,'0');
+      s.textContent=String(ss).padStart(2,'0');
     }
     tick(); setInterval(tick,1000);
 
-    // Ping dorado en los cuadros del contador
     $$('.time-box').forEach(box=>{
-      function pingAt(x,y){ const r=document.createElement('span'); r.className='ping'; const rect=box.getBoundingClientRect(); r.style.setProperty('--x',(x-rect.left)+'px'); r.style.setProperty('--y',(y-rect.top)+'px'); box.appendChild(r); r.addEventListener('animationend',()=>r.remove(),{once:true});}
-      box.addEventListener('click', e=> pingAt(e.clientX,e.clientY));
-      box.addEventListener('touchstart', e=>{const t=e.touches[0]; if(t) pingAt(t.clientX,t.clientY);},{passive:true});
+      function pingAt(x,y){
+        const r=document.createElement('span'); r.className='ping';
+        const rect=box.getBoundingClientRect();
+        r.style.setProperty('--x',(x-rect.left)+'px'); r.style.setProperty('--y',(y-rect.top)+'px');
+        box.appendChild(r); r.addEventListener('animationend',()=> r.remove(), {once:true});
+      }
+      box.addEventListener('click', e=> pingAt(e.clientX, e.clientY));
+      box.addEventListener('touchstart', e=>{ const t=e.touches[0]; if(t) pingAt(t.clientX, t.clientY); }, {passive:true});
     });
 
     // ===== Añadir al calendario (.ics)
     $('#btnCalendar')?.addEventListener('click', ()=>{
       const start=new Date('2025-09-18T13:30:00'), end=new Date(start.getTime()+4*60*60*1000);
-      const pad=n=>String(n).padStart(2,'0'); const fmt=d=>d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
+      const pad=n=>String(n).padStart(2,'0');
+      const fmt=d=>d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
       const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Creative Studio//Boda//ES','BEGIN:VEVENT','UID:'+Date.now()+'@boda','DTSTAMP:'+fmt(new Date()),'DTSTART:'+fmt(start),'DTEND:'+fmt(end),'SUMMARY:Boda de Jimena & David','LOCATION:Iglesia Retalhuleu; Recepción: Salón Las Morenas','DESCRIPTION:Acompáñanos en nuestro gran día 💕','END:VEVENT','END:VCALENDAR'].join('\r\n');
-      const blob=new Blob([ics],{type:'text/calendar'}), url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='Boda-Jimena-David.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),5000);
+      const blob=new Blob([ics],{type:'text/calendar'}), url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='Boda-Jimena-David.ics'; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),5000);
     });
 
     // ===== Compartir
@@ -502,13 +584,16 @@
       else { try{ await navigator.clipboard.writeText(location.href); alert('Enlace copiado'); } catch{ alert('No se pudo copiar'); } }
     });
 
-    // ===== WhatsApp RSVP
+    // ===== RSVP → WhatsApp
     const WHATSAPP_NUMBER='54389207';
     $('#rsvpForm')?.addEventListener('submit', (e)=>{
       e.preventDefault();
-      const name=$('#guestName').value.trim(), companions=$('#companions').value;
+      const name=$('#guestName').value.trim();
+      const companions=$('#companions').value;
       if(!name){ alert('Por favor, escribe tu nombre.'); return; }
-      const compText=companions==='-1'?'No podré asistir':(companions==='0'?'Asistiré sin acompañantes':`Asistiré con ${companions} acompañante${companions==='1'?'':'s'}`);
+      const compText = companions==='-1' ? 'No podré asistir'
+        : (companions==='0' ? 'Asistiré sin acompañantes'
+        : `Asistiré con ${companions} acompañante${companions==='1'?'':'s'}`);
       const msg=`Hola, soy ${name}. ${compText}. Evento: ${$('#eventDate')?.textContent?.trim()??''}. ${$('#place')?.textContent?.trim()??''}.`;
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
     });
@@ -518,7 +603,7 @@
     function openModal({who, role, text}){ $('#mWho').textContent=who; $('#mRole').textContent=role; $('#mText').textContent=text; modal.classList.add('open'); }
     $$('#padrinos [data-open-modal]').forEach(btn=> btn.addEventListener('click', ()=> openModal({who:btn.dataset.who, role:btn.dataset.role, text:btn.dataset.text})));
     closeModal.addEventListener('click', ()=> modal.classList.remove('open'));
-    modal.addEventListener('click', e=>{ if(e.target===modal) modal.classList.remove('open'); });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open'); });
 
     // ===== Imágenes rotas → placeholder
     document.querySelectorAll('img').forEach(img=>{
@@ -532,7 +617,7 @@
       }, {once:true});
     });
 
-    // ===== Scroll reveal
+    // ===== Reveal en scroll
     const io=new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target);} }); }, {threshold:.12});
     $$('.reveal').forEach(el=> io.observe(el));
   </script>
