@@ -117,7 +117,7 @@
     .slide.leaving img{opacity:.85; filter:blur(2px); transform:scale(1.05)}
     .overlay{
       position:absolute; left:12px; right:12px; bottom:12px;
-      background:rgba(255,255,255,.22); /* muy transparente */
+      background:rgba(255,255,255,.22); /* súper transparente */
       border:1px solid rgba(0,0,0,.04); color:var(--ink);
       padding:12px 14px; border-radius:12px; max-width:720px; margin-inline:auto; box-shadow:0 4px 14px rgba(0,0,0,.08);
       opacity:0; transform:translateY(6px); transition:opacity .6s ease, transform .6s ease;
@@ -131,13 +131,10 @@
 
     /* ===== Grid / Cards ===== */
     .grid{display:grid; gap:14px}
-    @media(min-width:720px){.grid.three{grid-template-columns:repeat(3,1fr)} .grid.two{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:720px){.grid.two{grid-template-columns:repeat(2,1fr)}}
     .card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); border:1px solid var(--glass-border-light); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease}
     .card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
     .card .body{padding:12px}
-    .tag{display:inline-block; font-size:.72rem; padding:.28rem .55rem; border:1px solid var(--glass-border-light); border-radius:999px; color:var(--muted); background:#fff}
-    .name{font-weight:800; margin:8px 0 2px; color:var(--ink)}
-    .role{color:var(--muted)}
 
     /* ===== Botón “Ver ubicación” elegante ===== */
     .center-actions{display:flex; justify-content:center; padding-top:6px}
@@ -187,22 +184,6 @@
     .tl-card.card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); border:1px solid var(--glass-border-light); border-left:4px solid var(--brand)}
     .tl-card .body{padding:12px}
     .tl-card .place{color:var(--muted); font-size:.95rem}
-
-    /* ===== Modal Padrinos ===== */
-    .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; padding:18px; z-index:90}
-    .modal.open{display:flex}
-    .modal::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.45); backdrop-filter:blur(2px)}
-    .dialog{position:relative; z-index:1; max-width:800px; width:min(92vw,820px); border-radius:22px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.06); background:
-      radial-gradient(1px 1px at 16% 22%, rgba(176,141,87,.22) 0 1px, transparent 1.2px),
-      radial-gradient(1px 1px at 72% 44%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
-      repeating-linear-gradient(145deg, rgba(0,0,0,.018) 0 2px, rgba(255,255,255,.018) 2px 4px),
-      #fff;}
-    .dialog .head{padding:16px 18px 0; text-align:center}
-    .dialog .who{font-size:clamp(20px,4.5vw,28px); font-weight:800}
-    .dialog .role{color:var(--muted); margin-top:-6px}
-    .dialog .content{padding:8px 18px 20px}
-    .dialog .content p{font-family:"Times New Roman", Georgia, serif; font-size:clamp(16px,3.8vw,20px); line-height:1.75; color:#3a3327; margin:0}
-    .dialog .close{position:absolute; top:10px; right:10px; width:38px; height:38px; border-radius:12px; border:1px solid rgba(0,0,0,.08); background:#fff; box-shadow:var(--shadow-soft); cursor:pointer}
 
     /* Reveal */
     .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease}
@@ -299,51 +280,6 @@
         </li>
       </ul>
       <div class="dots" data-dots></div>
-    </div>
-  </section>
-
-  <!-- ===== Padrinos ===== -->
-  <section id="padrinos" class="wrap reveal sectioned">
-    <h2 class="title">Padrinos</h2>
-    <div class="grid three">
-      <article class="card reveal">
-        <img src="assets/imagenes/padrino-velacion.jpg" alt="Padrino de velación" loading="lazy" decoding="async"/>
-        <div class="body">
-          <span class="tag">Velación</span>
-          <div class="name">Carlos Mendoza</div>
-          <div class="role">Padrino de Velación</div>
-          <button class="btn" data-open-modal data-who="Carlos Mendoza" data-role="Padrino de Velación" data-text="Carlos ha sido un guía espiritual para nosotros. Su ejemplo de amor y servicio nos inspiró desde el inicio; por eso deseamos que bendiga esta nueva etapa con su presencia.">
-            <svg viewBox="0 0 24 24"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4zm0 2.2L7 7.5v8.9l5 2.8 5-2.8V7.5l-5-2.3z"/></svg>
-            Ver por qué lo elegimos
-          </button>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <img src="assets/imagenes/madrina-anillos.jpg" alt="Madrina de anillo" loading="lazy" decoding="async"/>
-        <div class="body">
-          <span class="tag">Anillo</span>
-          <div class="name">María López</div>
-          <div class="role">Madrina de Anillo</div>
-          <button class="btn" data-open-modal data-who="María López" data-role="Madrina de Anillo" data-text="María nos ha acompañado en momentos clave de nuestra historia. Su amor y amistad representan el compromiso que hoy sellamos con los anillos.">
-            <svg viewBox="0 0 24 24"><path d="M12 7a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0-5l2 3h-4l2-3z"/></svg>
-            Ver por qué la elegimos
-          </button>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <img src="assets/imagenes/padrino-arras.jpg" alt="Padrino de arras" loading="lazy" decoding="async"/>
-        <div class="body">
-          <span class="tag">Arras</span>
-          <div class="name">Jorge Ramírez</div>
-          <div class="role">Padrino de Arras</div>
-          <button class="btn" data-open-modal data-who="Jorge Ramírez" data-role="Padrino de Arras" data-text="Jorge nos enseñó el valor de la generosidad y el trabajo en equipo. Las arras simbolizan esa confianza compartida que queremos en nuestra familia.">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5v5h4v2h-6V7h2z"/></svg>
-            Ver por qué lo elegimos
-          </button>
-        </div>
-      </article>
     </div>
   </section>
 
@@ -447,24 +383,10 @@
     </form>
   </section>
 
-  <footer class="signature reveal sectioned">
+  <footer class="signature reveal sectioned" style="text-align:center; color:var(--muted); padding:36px 0">
     <div>Con cariño,</div>
-    <em>Escobar</em>
+    <em style="display:block; font-family:'Times New Roman', Georgia, serif; font-size:clamp(22px,4.5vw,32px); color:var(--brand)">Escobar</em>
   </footer>
-
-  <!-- ===== Modal Padrinos ===== -->
-  <div class="modal" id="modal">
-    <div class="dialog">
-      <button class="close" id="closeModal" aria-label="Cerrar">✕</button>
-      <div class="head">
-        <div class="who" id="mWho">Nombre</div>
-        <div class="role" id="mRole">Rol</div>
-      </div>
-      <div class="content">
-        <p id="mText">Texto…</p>
-      </div>
-    </div>
-  </div>
 
   <!-- ===== Audio (ruta actualizada) ===== -->
   <audio id="bgMusic" src="assets/imagenes/musica/fondo.mp3" preload="auto" loop></audio>
@@ -597,13 +519,6 @@
       const msg=`Hola, soy ${name}. ${compText}. Evento: ${$('#eventDate')?.textContent?.trim()??''}. ${$('#place')?.textContent?.trim()??''}.`;
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
     });
-
-    // ===== Modal padrinos
-    const modal=$('#modal'), closeModal=$('#closeModal');
-    function openModal({who, role, text}){ $('#mWho').textContent=who; $('#mRole').textContent=role; $('#mText').textContent=text; modal.classList.add('open'); }
-    $$('#padrinos [data-open-modal]').forEach(btn=> btn.addEventListener('click', ()=> openModal({who:btn.dataset.who, role:btn.dataset.role, text:btn.dataset.text})));
-    closeModal.addEventListener('click', ()=> modal.classList.remove('open'));
-    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open'); });
 
     // ===== Imágenes rotas → placeholder
     document.querySelectorAll('img').forEach(img=>{
