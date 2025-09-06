@@ -6,12 +6,16 @@
   <title>Invitación de Boda · Jimena & David</title>
   <meta name="description" content="Invitación digital para boda optimizada para celular, con slider, música, contador, WhatsApp y efectos" />
   <meta name="theme-color" content="#b08d57" />
+
+  <!-- Preload de la imagen de portada (acelera el héroe) -->
+  <link rel="preload" as="image" href="assets/imagenes/hero-portada.jpg" imagesrcset="assets/imagenes/hero-portada.jpg" imagesizes="100vw" fetchpriority="high" />
+
   <style>
     :root{
       --brand:#b08d57; --ink:#2b2a28; --muted:#6e6a60; --bg:#f8f4ee; --card:#ffffff;
       --radius:20px; --maxw:1100px;
-      --shadow: 0 18px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.08);
-      --shadow-soft: 0 10px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+      --shadow: 0 12px 28px rgba(0,0,0,.10), 0 3px 8px rgba(0,0,0,.06); /* sombras un poco más ligeras */
+      --shadow-soft: 0 8px 18px rgba(0,0,0,.08), 0 2px 5px rgba(0,0,0,.05);
       --glass-border-light:rgba(0,0,0,.08);
     }
 
@@ -20,14 +24,19 @@
     body{
       margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,'Helvetica Neue',Arial;
       line-height:1.6; color:var(--ink);
-      /* textura de papel suave (sin imágenes externas) */
-      background:
-        radial-gradient(1px 1px at 12% 18%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
-        radial-gradient(1px 1px at 78% 42%, rgba(176,141,87,.16) 0 1px, transparent 1.2px),
-        radial-gradient(1px 1px at 32% 76%, rgba(176,141,87,.14) 0 1px, transparent 1.2px),
-        radial-gradient(1px 1px at 60% 12%, rgba(176,141,87,.16) 0 1px, transparent 1.2px),
-        repeating-linear-gradient(145deg, rgba(0,0,0,.018) 0 2px, rgba(255,255,255,.018) 2px 4px),
-        var(--bg);
+      /* textura “papel” ligera: un patrón SVG repetido (pinta muy rápido) */
+      --paper:url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">\
+        <defs><pattern id="p" width="32" height="32" patternUnits="userSpaceOnUse">\
+          <rect width="32" height="32" fill="%23f8f4ee"/>\
+          <path d="M0 31 l32 -32 M-8 23 l32 -32 M8 39 l32 -32" stroke="%23c9b89a" stroke-opacity=".12" stroke-width="1"/>\
+          <circle cx="4" cy="6" r="1" fill="%23b08d57" fill-opacity=".13"/>\
+          <circle cx="22" cy="18" r="1" fill="%23b08d57" fill-opacity=".10"/>\
+          <circle cx="12" cy="28" r="1" fill="%23b08d57" fill-opacity=".10"/>\
+        </pattern></defs>\
+        <rect width="100%" height="100%" fill="url(%23p)"/>\
+      </svg>');
+      background: var(--paper);
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
       overflow-x:hidden;
     }
@@ -43,6 +52,7 @@
       background:
         linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65)),
         url('assets/imagenes/hero-portada.jpg') center/cover no-repeat;
+      content-visibility:auto; contain-intrinsic-size: 600px;
     }
     header .badge{
       display:inline-block; padding:.3rem .7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
@@ -59,14 +69,14 @@
       transform:translateY(0);
       transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
       position:relative; overflow:hidden; touch-action:manipulation;
-      display:inline-flex; align-items:center; gap:.55rem; /* para íconos */
+      display:inline-flex; align-items:center; gap:.55rem;
     }
     .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
     .btn:active{transform:translateY(0)}
     .btn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(176,141,87,.35), var(--shadow)}
     .btn svg{width:18px; height:18px; display:block}
     .btn svg path{fill:currentColor}
-    /* Botones del hero totalmente transparentes */
+    /* Botones del hero transparentes */
     header .btn, header .btn.secondary{
       background:transparent; color:#fff; border-color:rgba(255,255,255,.36);
       box-shadow:0 8px 24px rgba(0,0,0,.12)
@@ -80,6 +90,7 @@
       background:transparent; border:1px solid rgba(255,255,255,.36);
       box-shadow:0 8px 24px rgba(0,0,0,.12);
       transition:transform .15s ease, box-shadow .15s ease;
+      will-change:transform;
     }
     .time-box:hover{transform:translateY(-1px); box-shadow:0 10px 30px rgba(0,0,0,.18)}
     .time-box .num{font-size:26px; font-weight:900; letter-spacing:.02em; display:block; text-shadow:0 1px 6px rgba(0,0,0,.35)}
@@ -93,8 +104,11 @@
     @keyframes pingBrand{from{opacity:.9; transform:translate(-50%,-50%) scale(.6)}to{opacity:0; transform:translate(-50%,-50%) scale(9)}}
     @media(min-width:760px){.time-box{min-width:90px; border-radius:14px; padding:11px 13px}.time-box .num{font-size:32px}}
 
-    /* ===== Secciones con divisor elegante ===== */
-    section.sectioned{padding:84px 0; position:relative}
+    /* ===== Secciones con divisor elegante y render diferido ===== */
+    section.sectioned{
+      padding:84px 0; position:relative;
+      content-visibility:auto; contain-intrinsic-size: 800px; /* reserva espacio y aplaza render */
+    }
     section.sectioned::before{
       content:""; position:absolute; top:24px; left:50%; transform:translateX(-50%);
       width:min(560px,84%); height:1px; background:linear-gradient(90deg, transparent, rgba(176,141,87,.65), transparent);
@@ -112,12 +126,12 @@
     .slider{position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); background:var(--card); border:1px solid var(--glass-border-light)}
     .slides{display:flex; transition:transform .6s cubic-bezier(.22,.75,.18,1); touch-action:pan-y; will-change:transform}
     .slide{min-width:100%; height:62svh; position:relative; background:#eee}
-    .slide img{width:100%; height:100%; object-fit:cover; transition:transform .9s ease, opacity .6s ease}
+    .slide img{width:100%; height:100%; object-fit:cover; transition:transform .9s ease, opacity .6s ease; will-change:transform,opacity}
     .slide.is-active img{transform:scale(1.03)}
     .slide.leaving img{opacity:.85; filter:blur(2px); transform:scale(1.05)}
     .overlay{
       position:absolute; left:12px; right:12px; bottom:12px;
-      background:rgba(255,255,255,.22); /* súper transparente */
+      background:rgba(255,255,255,.20);
       border:1px solid rgba(0,0,0,.04); color:var(--ink);
       padding:12px 14px; border-radius:12px; max-width:720px; margin-inline:auto; box-shadow:0 4px 14px rgba(0,0,0,.08);
       opacity:0; transform:translateY(6px); transition:opacity .6s ease, transform .6s ease;
@@ -132,7 +146,7 @@
     /* ===== Grid / Cards ===== */
     .grid{display:grid; gap:14px}
     @media(min-width:720px){.grid.two{grid-template-columns:repeat(2,1fr)}}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); border:1px solid var(--glass-border-light); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); border:1px solid var(--glass-border-light); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease; content-visibility:auto; contain-intrinsic-size: 420px}
     .card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
     .card .body{padding:12px}
 
@@ -212,17 +226,14 @@
 
       <div class="cta-row">
         <button class="btn secondary" id="btnHistoria" aria-label="Ir a Nuestra Historia">
-          <!-- book-open -->
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a3 3 0 0 1 3-3h13v17h-1a5 5 0 0 0-4 2 5 5 0 0 0-4-2H4V5zm2 1v11h6a3 3 0 0 1 3 1V4H7a1 1 0 0 0-1 1z"/></svg>
           Nuestra Historia
         </button>
         <button class="btn secondary" id="btnEscuchar" aria-label="Reproducir nuestra canción">
-          <!-- music-note -->
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11.55A4 4 0 1 1 10 18V7h9V3h-7z"/></svg>
           Reproducir nuestra canción
         </button>
         <button class="btn secondary" id="btnCalendar" title="Agregar al calendario" aria-label="Añadir al calendario">
-          <!-- calendar-plus -->
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm13 8H6v10h14V10zm-6 2h2v3h3v2h-3v3h-2v-3h-3v-2h3v-3z"/></svg>
           Añadir al calendario
         </button>
@@ -258,19 +269,19 @@
 
       <ul class="slides" data-slides>
         <li class="slide">
-          <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" loading="lazy" decoding="async"/>
+          <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" loading="eager" fetchpriority="high" decoding="async"/>
           <div class="overlay"><b>Fecha: 02-09-2025</b> · Cuando nos conocimos. Una mirada bastó para empezar la aventura.</div>
         </li>
         <li class="slide">
-          <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" loading="lazy" decoding="async"/>
+          <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" loading="lazy" fetchpriority="low" decoding="async"/>
           <div class="overlay"><b>Fecha: 16-10-2025</b> · Primera cita. Risas, café y mil planes por delante.</div>
         </li>
         <li class="slide">
-          <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" loading="lazy" decoding="async"/>
+          <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" loading="lazy" fetchpriority="low" decoding="async"/>
           <div class="overlay"><b>Fecha: 08-01-2026</b> · Nuestro primer viaje. Descubrimos que el mejor destino es estar juntos.</div>
         </li>
         <li class="slide">
-          <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" loading="lazy" decoding="async"/>
+          <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" loading="lazy" fetchpriority="low" decoding="async"/>
           <div class="overlay"><b>Fecha: 12-02-2027</b> · ¡Dijo que sí! El comienzo de una nueva etapa.</div>
         </li>
       </ul>
@@ -285,7 +296,7 @@
     <div class="grid two">
       <article class="card reveal">
         <div class="place-media" style="height:240px; overflow:hidden">
-          <img src="assets/imagenes/ceremonia.jpg" alt="Lugar de la ceremonia" loading="lazy" decoding="async"/>
+          <img src="assets/imagenes/ceremonia.jpg" alt="Lugar de la ceremonia" loading="lazy" fetchpriority="low" decoding="async"/>
         </div>
         <div class="body">
           <h3 style="margin:.2rem 0 .4rem">Ceremonia — Iglesia Retalhuleu</h3>
@@ -300,7 +311,7 @@
       </article>
       <article class="card reveal">
         <div class="place-media" style="height:240px; overflow:hidden">
-          <img src="assets/imagenes/recepcion.jpg" alt="Lugar de la recepción" loading="lazy" decoding="async"/>
+          <img src="assets/imagenes/recepcion.jpg" alt="Lugar de la recepción" loading="lazy" fetchpriority="low" decoding="async"/>
         </div>
         <div class="body">
           <h3 style="margin:.2rem 0 .4rem">Recepción — Salón Las Morenas</h3>
