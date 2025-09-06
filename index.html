@@ -226,11 +226,6 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm13 8H6v10h14V10zm-6 2h2v3h3v2h-3v3h-2v-3h-3v-2h3v-3z"/></svg>
           Añadir al calendario
         </button>
-        <button class="btn secondary" id="btnShare" title="Compartir invitación" aria-label="Compartir invitación">
-          <!-- share -->
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16a3 3 0 0 0-2.24 1.03L8.91 13.7a3.03 3.03 0 0 0 0-3.4l6.85-3.33A3 3 0 1 0 15 5a3 3 0 0 0 .09.72L8.24 9.05a3 3 0 1 0 0 5.9l6.85 3.33A3 3 0 1 0 18 16z"/></svg>
-          Compartir
-        </button>
       </div>
     </div>
   </header>
@@ -497,13 +492,6 @@
       const blob=new Blob([ics],{type:'text/calendar'}), url=URL.createObjectURL(blob);
       const a=document.createElement('a'); a.href=url; a.download='Boda-Jimena-David.ics'; document.body.appendChild(a); a.click(); a.remove();
       setTimeout(()=>URL.revokeObjectURL(url),5000);
-    });
-
-    // ===== Compartir
-    $('#btnShare')?.addEventListener('click', async ()=>{
-      const data={title:'Boda · Jimena & David', text:'Acompáñanos 💕', url:location.href};
-      if (navigator.share){ try{ await navigator.share(data); } catch{} }
-      else { try{ await navigator.clipboard.writeText(location.href); alert('Enlace copiado'); } catch{ alert('No se pudo copiar'); } }
     });
 
     // ===== RSVP → WhatsApp
