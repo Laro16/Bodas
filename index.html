@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Invitación de Boda · Jimena & David</title>
+  <title>Invitación de Boda · Isabel & Alejandro</title>
   <meta name="description" content="Una invitación de boda digital elegante, con un diseño profesional y moderno." />
   <meta name="theme-color" content="#fbf9f6" />
 
@@ -101,7 +101,7 @@
     .time-box .num{font-size:clamp(28px, 5vw, 36px); font-weight:600; display:block; line-height:1.1;}
     .time-box .label{font-size:11px; opacity:.8; letter-spacing:.08em; text-transform:uppercase}
 
-    /* === BOTONES === */
+    /* === BOTONES (REFINADOS) === */
     .cta-row{display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-top: 24px;}
     .btn{
       appearance:none; border: 1.5px solid;
@@ -111,6 +111,8 @@
       transition: var(--transition);
       display:inline-flex; align-items:center; gap:.6rem;
       text-align: center;
+      text-transform: uppercase;
+      letter-spacing: .05em;
     }
     .btn.primary {
       background-color: var(--brand);
@@ -134,21 +136,49 @@
     }
     .btn svg { width: 18px; height: 18px; }
 
+    /* NUEVO: Estilo especial para los botones con letra cursiva */
+    #btnWhatsapp,
+    #btnEscuchar {
+      font-family: 'Dancing Script', cursive;
+      text-transform: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: normal;
+      color: #fff;
+      padding: .7rem 1.8rem;
+    }
+    #btnWhatsapp svg,
+    #btnEscuchar svg {
+      margin-right: 4px; /* Pequeño ajuste para el icono */
+    }
+
+
     /* === SECCIONES Y SEPARADORES === */
-    section.sectioned{padding:100px 0; position:relative}
+    section.sectioned{
+      padding:80px 0; /* Espacio entre secciones reducido */
+      position:relative
+    }
     section.sectioned::before{
       content: url("data:image/svg+xml,%3Csvg width='80' height='20' viewBox='0 0 80 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 10L80 10' stroke='%23a88552' stroke-opacity='0.5'/%3E%3Cpath d='M40 10L0 10' stroke='%23a88552' stroke-opacity='0.5'/%3E%3Cpath d='M45.5 18.5C45.5 18.5 42.5 10 40 10C37.5 10 34.5 1.5 34.5 1.5' stroke='%23a88552' stroke-opacity='0.5'/%3E%3Cpath d='M34.5 18.5C34.5 18.5 37.5 10 40 10C42.5 10 45.5 1.5 45.5 1.5' stroke='%23a88552' stroke-opacity='0.5'/%3E%3C/svg%3E%0A");
-      position:absolute; top:30px; left:50%; transform:translateX(-50%);
+      position:absolute; top:20px; left:50%; transform:translateX(-50%);
     }
 
     /* === SLIDER === */
     .slider{
-      position:relative; overflow:hidden; border-radius:var(--radius); 
-      box-shadow:var(--shadow-medium); background:var(--card);
+      position:relative; 
+      background: var(--card);
+      padding: 12px;
+      border-radius: var(--radius); 
+      box-shadow: var(--shadow-medium);
     }
-    .slides{display:flex; transition:transform .6s cubic-bezier(.22,.75,.18,1); border-radius: var(--radius); overflow: hidden;}
-    .slide{min-width:100%; height:70svh; position:relative; background:#eee}
-    .slide img{width:100%; height:100%; object-fit:cover; transition:transform .9s ease, opacity .6s ease; border-radius: 0;}
+    .slides-container {
+      overflow: hidden;
+      position: relative;
+      border-radius: calc(var(--radius) - 6px);
+    }
+    .slides{display:flex; transition:transform .6s cubic-bezier(.22,.75,.18,1); }
+    .slide{min-width:100%; height:70svh; position:relative;}
+    .slide img{width:100%; height:100%; object-fit:cover; border-radius: 0;}
     .slide.is-active img{transform:scale(1.03)}
     .overlay{
       position:absolute; left:16px; right:16px; bottom:16px;
@@ -177,16 +207,25 @@
       will-change: transform, box-shadow;
       overflow: hidden;
     }
+    .grid.two .card img {
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+    }
     .card:hover{transform:translateY(-5px); box-shadow:var(--shadow-medium)}
     .card .body{padding:24px}
     .card h3 { font-family: 'Playfair Display', serif; margin: 0 0 8px; color: var(--accent); }
 
     /* === TIMELINE (ITINERARIO) === */
     .timeline{position:relative; max-width:900px; margin:40px auto 0;}
-    .timeline::before{content:""; position:absolute; left:39px; top:10px; bottom:10px; width:2px; background:var(--brand-light);}
-    .tl-item{display:grid; grid-template-columns:80px 1fr; gap:16px; align-items:center; position:relative; margin-bottom:20px}
-    .tl-time{font-weight:600; font-size: 1.1rem; color: var(--accent); text-align:center; position:relative; z-index:2}
-    .tl-dot{position:absolute; left:32px; top:50%; transform: translateY(-50%); width:16px; height:16px; border-radius:50%; background:var(--bg); border: 3px solid var(--brand-light); z-index:1}
+    .timeline::before{content:""; position:absolute; left:45px; top:10px; bottom:10px; width:2px; background:var(--brand-light);}
+    .tl-item{display:grid; grid-template-columns:90px 1fr; gap:16px; align-items:center; position:relative; margin-bottom:20px}
+    .tl-time{
+      font-weight:600; font-size: 1.1rem; color: var(--accent); 
+      text-align:left;
+      position:relative; z-index:2;
+    }
+    .tl-dot{position:absolute; left:45px; top:50%; transform:translate(-50%, -50%); width:16px; height:16px; border-radius:50%; background:var(--bg); border: 3px solid var(--brand-light); z-index:1}
     .tl-card.card{box-shadow:var(--shadow-soft); padding:20px; will-change: none; }
     .tl-card.card:hover { transform: none; box-shadow: var(--shadow-medium); }
     .tl-card .body{padding:0}
@@ -241,8 +280,8 @@
   <header class="hero" id="hero">
     <div class="wrap reveal">
       <span class="badge">NUESTRA BODA</span>
-      <h1>Jimena & David</h1>
-      <p class="sub" id="eventDate">18 de Septiembre de 2025 · 1:30 pm</p>
+      <h1>Isabel & Alejandro</h1>
+      <p class="sub" id="eventDate">6 de Diciembre de 2025 · 1:30 pm</p>
 
       <div id="countdown" class="countdown" aria-live="polite">
         <div class="time-box"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
@@ -287,26 +326,28 @@
       </div>
 
       <div class="slider" data-slider>
+        <div class="slides-container">
+          <ul class="slides" data-slides>
+            <li class="slide">
+              <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" loading="lazy" decoding="async"/>
+              <div class="overlay"><b>02 de Septiembre, 2025</b><p style="margin:4px 0 0;">Cuando nos conocimos. Una mirada bastó para empezar la aventura.</p></div>
+            </li>
+            <li class="slide">
+              <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" loading="lazy" decoding="async"/>
+              <div class="overlay"><b>16 de Octubre, 2025</b><p style="margin:4px 0 0;">Nuestra primera cita. Entre risas, café y mil planes por delante.</p></div>
+            </li>
+            <li class="slide">
+              <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" loading="lazy" decoding="async"/>
+              <div class="overlay"><b>08 de Enero, 2026</b><p style="margin:4px 0 0;">El primer viaje. Descubrimos que el mejor destino es estar juntos.</p></div>
+            </li>
+            <li class="slide">
+              <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" loading="lazy" decoding="async"/>
+              <div class="overlay"><b>12 de Febrero, 2027</b><p style="margin:4px 0 0;">¡Dijo que sí! El comienzo de una nueva etapa para siempre.</p></div>
+            </li>
+          </ul>
+        </div>
         <button class="nav-btn prev" data-prev aria-label="Anterior">⟵</button>
         <button class="nav-btn next" data-next aria-label="Siguiente">⟶</button>
-        <ul class="slides" data-slides>
-          <li class="slide">
-            <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" loading="lazy" decoding="async"/>
-            <div class="overlay"><b>02 de Septiembre, 2025</b><p style="margin:4px 0 0;">Cuando nos conocimos. Una mirada bastó para empezar la aventura.</p></div>
-          </li>
-          <li class="slide">
-            <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" loading="lazy" decoding="async"/>
-            <div class="overlay"><b>16 de Octubre, 2025</b><p style="margin:4px 0 0;">Nuestra primera cita. Entre risas, café y mil planes por delante.</p></div>
-          </li>
-          <li class="slide">
-            <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" loading="lazy" decoding="async"/>
-            <div class="overlay"><b>08 de Enero, 2026</b><p style="margin:4px 0 0;">El primer viaje. Descubrimos que el mejor destino es estar juntos.</p></div>
-          </li>
-          <li class="slide">
-            <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" loading="lazy" decoding="async"/>
-            <div class="overlay"><b>12 de Febrero, 2027</b><p style="margin:4px 0 0;">¡Dijo que sí! El comienzo de una nueva etapa para siempre.</p></div>
-          </li>
-        </ul>
         <div class="dots" data-dots></div>
       </div>
     </section>
@@ -371,7 +412,7 @@
 
     <section id="rsvp" class="wrap reveal sectioned">
       <h2 class="title">Confirmar Asistencia</h2>
-      <p class="subtitle">Tu presencia es nuestro mayor regalo. Por favor, confirma tu asistencia antes del 18 de Agosto de 2025.</p>
+      <p class="subtitle">Tu presencia es nuestro mayor regalo. Por favor, confirma tu asistencia antes del 6 de Noviembre de 2025.</p>
 
       <form class="rsvp-card" id="rsvpForm">
         <div class="field">
@@ -395,14 +436,14 @@
              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5a10 10 0 0 0-16.2 11.3L3 21l6.4-1.3A10 10 0 0 0 20.5 3.5Zm-1.1 13a8 8 0 0 1-11.8 1.5l-.3-.2-3 .6.6-2.9-.2-.3A8 8 0 1 1 19.4 16.5ZM8.9 7.9c.2-.5.4-.5.7-.5h.6c.2 0 .5 0 .7.5s.9 1.5.9 1.6.1.4 0 .6-.2.4-.4.6-.4.5-.2.9c.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9s.5 0 .7-.2.8-.9 1-1.2.4-.2.6-.1.6.3 1.4.7 1.2.6 1.4.9.1.9-.2 1.5c-.3.6-1.2 1.1-1.6 1.1s-.9.2-3-.8a13.6 13.6 0 0 1-3.8-2.4 12.2 12.2 0 0 1-2.2-2.6c-.8-1.2-1.1-2.1-1.2-2.4-.2-.4 0-.8.1-1s.5-1.2.6-1.4Z"/></svg>
             Confirmar por WhatsApp
           </button>
-          <p class="helper">O si prefieres, puedes llamar al <a href="tel:54389207">54 38 92 07</a>.</p>
+          <p class="helper">O si prefieres, puedes llamar al <a href="tel:44649407">44 64 94 07</a>.</p>
         </div>
       </form>
     </section>
 
     <footer class="signature reveal sectioned">
       <div>Con todo nuestro cariño,</div>
-      <em>Jimena & David</em>
+      <em>Isabel & Alejandro</em>
     </footer>
   </main>
 
@@ -440,6 +481,7 @@
       }
       function auto(){ clearInterval(autoTimer); autoTimer=setInterval(()=>go(i+1), 6000); }
       if (slides.length > 0 && dotsC) {
+        dotsC.innerHTML = ''; 
         slides.forEach((_s, idx)=>{
           const b=document.createElement('button');
           b.type='button'; b.setAttribute('aria-label',`Ir a la foto ${idx+1}`);
@@ -478,7 +520,7 @@
       bg?.addEventListener('play', updBtns); bg?.addEventListener('pause', updBtns);
       voice?.addEventListener('play', ()=>{ if(!bg.paused){ bg.pause(); updBtns(); } });
 
-      const target=new Date('2025-09-18T13:30:00'),
+      const target=new Date('2025-12-06T13:30:00'),
             d=$('#cd-days'), h=$('#cd-hours'), m=$('#cd-mins'), s=$('#cd-secs');
       let countdownInterval = null;
       function tick(){
@@ -503,16 +545,16 @@
       }
       
       $('#btnCalendar')?.addEventListener('click', ()=>{
-        const start=new Date('2025-09-18T13:30:00'), end=new Date(start.getTime()+4*60*60*1000);
+        const start=new Date('2025-12-06T13:30:00'), end=new Date(start.getTime()+4*60*60*1000);
         const pad=n=>String(n).padStart(2,'0');
         const fmt=d=>d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
-        const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Creative Studio//Boda//ES','BEGIN:VEVENT','UID:'+Date.now()+'@boda','DTSTAMP:'+fmt(new Date()),'DTSTART:'+fmt(start),'DTEND:'+fmt(end),'SUMMARY:Boda de Jimena & David','LOCATION:Iglesia Retalhuleu; Recepción: Salón Las Morenas','DESCRIPTION:Acompáñanos en nuestro gran día 💕','END:VEVENT','END:VCALENDAR'].join('\r\n');
+        const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Creative Studio//Boda//ES','BEGIN:VEVENT','UID:'+Date.now()+'@boda','DTSTAMP:'+fmt(new Date()),'DTSTART:'+fmt(start),'DTEND:'+fmt(end),'SUMMARY:Boda de Isabel & Alejandro','LOCATION:Iglesia Retalhuleu; Recepción: Salón Las Morenas','DESCRIPTION:Acompáñanos en nuestro gran día 💕','END:VEVENT','END:VCALENDAR'].join('\r\n');
         const blob=new Blob([ics],{type:'text/calendar'}), url=URL.createObjectURL(blob);
-        const a=document.createElement('a'); a.href=url; a.download='Boda-Jimena-David.ics'; document.body.appendChild(a); a.click(); a.remove();
+        const a=document.createElement('a'); a.href=url; a.download='Boda-Isabel-Alejandro.ics'; document.body.appendChild(a); a.click(); a.remove();
         setTimeout(()=>URL.revokeObjectURL(url),5000);
       });
 
-      const WHATSAPP_NUMBER='54389207';
+      const WHATSAPP_NUMBER='44649407';
       $('#rsvpForm')?.addEventListener('submit', (e)=>{
         e.preventDefault();
         const name=$('#guestName').value.trim();
