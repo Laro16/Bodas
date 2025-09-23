@@ -101,7 +101,7 @@
     .time-box .num{font-size:clamp(28px, 5vw, 36px); font-weight:600; display:block; line-height:1.1;}
     .time-box .label{font-size:11px; opacity:.8; letter-spacing:.08em; text-transform:uppercase}
 
-    /* === BOTONES (REFINADOS) === */
+    /* === BOTONES === */
     .cta-row{display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-top: 24px;}
     .btn{
       appearance:none; border: 1.5px solid;
@@ -136,7 +136,7 @@
     }
     .btn svg { width: 18px; height: 18px; }
 
-    /* NUEVO: Estilo especial para los botones con letra cursiva */
+    /* Estilo especial para los botones con letra cursiva */
     #btnWhatsapp,
     #btnEscuchar {
       font-family: 'Dancing Script', cursive;
@@ -150,6 +150,14 @@
     #btnWhatsapp svg,
     #btnEscuchar svg {
       margin-right: 4px; /* Pequeño ajuste para el icono */
+      fill: #fff; /* Asegura que el icono también sea blanco */
+    }
+
+    /* Centra el botón de escuchar nuestra canción */
+    .center-actions {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
     }
 
 
@@ -318,10 +326,8 @@
       <h2 class="title">Nuestra Historia</h2>
       <p class="subtitle">Un viaje a través de los momentos que nos trajeron hasta aquí. Desliza para revivir nuestros recuerdos más queridos.</p>
 
-      <div class="center-actions" style="margin-bottom: 40px;">
-        <button class="btn primary" id="btnEscuchar" aria-label="Reproducir nuestra canción">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v11.55A4 4 0 1 1 10 18V7h9V3h-7z"/></svg>
-          Reproducir Nuestra Canción
+      <div class="center-actions"> <button class="btn primary" id="btnEscuchar" aria-label="Reproducir nuestra canción">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Reproducir Nuestra Canción
         </button>
       </div>
 
