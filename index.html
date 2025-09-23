@@ -29,7 +29,7 @@
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html{scroll-behavior: smooth;}
     body{
       margin:0; color:var(--ink);
       font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,'Helvetica Neue',Arial;
@@ -47,7 +47,7 @@
     img{max-width:100%; display:block}
     ul,ol{margin:0; padding:0; list-style:none}
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 16px}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;} /* AJUSTADO: Aumentado el padding horizontal */
 
     /* ================= HERO ================= */
     header.hero{
@@ -82,6 +82,7 @@
       transition:transform .18s ease, box-shadow .18s ease, filter .18s ease, background .18s ease;
       position:relative; overflow:hidden; touch-action:manipulation;
       display:inline-flex; align-items:center; gap:.55rem;
+      will-change: transform, box-shadow; /* NUEVO: Optimización de rendimiento */
     }
     .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow); filter:saturate(1.05)}
     .btn:active{transform:translateY(0)}
@@ -100,6 +101,7 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 8px 24px rgba(0,0,0,.18);
       transition:transform .15s ease, box-shadow .15s ease;
       backdrop-filter: blur(6px);
+      will-change: transform, box-shadow; /* NUEVO: Optimización de rendimiento */
     }
     .time-box:hover{transform:translateY(-1px); box-shadow:0 12px 30px rgba(0,0,0,.22)}
     .time-box .num{font-size:clamp(26px,5.8vw,36px); font-weight:900; letter-spacing:.02em; display:block; text-shadow:0 1px 6px rgba(0,0,0,.35); line-height:1}
@@ -136,6 +138,7 @@
       border:1px solid var(--hairline); color:var(--ink);
       padding:12px 14px; border-radius:14px; max-width:760px; margin-inline:auto; box-shadow:0 6px 18px rgba(0,0,0,.10);
       opacity:0; transform:translateY(8px); transition:opacity .6s ease, transform .6s ease;
+      will-change: opacity, transform;
     }
     .slide.is-active .overlay{opacity:1; transform:translateY(0)}
     .nav-btn{position:absolute; top:50%; translate:0 -50%; z-index:10; width:42px; height:42px; border-radius:999px; border:1px solid var(--hairline); background:rgba(255,255,255,.7); display:grid; place-items:center; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.12)}
@@ -146,14 +149,17 @@
 
     /* ================= Grid / Cards ================= */
     .grid{display:grid; gap:16px}
-    @media(min-width:720px){.grid.three{grid-template-columns:repeat(3,1fr)} .grid.two{grid-template-columns:repeat(2,1fr)}}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); border:1px solid var(--glass-border-light); border-radius:18px; overflow:hidden; box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease}
+    @media(min-width:720px){.grid.two{grid-template-columns:repeat(2,1fr)}}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.96)); 
+      border:1px solid var(--glass-border-light); border-radius:18px; 
+      overflow:hidden; box-shadow:var(--shadow-soft); 
+      transition:transform .18s ease, box-shadow .18s ease;
+      will-change: transform, box-shadow; /* NUEVO: Optimización de rendimiento */
+    }
     .card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
     .card .body{padding:14px}
-    .tag{display:inline-block; font-size:.72rem; padding:.28rem .55rem; border:1px solid var(--glass-border-light); border-radius:999px; color:var(--muted); background:#fff}
-    .name{font-weight:800; margin:8px 0 2px; color:var(--ink)}
-    .role{color:var(--muted)}
-
+    
     /* ================= Botón “Ver ubicación” ================= */
     .center-actions{display:flex; justify-content:center; padding-top:8px}
     .btn.map{
@@ -173,7 +179,9 @@
         radial-gradient(circle at 50% 50%, #333 0 6px, #111 7px 50%, #000 51% 100%),
         repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.06) 0 2px, rgba(0,0,0,.12) 2px 4px);
       position:relative; flex:0 0 24px; box-shadow:inset 0 2px 6px rgba(255,255,255,.3), inset 0 -2px 8px rgba(0,0,0,.25);
-      animation:spin 5s linear infinite; animation-play-state:paused}
+      animation:spin 5s linear infinite; animation-play-state:paused;
+      will-change: transform;
+    }
     .disc::after{content:""; position:absolute; width:6px; height:6px; border-radius:50%; background:var(--brand); top:50%; left:50%; transform:translate(-50%,-50%)}
     .player.playing .disc{animation-play-state:running}
     @keyframes spin{to{transform:rotate(360deg)}}
@@ -206,7 +214,7 @@
     .tl-card .place{color:var(--muted); font-size:.97rem}
 
     /* ================= Reveal ================= */
-    .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease}
+    .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; will-change: opacity, transform;}
     .reveal.visible{opacity:1; transform:none}
 
     /* ================= Footer firma ================= */
@@ -404,16 +412,12 @@
   <audio id="voiceInvite" src="assets/musica/invitacion.mp3" preload="auto"></audio>
 
   <script>
-    // Se envuelve todo el código en DOMContentLoaded para esperar a que el HTML esté listo.
-    // Esto mejora el rendimiento inicial y evita "trabones".
     document.addEventListener('DOMContentLoaded', () => {
       const $  = (s, el=document) => el.querySelector(s);
       const $$ = (s, el=document) => [...el.querySelectorAll(s)];
 
-      // Scroll a historia
-      $('#btnHistoria')?.addEventListener('click', ()=> $('#historia').scrollIntoView({behavior:'smooth'}));
+      $('#btnHistoria')?.addEventListener('click', ()=> $('#historia').scrollIntoView());
 
-      // ===== Slider con transición =====
       const slider = $('[data-slider]'), track=slider?.querySelector('[data-slides]');
       const slides = $$('.slide', slider), dotsC=slider?.querySelector('[data-dots]');
       const prev   = slider?.querySelector('[data-prev]'), next=slider?.querySelector('[data-next]');
@@ -451,7 +455,6 @@
       track?.addEventListener('pointerup',   e=>{ if(x0===null) return; const dx=e.clientX - x0; x0=null; if(Math.abs(dx) > 40) go(i + (dx<0?1:-1)); auto(); });
       window.addEventListener('keydown', e=>{ if(e.key==='ArrowRight'){go(i+1);auto();} if(e.key==='ArrowLeft'){go(i-1);auto();} });
 
-      // ===== Audio =====
       const bg=$('#bgMusic'), voice=$('#voiceInvite');
       const player=$('#player'), playerState=$('#playerState');
       const icoPlay=$('#icoPlay'), icoPause=$('#icoPause'), icoVol=$('#icoVol'), icoMute=$('#icoMute');
@@ -477,12 +480,16 @@
       bg?.addEventListener('play', updBtns); bg?.addEventListener('pause', updBtns);
       voice?.addEventListener('play', ()=>{ if(!bg.paused){ bg.pause(); updBtns(); } });
 
-      // ===== Contador + ping al tocar =====
       const target=new Date('2025-09-18T13:30:00'),
             d=$('#cd-days'), h=$('#cd-hours'), m=$('#cd-mins'), s=$('#cd-secs');
+      let countdownInterval = null;
       function tick(){
         const now=new Date(); let diff=target-now;
-        if (diff<=0){ d.textContent=h.textContent=m.textContent=s.textContent='00'; return; }
+        if (diff<=0){ 
+          d.textContent=h.textContent=m.textContent=s.textContent='00'; 
+          clearInterval(countdownInterval);
+          return; 
+        }
         const dd=Math.floor(diff/86400000); diff%=86400000;
         const hh=Math.floor(diff/3600000);  diff%=3600000;
         const mm=Math.floor(diff/60000);    diff%=60000;
@@ -494,7 +501,7 @@
       }
       if(d && h && m && s) {
         tick(); 
-        setInterval(tick,1000);
+        countdownInterval = setInterval(tick,1000);
       }
       
       $$('.time-box').forEach(box=>{
@@ -508,7 +515,6 @@
         box.addEventListener('touchstart', e=>{ const t=e.touches[0]; if(t) pingAt(t.clientX, t.clientY); }, {passive:true});
       });
 
-      // ===== Añadir al calendario (.ics) =====
       $('#btnCalendar')?.addEventListener('click', ()=>{
         const start=new Date('2025-09-18T13:30:00'), end=new Date(start.getTime()+4*60*60*1000);
         const pad=n=>String(n).padStart(2,'0');
@@ -519,7 +525,6 @@
         setTimeout(()=>URL.revokeObjectURL(url),5000);
       });
 
-      // ===== RSVP → WhatsApp =====
       const WHATSAPP_NUMBER='54389207';
       $('#rsvpForm')?.addEventListener('submit', (e)=>{
         e.preventDefault();
@@ -533,7 +538,6 @@
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
       });
 
-      // ===== Imágenes rotas → placeholder =====
       document.querySelectorAll('img').forEach(img=>{
         img.addEventListener('error', ()=>{
           const missing=img.getAttribute('src')||'';
@@ -545,7 +549,6 @@
         }, {once:true});
       });
 
-      // ===== Reveal en scroll =====
       const io=new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target);} }); }, {threshold:.12});
       $$('.reveal').forEach(el=> io.observe(el));
     });
