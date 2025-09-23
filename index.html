@@ -4,240 +4,245 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Invitación de Boda · Jimena & David</title>
-  <meta name="description" content="Invitación digital para boda optimizada para celular, con slider, música, contador, WhatsApp y efectos" />
-  <meta name="theme-color" content="#b08d57" />
+  <meta name="description" content="Una invitación de boda digital elegante, con un diseño profesional y moderno." />
+  <meta name="theme-color" content="#fbf9f6" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --brand:#b08d57;          /* oro cálido */
-      --brand-2:#9b7c48;        /* oro profundo */
-      --ink:#2b2a28;            /* texto principal */
-      --muted:#6e6a60;          /* texto secundario */
-      --bg:#f8f4ee;            /* papel */
-      --card:#ffffff;          /* tarjetas */
-      --radius:22px;             /* radios globales */
-      --maxw:1100px;
-      --shadow: 0 18px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.08);
-      --shadow-soft: 0 10px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
-      --glass-border-light:rgba(0,0,0,.08);
-      --gold-grad: linear-gradient(135deg, #e8d6a2, #b89253 45%, #e6cf93 70%, #a7803f);
-      --hairline:#00000014;
+      --brand:#a88552;          /* Oro principal */
+      --brand-light: #e6d8c3;   /* Oro claro */
+      --ink:#2c2c2c;            /* Texto principal (casi negro) */
+      --muted:#7d7d7d;          /* Texto secundario */
+      --accent: #1e413a;        /* Verde esmeralda profundo */
+      --bg:#fbf9f6;             /* Fondo (blanco hueso) */
+      --card:#ffffff;           /* Tarjetas (blanco puro) */
+      --radius: 16px;            /* Radios globales */
+      --maxw: 900px;             /* Ancho máximo del contenido */
+      --shadow-soft: 0 4px 12px rgba(0,0,0,.05);
+      --shadow-medium: 0 8px 24px rgba(0,0,0,.08);
+      --transition: all .3s cubic-bezier(.25,.8,.25,1);
     }
 
+    /* === RESETS Y GLOBALES === */
     *{box-sizing:border-box}
     html{scroll-behavior: smooth;}
     body{
-      margin:0; color:var(--ink);
-      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,'Helvetica Neue',Arial;
-      line-height:1.65;
-      background:
-        radial-gradient(1px 1px at 12% 18%, rgba(176,141,87,.18) 0 1px, transparent 1.2px),
-        radial-gradient(1px 1px at 78% 42%, rgba(176,141,87,.16) 0 1px, transparent 1.2px),
-        radial-gradient(1px 1px at 32% 76%, rgba(176,141,87,.14) 0 1px, transparent 1.2px),
-        radial-gradient(1px 1px at 60% 12%, rgba(176,141,87,.16) 0 1px, transparent 1.2px),
-        repeating-linear-gradient(145deg, rgba(0,0,0,.018) 0 2px, rgba(255,255,255,.018) 2px 4px),
-        var(--bg);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      margin:0; 
+      color:var(--ink);
+      font-family:'Poppins', sans-serif;
+      font-weight: 300;
+      line-height:1.7;
+      background-color: var(--bg);
+      -webkit-font-smoothing:antialiased; 
+      -moz-osx-font-smoothing:grayscale;
       overflow-x:hidden;
     }
-    img{max-width:100%; display:block}
+    img{max-width:100%; display:block; border-radius: var(--radius);}
     ul,ol{margin:0; padding:0; list-style:none}
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;} /* Aumentado el padding horizontal */
-
-    /* ================= HERO ================= */
-    header.hero{
-      min-height:78svh; /* Reducido desde 86svh para hacerlo más corto */
-      display:grid; place-items:center; text-align:center; position:relative; overflow:hidden; color:#fff;
-      background:
-        radial-gradient(160% 70% at 50% 90%, rgba(0,0,0,.70) 0 40%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.25) 75%, rgba(0,0,0,.10) 100%),
-        url('assets/imagenes/hero-portada.jpg') center/cover no-repeat;
-      isolation:isolate;
+    a{color:var(--brand); text-decoration:none; transition: var(--transition);}
+    a:hover{color:var(--accent);}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+    .title{
+      font-family:'Playfair Display', serif; 
+      font-weight:600; 
+      font-size:clamp(32px, 6vw, 48px); 
+      margin:0 0 10px; text-align:center; 
+      line-height: 1.2;
+      color: var(--accent);
     }
-    header.hero::after{ /* brillo suave superior */
-      content:""; position:absolute; inset:0; background:radial-gradient(80% 40% at 50% 0%, rgba(255,255,255,.10), transparent 60%); pointer-events:none;
+    .subtitle{
+      color:var(--muted); 
+      text-align:center; 
+      margin:-2px auto 40px; 
+      max-width:600px;
+      font-size: 1.1rem;
+    }
+
+    /* === HERO === */
+    header.hero{
+      min-height:90svh; 
+      display:flex; flex-direction: column; justify-content: center;
+      text-align:center; position:relative; overflow:hidden; color:#fff;
+      padding: 40px 0;
+      background:
+        linear-gradient(to top, rgba(30, 65, 58, 0.7), rgba(30, 65, 58, 0.3) 60%, transparent),
+        url('assets/imagenes/hero-portada.jpg') center/cover no-repeat;
     }
     header .badge{
-      display:inline-block; padding:.32rem .72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.8rem;
-      background:transparent; border:1px solid rgba(255,255,255,.38); border-radius:999px; backdrop-filter: blur(2px);
+      display:inline-block; padding:.4rem 1rem; 
+      font-weight:600; letter-spacing:.1em; text-transform:uppercase; font-size:.75rem;
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.3); 
+      border-radius:999px; backdrop-filter: blur(5px);
+      color: #fff;
     }
     header h1{
-      font-family:'Playfair Display',serif; font-weight:700;
-      font-size:clamp(36px,7.5vw,72px); margin:.5rem 0 .25rem; line-height:1.06;
-      text-shadow:0 3px 22px rgba(0,0,0,.45);
-      letter-spacing:.5px;
+      font-family:'Playfair Display',serif; font-weight:600;
+      font-size:clamp(48px, 10vw, 90px); 
+      margin:1rem 0 .5rem; line-height:1.05;
+      text-shadow:0 3px 15px rgba(0,0,0,.3);
+      color: #fff;
     }
-    header p.sub{color:#f5efe3; margin:.3rem 0 .9rem}
+    header p.sub{color:#f0f0f0; margin:.5rem 0 1.5rem; font-size: 1.1rem;}
 
-    .cta-row{display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap}
-    .btn{
-      appearance:none; border:1px solid var(--glass-border-light);
-      background: var(--gold-grad); color:#2d1f08; font-weight:800;
-      padding:.85rem 1.05rem; border-radius:16px; cursor:pointer; box-shadow:var(--shadow-soft);
-      transform:translateY(0);
-      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease, background .18s ease;
-      position:relative; overflow:hidden; touch-action:manipulation;
-      display:inline-flex; align-items:center; gap:.55rem;
-      will-change: transform, box-shadow; /* Optimización de rendimiento */
-    }
-    .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow); filter:saturate(1.05)}
-    .btn:active{transform:translateY(0)}
-    .btn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(176,141,87,.35), var(--shadow)}
-
-    header .btn{ background:transparent; color:#fff; border-color:rgba(255,255,255,.38); box-shadow:0 8px 24px rgba(0,0,0,.15) }
-    header .btn:hover{ background:rgba(255,255,255,.10) }
-
-    /* ================= Countdown ================= */
-    .countdown{display:flex; justify-content:center; gap:16px; margin:16px auto 6px; z-index:2}
+    /* === COUNTDOWN === */
+    .countdown{display:flex; justify-content:center; gap:12px; margin:24px auto;}
     .time-box{
-      min-width:74px; border-radius:999px; padding:10px 14px; text-align:center; color:#fff; position:relative; overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
-      border:1px solid rgba(255,255,255,.36);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 8px 24px rgba(0,0,0,.18);
-      transition:transform .15s ease, box-shadow .15s ease;
-      backdrop-filter: blur(6px);
-      will-change: transform, box-shadow; /* Optimización de rendimiento */
+      min-width:80px; border-radius:var(--radius); padding:12px; text-align:center; color:#fff;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.25);
+      box-shadow:var(--shadow-soft);
+      backdrop-filter: blur(8px);
     }
-    .time-box:hover{transform:translateY(-1px); box-shadow:0 12px 30px rgba(0,0,0,.22)}
-    .time-box .num{font-size:clamp(26px,5.8vw,36px); font-weight:900; letter-spacing:.02em; display:block; text-shadow:0 1px 6px rgba(0,0,0,.35); line-height:1}
-    .time-box .label{font-size:11px; opacity:.92; margin-top:2px; letter-spacing:.08em; text-transform:uppercase}
-    .time-box .ping{ position:absolute; width:12px; height:12px; border-radius:999px; background:radial-gradient(circle, rgba(255,255,255,.95) 0 35%, rgba(176,141,87,.65) 35% 65%, rgba(176,141,87,0) 70%); left:var(--x,50%); top:var(--y,50%); transform:translate(-50%,-50%); animation:pingBrand 800ms ease-out forwards; pointer-events:none; }
-    @keyframes pingBrand{from{opacity:.9; transform:translate(-50%,-50%) scale(.6)}to{opacity:0; transform:translate(-50%,-50%) scale(9)}}
+    .time-box .num{font-size:clamp(28px, 5vw, 36px); font-weight:600; display:block; line-height:1.1;}
+    .time-box .label{font-size:11px; opacity:.8; letter-spacing:.08em; text-transform:uppercase}
 
-    /* ================= Secciones ================= */
-    section.sectioned{padding:90px 0 84px; position:relative}
+    /* === BOTONES === */
+    .cta-row{display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; margin-top: 24px;}
+    .btn{
+      appearance:none; border: 1.5px solid;
+      background: transparent; color: inherit; 
+      font-weight:600; font-size: 1rem;
+      padding:.8rem 1.5rem; border-radius:999px; cursor:pointer; 
+      transition: var(--transition);
+      display:inline-flex; align-items:center; gap:.6rem;
+      text-align: center;
+    }
+    .btn.primary {
+      background-color: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+    .btn.primary:hover {
+      background-color: #947244;
+      border-color: #947244;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+    .btn.secondary {
+      border-color: rgba(255,255,255,.5);
+      color: #fff;
+    }
+    .btn.secondary:hover {
+      background-color: rgba(255,255,255,.1);
+      border-color: #fff;
+    }
+    .btn svg { width: 18px; height: 18px; }
+
+    /* === SECCIONES Y SEPARADORES === */
+    section.sectioned{padding:100px 0; position:relative}
     section.sectioned::before{
-      content:""; position:absolute; top:26px; left:50%; transform:translateX(-50%);
-      width:min(560px,84%); height:1px; background:linear-gradient(90deg, transparent, rgba(176,141,87,.65), transparent);
-    }
-    section.sectioned::after{
-      content:""; position:absolute; top:22px; left:50%; transform:translateX(-50%);
-      width:10px; height:10px; border-radius:999px; background:rgba(176,141,87,.85);
-      box-shadow:0 0 0 6px rgba(176,141,87,.18);
+      content: url("data:image/svg+xml,%3Csvg width='80' height='20' viewBox='0 0 80 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 10L80 10' stroke='%23a88552' stroke-opacity='0.5'/%3E%3Cpath d='M40 10L0 10' stroke='%23a88552' stroke-opacity='0.5'/%3E%3Cpath d='M45.5 18.5C45.5 18.5 42.5 10 40 10C37.5 10 34.5 1.5 34.5 1.5' stroke='%23a88552' stroke-opacity='0.5'/%3E%3Cpath d='M34.5 18.5C34.5 18.5 37.5 10 40 10C42.5 10 45.5 1.5 45.5 1.5' stroke='%23a88552' stroke-opacity='0.5'/%3E%3C/svg%3E%0A");
+      position:absolute; top:30px; left:50%; transform:translateX(-50%);
     }
 
-    .title{font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(24px,5.2vw,44px); margin:0 0 10px; text-align:center; letter-spacing:.3px}
-    .subtitle{color:var(--muted); text-align:center; margin:-2px auto 30px; max-width:720px}
-
-    /* ================= Slider ================= */
+    /* === SLIDER === */
     .slider{
       position:relative; overflow:hidden; border-radius:var(--radius); 
-      box-shadow:var(--shadow); background:var(--card); border:1px solid var(--glass-border-light);
-      padding: 12px; /* NUEVO: Padding para crear marco interior */
+      box-shadow:var(--shadow-medium); background:var(--card);
     }
-    .slides{display:flex; transition:transform .6s cubic-bezier(.22,.75,.18,1); touch-action:pan-y; will-change:transform; border-radius: 14px; overflow: hidden;}
-    .slide{min-width:100%; height:62svh; position:relative; background:#eee}
-    .slide img{width:100%; height:100%; object-fit:cover; transition:transform .9s ease, opacity .6s ease}
+    .slides{display:flex; transition:transform .6s cubic-bezier(.22,.75,.18,1); border-radius: var(--radius); overflow: hidden;}
+    .slide{min-width:100%; height:70svh; position:relative; background:#eee}
+    .slide img{width:100%; height:100%; object-fit:cover; transition:transform .9s ease, opacity .6s ease; border-radius: 0;}
     .slide.is-active img{transform:scale(1.03)}
-    .slide.leaving img{opacity:.85; filter:blur(2px); transform:scale(1.05)}
     .overlay{
-      position:absolute; left:12px; right:12px; bottom:12px;
-      background:rgba(255,255,255,.92); /* Más opaco para compensar la falta de blur */
-      /* backdrop-filter: blur(4px); */ /* Comentado por rendimiento, es muy demandante en móviles */
+      position:absolute; left:16px; right:16px; bottom:16px;
+      background:rgba(255,255,255,.85);
+      backdrop-filter: blur(6px);
       border:1px solid var(--hairline); color:var(--ink);
-      padding:12px 14px; border-radius:14px; max-width:760px; margin-inline:auto; box-shadow:0 6px 18px rgba(0,0,0,.10);
-      opacity:0; transform:translateY(8px); transition:opacity .6s ease, transform .6s ease;
-      will-change: opacity, transform;
+      padding:16px; border-radius:var(--radius); box-shadow:var(--shadow-soft);
+      opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease .1s;
     }
     .slide.is-active .overlay{opacity:1; transform:translateY(0)}
-    .nav-btn{position:absolute; top:50%; translate:0 -50%; z-index:10; width:42px; height:42px; border-radius:999px; border:1px solid var(--hairline); background:rgba(255,255,255,.7); display:grid; place-items:center; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.12)}
-    .nav-btn.prev{left:22px} .nav-btn.next{right:22px}
-    .dots{position:absolute; inset:auto 0 24px; display:flex; gap:8px; justify-content:center; z-index:5}
-    .dots button{width:8px; height:8px; border-radius:999px; border:0; background:rgba(0,0,0,.22)}
-    .dots button[aria-current="true"]{background:rgba(176,141,87,.55)}
+    .nav-btn{position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:44px; height:44px; border-radius:50%; border:0; background:rgba(255,255,255,.8); display:grid; place-items:center; cursor:pointer; box-shadow:var(--shadow-soft); transition: var(--transition);}
+    .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.05); }
+    .nav-btn.prev{left:16px} .nav-btn.next{right:16px}
+    .dots{position:absolute; inset:auto 0 32px; display:flex; gap:10px; justify-content:center; z-index:5}
+    .dots button{width:10px; height:10px; border-radius:50%; border:1.5px solid #fff; background:transparent; transition: var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,.2);}
+    .dots button[aria-current="true"]{background: #fff;}
 
-    /* ================= Grid / Cards ================= */
-    .grid{display:grid; gap:16px}
+    /* === TARJETAS DE CONTENIDO (LUGARES, ITINERARIO) === */
+    .grid{display:grid; gap:24px}
     @media(min-width:720px){.grid.two{grid-template-columns:repeat(2,1fr)}}
     .card{
       background:var(--card); 
-      border:1px solid var(--glass-border-light); border-radius:18px; 
-      overflow:hidden; box-shadow:var(--shadow-soft); 
-      transition:transform .18s ease, box-shadow .18s ease;
-      will-change: transform, box-shadow; /* Optimización de rendimiento */
-      padding: 12px; /* NUEVO: Padding para crear marco interior */
+      border-radius:var(--radius); 
+      box-shadow:var(--shadow-soft); 
+      transition:transform .25s ease, box-shadow .25s ease;
+      will-change: transform, box-shadow;
+      overflow: hidden;
     }
-    .card img {
-      border-radius: 12px; /* NUEVO: Redondeo para las imágenes dentro de las tarjetas */
-    }
-    .card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
-    .card .body{padding:14px 4px 2px 4px;} /* Ajustado padding del cuerpo de la tarjeta */
-    
-    /* ================= Botón “Ver ubicación” ================= */
-    .center-actions{display:flex; justify-content:center; padding-top:8px}
-    .btn.map{
-      display:inline-flex; align-items:center; gap:.55rem;
-      background:transparent; color:#3a2f1f; font-weight:800;
-      border:1.5px solid rgba(176,141,87,.65); border-radius:999px;
-      padding:.78rem 1.12rem; box-shadow:0 8px 20px rgba(0,0,0,.08);
-      transition:background .18s ease, color .18s ease, transform .18s ease;
-    }
-    .btn.map:hover{background:var(--gold-grad); color:#211a12; border-color:transparent; transform:translateY(-2px)}
-    .btn svg{width:18px; height:18px; display:block}
-    .btn svg path{fill:currentColor}
+    .card:hover{transform:translateY(-5px); box-shadow:var(--shadow-medium)}
+    .card .body{padding:24px}
+    .card h3 { font-family: 'Playfair Display', serif; margin: 0 0 8px; color: var(--accent); }
 
-    /* ================= Tocadiscos ================= */
-    .player{position:fixed; right:12px; bottom:12px; z-index:50; display:flex; align-items:center; gap:.6rem; padding:.45rem .6rem; background:#ffffffd8; border:1px solid var(--glass-border-light); border-radius:999px; box-shadow:var(--shadow-soft)}
-    .disc{width:24px; height:24px; border-radius:50%; background:
-        radial-gradient(circle at 50% 50%, #333 0 6px, #111 7px 50%, #000 51% 100%),
-        repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.06) 0 2px, rgba(0,0,0,.12) 2px 4px);
-      position:relative; flex:0 0 24px; box-shadow:inset 0 2px 6px rgba(255,255,255,.3), inset 0 -2px 8px rgba(0,0,0,.25);
-      animation:spin 5s linear infinite; animation-play-state:paused;
-      will-change: transform;
+    /* === TIMELINE (ITINERARIO) === */
+    .timeline{position:relative; max-width:900px; margin:40px auto 0;}
+    .timeline::before{content:""; position:absolute; left:39px; top:10px; bottom:10px; width:2px; background:var(--brand-light);}
+    .tl-item{display:grid; grid-template-columns:80px 1fr; gap:16px; align-items:center; position:relative; margin-bottom:20px}
+    .tl-time{font-weight:600; font-size: 1.1rem; color: var(--accent); text-align:center; position:relative; z-index:2}
+    .tl-dot{position:absolute; left:32px; top:50%; transform: translateY(-50%); width:16px; height:16px; border-radius:50%; background:var(--bg); border: 3px solid var(--brand-light); z-index:1}
+    .tl-card.card{box-shadow:var(--shadow-soft); padding:20px; will-change: none; }
+    .tl-card.card:hover { transform: none; box-shadow: var(--shadow-medium); }
+    .tl-card .body{padding:0}
+    .tl-card .place{color:var(--muted); font-size:.95rem}
+    .tl-card b { color: var(--accent); }
+
+    /* === FORMULARIO RSVP === */
+    .rsvp-card{
+      max-width:600px; margin:0 auto; padding:32px; background:var(--card); 
+      border-radius:var(--radius); box-shadow:var(--shadow-medium);
     }
-    .disc::after{content:""; position:absolute; width:6px; height:6px; border-radius:50%; background:var(--brand); top:50%; left:50%; transform:translate(-50%,-50%)}
+    .field{display:flex; flex-direction:column; gap:.5rem; margin-bottom: 1.2rem;}
+    .field span { font-weight: 600; color: var(--accent); }
+    .input,.select{
+      width:100%; padding:12px 16px; border-radius:10px; 
+      border:1.5px solid #e0e0e0; background:#f9f9f9; 
+      box-shadow:none; outline:none; transition: var(--transition);
+      font-size: 1rem;
+    }
+    .input:focus,.select:focus{box-shadow:0 0 0 3px var(--brand-light); border-color:var(--brand)}
+    .helper{font-size:.9rem; color:var(--muted); text-align: center; margin-top: 16px;}
+    
+    /* === REPRODUCTOR DE MÚSICA === */
+    .player{position:fixed; right:16px; bottom:16px; z-index:50; display:flex; align-items:center; gap:.6rem; padding:.5rem; background:#fff; border-radius:999px; box-shadow:var(--shadow-medium)}
+    .disc{width:32px; height:32px; border-radius:50%; background:radial-gradient(circle at 50% 50%, #444 0 8px, #222 9px 50%, #111 51% 100%), repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 2px, rgba(0,0,0,.15) 2px 4px); position:relative; flex:0 0 32px; box-shadow:inset 0 1px 4px rgba(0,0,0,.2); animation:spin 5s linear infinite; animation-play-state:paused;}
+    .disc::after{content:""; position:absolute; width:8px; height:8px; border-radius:50%; background:var(--brand); top:50%; left:50%; transform:translate(-50%,-50%);}
     .player.playing .disc{animation-play-state:running}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .player .label{font-weight:700; font-size:.86rem}
-    .player .sub{font-size:.74rem; color:var(--muted); margin-top:-2px}
-    .icon-btn{width:36px; height:36px; display:grid; place-items:center; border-radius:12px; border:1px solid var(--glass-border-light); background:#fff; box-shadow:var(--shadow-soft); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease}
-    .icon-btn:hover{transform:translateY(-1px); box-shadow:var(--shadow)}
-    .icon{width:18px; height:18px; display:block}
-    .icon path{fill:#3a342a}
+    .player .label,.player .sub{display:none}
+    .icon-btn{width:40px; height:40px; display:grid; place-items:center; border-radius:50%; border:0; background:transparent; cursor:pointer; transition: var(--transition);}
+    .icon-btn:hover { background-color: #f0f0f0; }
+    .icon{width:20px; height:20px; display:block}
+    .icon path{fill:var(--ink)}
 
-    /* ================= Inputs / RSVP ================= */
-    .field{display:flex; flex-direction:column; gap:.4rem}
-    .input,.select{width:100%; padding:.9rem 1rem; border-radius:14px; border:1px solid var(--glass-border-light); background:#fff; box-shadow:var(--shadow-soft); outline:none; transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease}
-    .input:focus,.select:focus{box-shadow:var(--shadow); transform:translateY(-1px); border-color:var(--brand)}
-    .helper{font-size:.95rem; color:var(--muted)}
-    .btn.whatsapp{display:inline-flex; align-items:center; gap:.55rem; background:var(--gold-grad); color:#211a12; border:1px solid rgba(0,0,0,.06); box-shadow:var(--shadow-soft); font-weight:800}
-
-    .rsvp-card{max-width:720px; margin:0 auto; padding:24px; background:var(--card); border:1px solid rgba(176,141,87,.30); border-radius:18px; box-shadow:var(--shadow-soft)}
-    .rsvp-accent{display:flex; align-items:center; gap:.6rem; margin:0 0 8px 2px; color:#7b6a4c}
-    .rsvp-accent .dot{width:8px; height:8px; border-radius:999px; background:var(--brand)}
-
-    /* ================= Timeline ================= */
-    .timeline{position:relative; max-width:900px; margin:0 auto}
-    .timeline::before{content:""; position:absolute; left:30px; top:0; bottom:0; width:3px; border-radius:3px; background:linear-gradient(180deg, rgba(176,141,87,.6), rgba(176,141,87,.15))}
-    .tl-item{display:grid; grid-template-columns:80px 1fr; gap:12px; align-items:start; position:relative; margin-bottom:14px}
-    .tl-time{font-weight:800; font-variant-numeric:tabular-nums; background:#fff; border:1px solid var(--glass-border-light); border-radius:999px; padding:.4rem .6rem; text-align:center; box-shadow:var(--shadow-soft); position:relative; z-index:2}
-    .tl-dot{position:absolute; left:26px; top:18px; width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 40% 40%, #fff 0 2px, #d8c7aa 3px 6px, #b08d57 7px); box-shadow:0 2px 8px rgba(0,0,0,.15); z-index:1}
-    .tl-card.card{padding:14px; border-left:4px solid var(--brand)}
-    .tl-card .body{padding:0}
-    .tl-card .place{color:var(--muted); font-size:.97rem}
-
-    /* ================= Reveal ================= */
-    .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; will-change: opacity, transform;}
-    .reveal.visible{opacity:1; transform:none}
-
-    /* ================= Footer firma ================= */
+    /* === FOOTER === */
     footer.signature{ text-align:center; color:var(--muted) }
-    footer.signature em{ font-family:'Playfair Display',serif; font-size:clamp(20px,4.8vw,28px); color:var(--brand-2) }
+    footer.signature em{ 
+      font-family:'Dancing Script', cursive; 
+      font-size:clamp(28px, 6vw, 42px); 
+      color:var(--brand);
+      font-weight: 500;
+    }
 
-    @media (max-width:420px){.cta-row{gap:.55rem} .player .label,.player .sub{display:none}}
+    /* === ANIMACIONES === */
+    .reveal{opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s ease; will-change: opacity, transform;}
+    .reveal.visible{opacity:1; transform:none}
+    
     @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important; scroll-behavior:auto!important}}
   </style>
 </head>
 <body>
   <header class="hero" id="hero">
     <div class="wrap reveal">
-      <span class="badge">Boda</span>
-      <h1 id="couple">Jimena & David</h1>
-      <p class="sub" id="eventDate">18 de septiembre de 2025 · 1:30 pm</p>
+      <span class="badge">NUESTRA BODA</span>
+      <h1>Jimena & David</h1>
+      <p class="sub" id="eventDate">18 de Septiembre de 2025 · 1:30 pm</p>
 
       <div id="countdown" class="countdown" aria-live="polite">
         <div class="time-box"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
@@ -246,16 +251,12 @@
         <div class="time-box"><span class="num" id="cd-secs">00</span><span class="label">Segundos</span></div>
       </div>
 
-      <p class="sub" id="place">Iglesia Retalhuleu · Recepción: Salón Las Morenas</p>
-
       <div class="cta-row">
         <button class="btn secondary" id="btnHistoria" aria-label="Ir a Nuestra Historia">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a3 3 0 0 1 3-3h13v17h-1a5 5 0 0 0-4 2 5 5 0 0 0-4-2H4V5zm2 1v11h6a3 3 0 0 1 3 1V4H7a1 1 0 0 0-1 1z"/></svg>
           Nuestra Historia
         </button>
         <button class="btn secondary" id="btnCalendar" title="Agregar al calendario" aria-label="Añadir al calendario">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm13 8H6v10h14V10zm-6 2h2v3h3v2h-3v3h-2v-3h-3v-2h3v-3z"/></svg>
-          Añadir al calendario
+          Añadir al Calendario
         </button>
       </div>
     </div>
@@ -263,10 +264,6 @@
 
   <div class="player" id="player" role="region" aria-label="Reproductor de música">
     <div class="disc" aria-hidden="true"></div>
-    <div>
-      <div class="label">Nuestra canción</div>
-      <div class="sub" id="playerState">Pausada</div>
-    </div>
     <button class="icon-btn" id="btnMusic" aria-label="Reproducir / Pausar" title="Reproducir / Pausar">
       <svg class="icon" id="icoPlay" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon" id="icoPause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
@@ -277,114 +274,112 @@
     </button>
   </div>
   
-  <div class="center-actions reveal" style="padding-bottom: 50px;">
-    <button class="btn" id="btnEscuchar" aria-label="Reproducir nuestra canción">
-      Reproducir nuestra canción
-    </button>
-  </div>
+  <main>
+    <section id="historia" class="wrap reveal sectioned">
+      <h2 class="title">Nuestra Historia</h2>
+      <p class="subtitle">Un viaje a través de los momentos que nos trajeron hasta aquí. Desliza para revivir nuestros recuerdos más queridos.</p>
 
-  <section id="historia" class="wrap reveal sectioned">
-    <h2 class="title">Nuestra Historia</h2>
-    <p class="subtitle">Desliza para ver los momentos que los llevaron al “sí”. Cada foto tiene su nota y fecha.</p>
+      <div class="center-actions" style="margin-bottom: 40px;">
+        <button class="btn primary" id="btnEscuchar" aria-label="Reproducir nuestra canción">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v11.55A4 4 0 1 1 10 18V7h9V3h-7z"/></svg>
+          Reproducir Nuestra Canción
+        </button>
+      </div>
 
-    <div class="slider" data-slider>
-      <button class="nav-btn prev" data-prev aria-label="Anterior">⟵</button>
-      <button class="nav-btn next" data-next aria-label="Siguiente">⟶</button>
+      <div class="slider" data-slider>
+        <button class="nav-btn prev" data-prev aria-label="Anterior">⟵</button>
+        <button class="nav-btn next" data-next aria-label="Siguiente">⟶</button>
+        <ul class="slides" data-slides>
+          <li class="slide">
+            <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" loading="lazy" decoding="async"/>
+            <div class="overlay"><b>02 de Septiembre, 2025</b><p style="margin:4px 0 0;">Cuando nos conocimos. Una mirada bastó para empezar la aventura.</p></div>
+          </li>
+          <li class="slide">
+            <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" loading="lazy" decoding="async"/>
+            <div class="overlay"><b>16 de Octubre, 2025</b><p style="margin:4px 0 0;">Nuestra primera cita. Entre risas, café y mil planes por delante.</p></div>
+          </li>
+          <li class="slide">
+            <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" loading="lazy" decoding="async"/>
+            <div class="overlay"><b>08 de Enero, 2026</b><p style="margin:4px 0 0;">El primer viaje. Descubrimos que el mejor destino es estar juntos.</p></div>
+          </li>
+          <li class="slide">
+            <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" loading="lazy" decoding="async"/>
+            <div class="overlay"><b>12 de Febrero, 2027</b><p style="margin:4px 0 0;">¡Dijo que sí! El comienzo de una nueva etapa para siempre.</p></div>
+          </li>
+        </ul>
+        <div class="dots" data-dots></div>
+      </div>
+    </section>
 
-      <ul class="slides" data-slides>
-        <li class="slide">
-          <img src="assets/imagenes/historia-1.jpg" alt="Cuando nos conocimos" loading="lazy" decoding="async"/>
-          <div class="overlay"><b>Fecha: 02-09-2025</b> · Cuando nos conocimos. Una mirada bastó para empezar la aventura.</div>
+    <section id="lugares" class="wrap reveal sectioned">
+      <h2 class="title">La Celebración</h2>
+      <p class="subtitle">Estos son los lugares donde celebraremos nuestro amor. Toca en cada uno para ver la ubicación en el mapa.</p>
+      <div class="grid two">
+        <article class="card reveal">
+          <img src="assets/imagenes/ceremonia.jpg" alt="Lugar de la ceremonia" loading="lazy" decoding="async"/>
+          <div class="body">
+            <h3>Ceremonia</h3>
+            <p class="helper">Iglesia Retalhuleu<br>Llegar 15 minutos antes. Hay estacionamiento frente a la entrada.</p>
+            <div class="center-actions">
+              <a class="btn primary" href="https://maps.google.com/?q=Iglesia%20Retalhuleu" target="_blank" rel="noopener" aria-label="Ver ubicación de Iglesia Retalhuleu">
+                Ver Ubicación
+              </a>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal">
+          <img src="assets/imagenes/recepcion.jpg" alt="Lugar de la recepción" loading="lazy" decoding="async"/>
+          <div class="body">
+            <h3>Recepción</h3>
+            <p class="helper">Salón Las Morenas<br>Acompáñanos a la cena, el brindis y el baile para celebrar.</p>
+            <div class="center-actions">
+              <a class="btn primary" href="https://maps.google.com/?q=Salon%20Las%20Morenas" target="_blank" rel="noopener" aria-label="Ver ubicación de Salón Las Morenas">
+                Ver Ubicación
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="itinerario" class="wrap reveal sectioned">
+      <h2 class="title">Itinerario</h2>
+      <p class="subtitle">Planeamos cada momento con mucho cariño para que disfrutes este día con nosotros.</p>
+      <ul class="timeline">
+        <li class="tl-item reveal">
+          <div class="tl-time">6:00 pm</div>
+          <div class="tl-card card"><div class="body"><b>Ceremonia Religiosa</b><div class="place">Iglesia Retalhuleu</div></div></div>
+          <span class="tl-dot" aria-hidden="true"></span>
         </li>
-        <li class="slide">
-          <img src="assets/imagenes/historia-2.jpg" alt="Primera cita" loading="lazy" decoding="async"/>
-          <div class="overlay"><b>Fecha: 16-10-2025</b> · Primera cita. Risas, café y mil planes por delante.</div>
+        <li class="tl-item reveal">
+          <div class="tl-time">8:00 pm</div>
+          <div class="tl-card card"><div class="body"><b>Recepción y Cena</b><div class="place">Salón Las Morenas</div></div></div>
+          <span class="tl-dot" aria-hidden="true"></span>
         </li>
-        <li class="slide">
-          <img src="assets/imagenes/historia-3.jpg" alt="Primer viaje" loading="lazy" decoding="async"/>
-          <div class="overlay"><b>Fecha: 08-01-2026</b> · Nuestro primer viaje. Descubrimos que el mejor destino es estar juntos.</div>
+        <li class="tl-item reveal">
+          <div class="tl-time">10:30 pm</div>
+          <div class="tl-card card"><div class="body"><b>Corte del Pastel</b><div class="place">¡El momento más dulce de la noche!</div></div></div>
+          <span class="tl-dot" aria-hidden="true"></span>
         </li>
-        <li class="slide">
-          <img src="assets/imagenes/historia-4.jpg" alt="La propuesta" loading="lazy" decoding="async"/>
-          <div class="overlay"><b>Fecha: 12-02-2027</b> · ¡Dijo que sí! El comienzo de una nueva etapa.</div>
+        <li class="tl-item reveal">
+          <div class="tl-time">12:00 am</div>
+          <div class="tl-card card"><div class="body"><b>Despedida y Agradecimientos</b><div class="place">Gracias por ser parte de nuestra historia. 💕</div></div></div>
+          <span class="tl-dot" aria-hidden="true"></span>
         </li>
       </ul>
-      <div class="dots" data-dots></div>
-    </div>
-  </section>
+    </section>
 
-  <section id="lugares" class="wrap reveal sectioned">
-    <h2 class="title">Lugares</h2>
-    <p class="subtitle">Ceremonia y recepción. Toca “Ver ubicación” para abrir el mapa.</p>
-    <div class="grid two">
-      <article class="card reveal">
-        <img src="assets/imagenes/ceremonia.jpg" alt="Lugar de la ceremonia" loading="lazy" decoding="async"/>
-        <div class="body">
-          <h3 style="margin:.2rem 0 .4rem">Ceremonia — Iglesia Retalhuleu</h3>
-          <p class="helper">Llegar 15 minutos antes. Estacionamiento frente a la entrada.</p>
-          <div class="center-actions">
-            <a class="btn map" href="https://maps.google.com/?q=Iglesia%20Retalhuleu" target="_blank" rel="noopener" aria-label="Ver ubicación de Iglesia Retalhuleu">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
-              Ver ubicación
-            </a>
-          </div>
-        </div>
-      </article>
-      <article class="card reveal">
-        <img src="assets/imagenes/recepcion.jpg" alt="Lugar de la recepción" loading="lazy" decoding="async"/>
-        <div class="body">
-          <h3 style="margin:.2rem 0 .4rem">Recepción — Salón Las Morenas</h3>
-          <p class="helper">Cena, brindis y baile.</p>
-          <div class="center-actions">
-            <a class="btn map" href="https://maps.google.com/?q=Salon%20Las%20Morenas" target="_blank" rel="noopener" aria-label="Ver ubicación de Salón Las Morenas">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
-              Ver ubicación
-            </a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
+    <section id="rsvp" class="wrap reveal sectioned">
+      <h2 class="title">Confirmar Asistencia</h2>
+      <p class="subtitle">Tu presencia es nuestro mayor regalo. Por favor, confirma tu asistencia antes del 18 de Agosto de 2025.</p>
 
-  <section id="itinerario" class="wrap reveal sectioned">
-    <h2 class="title">Itinerario</h2>
-    <ul class="timeline">
-      <li class="tl-item">
-        <div class="tl-time">6:00 pm</div>
-        <div class="tl-card card"><div class="body"><b>Ceremonia</b><div class="place">Iglesia Retalhuleu. Llegar 15 minutos antes.</div></div></div>
-        <span class="tl-dot" aria-hidden="true"></span>
-      </li>
-      <li class="tl-item">
-        <div class="tl-time">8:00 pm</div>
-        <div class="tl-card card"><div class="body"><b>Recepción</b><div class="place">Salón Las Morenas. Cena, brindis y baile.</div></div></div>
-        <span class="tl-dot" aria-hidden="true"></span>
-      </li>
-      <li class="tl-item">
-        <div class="tl-time">10:30 pm</div>
-        <div class="tl-card card"><div class="body"><b>Pastel</b><div class="place">Corte del pastel y fotos.</div></div></div>
-        <span class="tl-dot" aria-hidden="true"></span>
-      </li>
-      <li class="tl-item">
-        <div class="tl-time">12:00 am</div>
-        <div class="tl-card card"><div class="body"><b>Despedida</b><div class="place">Gracias por acompañarnos. 💕</div></div></div>
-        <span class="tl-dot" aria-hidden="true"></span>
-      </li>
-    </ul>
-  </section>
-
-  <section id="rsvp" class="wrap reveal sectioned">
-    <h2 class="title">Confirmar asistencia</h2>
-    <p class="subtitle">Por favor confirma tu asistencia un mes antes del evento. ¡Gracias!</p>
-
-    <form class="rsvp-card" id="rsvpForm">
-      <div class="rsvp-accent"><span class="dot" aria-hidden="true"></span><strong>Tu espacio</strong> · Nos encantará contar contigo</div>
-      <div class="grid" style="grid-template-columns:1fr; gap:12px">
-        <label class="field">
-          <span>Tu nombre completo</span>
-          <input class="input" id="guestName" name="guestName" type="text" placeholder="Tu nombre completo" required />
+      <form class="rsvp-card" id="rsvpForm">
+        <div class="field">
+          <span>Nombre Completo</span>
+          <input class="input" id="guestName" name="guestName" type="text" placeholder="Escribe tu nombre y apellido" required />
         </label>
-        <label class="field">
-          <span>Cantidad de acompañantes</span>
+        <div class="field">
+          <span>Acompañantes</span>
           <select class="select" id="companions" name="companions">
             <option value="0">Asistiré sin acompañantes</option>
             <option value="1">Asistiré con 1 acompañante</option>
@@ -392,24 +387,24 @@
             <option value="3">Asistiré con 3 acompañantes</option>
             <option value="4">Asistiré con 4 acompañantes</option>
             <option value="5">Asistiré con 5 acompañantes</option>
-            <option value="-1">No podré asistir</option>
+            <option value="-1">Lamentablemente no podré asistir</option>
           </select>
-        </label>
-        <div style="display:flex; gap:.8rem; align-items:center; flex-wrap:wrap">
-          <button type="submit" class="btn whatsapp" id="btnWhatsapp" aria-label="Confirmar por WhatsApp">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#211a12" d="M20.5 3.5a10 10 0 0 0-16.2 11.3L3 21l6.4-1.3A10 10 0 0 0 20.5 3.5Zm-1.1 13a8 8 0 0 1-11.8 1.5l-.3-.2-3 .6.6-2.9-.2-.3A8 8 0 1 1 19.4 16.5ZM8.9 7.9c.2-.5.4-.5.7-.5h.6c.2 0 .5 0 .7.5s.9 1.5.9 1.6.1.4 0 .6-.2.4-.4.6-.4.5-.2.9c.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9s.5 0 .7-.2.8-.9 1-1.2.4-.2.6-.1.6.3 1.4.7 1.2.6 1.4.9.1.9-.2 1.5c-.3.6-1.2 1.1-1.6 1.1s-.9.2-3-.8a13.6 13.6 0 0 1-3.8-2.4 12.2 12.2 0 0 1-2.2-2.6c-.8-1.2-1.1-2.1-1.2-2.4-.2-.4 0-.8.1-1s.5-1.2.6-1.4Z"/></svg>
+        </div>
+        <div style="margin-top: 24px; text-align:center;">
+          <button type="submit" class="btn primary" id="btnWhatsapp" aria-label="Confirmar por WhatsApp">
+             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5a10 10 0 0 0-16.2 11.3L3 21l6.4-1.3A10 10 0 0 0 20.5 3.5Zm-1.1 13a8 8 0 0 1-11.8 1.5l-.3-.2-3 .6.6-2.9-.2-.3A8 8 0 1 1 19.4 16.5ZM8.9 7.9c.2-.5.4-.5.7-.5h.6c.2 0 .5 0 .7.5s.9 1.5.9 1.6.1.4 0 .6-.2.4-.4.6-.4.5-.2.9c.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9s.5 0 .7-.2.8-.9 1-1.2.4-.2.6-.1.6.3 1.4.7 1.2.6 1.4.9.1.9-.2 1.5c-.3.6-1.2 1.1-1.6 1.1s-.9.2-3-.8a13.6 13.6 0 0 1-3.8-2.4 12.2 12.2 0 0 1-2.2-2.6c-.8-1.2-1.1-2.1-1.2-2.4-.2-.4 0-.8.1-1s.5-1.2.6-1.4Z"/></svg>
             Confirmar por WhatsApp
           </button>
-          <span class="helper">También puedes llamar al <a href="tel:54389207">54 38 92 07</a>.</span>
+          <p class="helper">O si prefieres, puedes llamar al <a href="tel:54389207">54 38 92 07</a>.</p>
         </div>
-      </div>
-    </form>
-  </section>
+      </form>
+    </section>
 
-  <footer class="signature reveal sectioned">
-    <div>Con cariño,</div>
-    <em>Escobar</em>
-  </footer>
+    <footer class="signature reveal sectioned">
+      <div>Con todo nuestro cariño,</div>
+      <em>Jimena & David</em>
+    </footer>
+  </main>
 
   <audio id="bgMusic" src="assets/imagenes/musica/fondo.mp3" preload="auto" loop></audio>
   <audio id="voiceInvite" src="assets/musica/invitacion.mp3" preload="auto"></audio>
@@ -468,7 +463,6 @@
         if(!bg || !player) return;
         const p=bg.paused, m=bg.muted;
         player.classList.toggle('playing',!p);
-        playerState.textContent=p?'Pausada':'Reproduciendo';
         icoPlay.style.display=p?'block':'none';
         icoPause.style.display=p?'none':'block';
         icoVol.style.display=m?'none':'block';
@@ -508,17 +502,6 @@
         countdownInterval = setInterval(tick,1000);
       }
       
-      $$('.time-box').forEach(box=>{
-        function pingAt(x,y){
-          const r=document.createElement('span'); r.className='ping';
-          const rect=box.getBoundingClientRect();
-          r.style.setProperty('--x',(x-rect.left)+'px'); r.style.setProperty('--y',(y-rect.top)+'px');
-          box.appendChild(r); r.addEventListener('animationend',()=> r.remove(), {once:true});
-        }
-        box.addEventListener('click', e=> pingAt(e.clientX, e.clientY));
-        box.addEventListener('touchstart', e=>{ const t=e.touches[0]; if(t) pingAt(t.clientX, t.clientY); }, {passive:true});
-      });
-
       $('#btnCalendar')?.addEventListener('click', ()=>{
         const start=new Date('2025-09-18T13:30:00'), end=new Date(start.getTime()+4*60*60*1000);
         const pad=n=>String(n).padStart(2,'0');
@@ -535,10 +518,10 @@
         const name=$('#guestName').value.trim();
         const companions=$('#companions').value;
         if(!name){ alert('Por favor, escribe tu nombre.'); return; }
-        const compText = companions==='-1' ? 'No podré asistir'
-          : (companions==='0' ? 'Asistiré sin acompañantes'
-          : `Asistiré con ${companions} acompañante${companions==='1'?'':'s'}`);
-        const msg=`Hola, soy ${name}. ${compText}. Evento: ${$('#eventDate')?.textContent?.trim()??''}. ${$('#place')?.textContent?.trim()??''}.`;
+        const compText = companions==='-1' ? 'Lamentablemente no podré asistir.'
+          : (companions==='0' ? 'Confirmo mi asistencia (sin acompañantes).'
+          : `Confirmo mi asistencia con ${companions} acompañante${companions==='1'?'':'s'}.`);
+        const msg=`¡Hola! Soy ${name}. ${compText}`;
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
       });
 
@@ -553,7 +536,7 @@
         }, {once:true});
       });
 
-      const io=new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target);} }); }, {threshold:.12});
+      const io=new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target);} }); }, {threshold:.1});
       $$('.reveal').forEach(el=> io.observe(el));
     });
   </script>
