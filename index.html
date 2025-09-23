@@ -51,7 +51,8 @@
 
     /* ================= HERO ================= */
     header.hero{
-      min-height:86svh; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden; color:#fff;
+      min-height:78svh; /* AJUSTADO: Reducido desde 86svh para hacerlo más corto */
+      display:grid; place-items:center; text-align:center; position:relative; overflow:hidden; color:#fff;
       background:
         radial-gradient(160% 70% at 50% 90%, rgba(0,0,0,.70) 0 40%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.25) 75%, rgba(0,0,0,.10) 100%),
         url('assets/imagenes/hero-portada.jpg') center/cover no-repeat;
@@ -221,7 +222,7 @@
     <div class="wrap reveal">
       <span class="badge">Boda</span>
       <h1 id="couple">Jimena & David</h1>
-      <p class="sub" id="eventDate">06 de Diciembre del 2025 · 4:30 pm</p>
+      <p class="sub" id="eventDate">18 de septiembre de 2025 · 1:30 pm</p>
 
       <div id="countdown" class="countdown" aria-live="polite">
         <div class="time-box"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
@@ -260,6 +261,12 @@
       <svg class="icon" id="icoMute" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M16.5 12a4.5 4.5 0 0 1-2.3 3.9V8.1A4.5 4.5 0 0 1 16.5 12zM4 10v4h4l5 4V6l-5 4H4zm12.6 6.2 1.4 1.4L21.6 18l-1.8-1.8L21.6 14l-1.4-1.4-1.8 1.8-1.8-1.8L15.2 14l1.8 1.8-1.8 1.8z"/></svg>
     </button>
   </div>
+  
+  <div class="center-actions reveal" style="padding-bottom: 50px;">
+    <button class="btn" id="btnEscuchar" aria-label="Reproducir nuestra canción">
+      Reproducir nuestra canción
+    </button>
+  </div>
 
   <section id="historia" class="wrap reveal sectioned">
     <h2 class="title">Nuestra Historia</h2>
@@ -290,12 +297,6 @@
       <div class="dots" data-dots></div>
     </div>
   </section>
-  
-  <div class="center-actions reveal" style="padding-bottom: 60px; margin-top: -30px;">
-    <button class="btn" id="btnEscuchar" aria-label="Reproducir nuestra canción">
-      Reproducir nuestra canción
-    </button>
-  </div>
 
   <section id="lugares" class="wrap reveal sectioned">
     <h2 class="title">Lugares</h2>
@@ -477,7 +478,7 @@
       voice?.addEventListener('play', ()=>{ if(!bg.paused){ bg.pause(); updBtns(); } });
 
       // ===== Contador + ping al tocar =====
-      const target=new Date('2025-12-06T13:30:00'),
+      const target=new Date('2025-09-18T13:30:00'),
             d=$('#cd-days'), h=$('#cd-hours'), m=$('#cd-mins'), s=$('#cd-secs');
       function tick(){
         const now=new Date(); let diff=target-now;
@@ -551,5 +552,3 @@
   </script>
 </body>
 </html>
-
-
